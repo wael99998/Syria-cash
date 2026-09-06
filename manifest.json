@@ -8,10 +8,16 @@
   "description": "Syria Cash Cloud Mining",
   "icons": [
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Flag_of_Syria_%281932-1958%2C_1961-1963%29.svg/512px-Flag_of_Syria_%281932-1958%2C_1961-1963%29.svg.png",
+      "src": "75893 (1) (1).png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "75893 (1) (1).png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
