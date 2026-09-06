@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Syria Cash 3D</title>
+  <title>Syria Cash</title>
   
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#05070a">
+  <meta name="theme-color" content="#07090e">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
   <style>
     :root {
-      --bg-dark: #05070a;
+      --bg-dark: #07090e;
+      --card-bg: #111827;
+      --card-border: #1f2937;
       --neon-green: #00f5a0;
-      --neon-green-dark: #00965a;
-      --neon-glow: rgba(0, 245, 160, 0.4);
-      --accent-gold: #fbbf24;
-      --accent-gold-dark: #b45309;
-      --accent-gold-glow: rgba(251, 191, 36, 0.4);
+      --neon-glow: rgba(0, 245, 160, 0.3);
+      --accent-gold: #f59e0b;
+      --accent-gold-glow: rgba(245, 158, 11, 0.35);
       --text-main: #ffffff;
-      --text-muted: #94a3b8;
+      --text-muted: #9ca3af;
       --danger-red: #ef4444;
     }
 
@@ -35,76 +35,65 @@
 
     body {
       background-color: var(--bg-dark);
-      background-image: 
-        radial-gradient(circle at 50% 0%, rgba(0, 245, 160, 0.1) 0%, transparent 60%),
-        radial-gradient(circle at 100% 100%, rgba(245, 158, 11, 0.06) 0%, transparent 50%),
-        radial-gradient(circle at 0% 50%, rgba(14, 165, 233, 0.05) 0%, transparent 50%);
       color: var(--text-main);
       padding-bottom: 95px;
       overflow-x: hidden;
-      min-height: 100vh;
     }
 
-    /* شريط انقطاع الإنترنت */
     #offline-banner {
       display: none;
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      background: linear-gradient(90deg, #dc2626, #ef4444);
+      background: var(--danger-red);
       color: white;
       text-align: center;
       padding: 8px;
       font-size: 12px;
       font-weight: bold;
       z-index: 10000;
-      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.5);
     }
 
-    /* الهيدر العلوي المجسم الزجاجي */
+    /* الهيدر العلوي المرتب والفخم */
     .top-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 10px 14px;
-      background: rgba(8, 12, 20, 0.85);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
+      background: rgba(7, 9, 14, 0.95);
+      backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
       z-index: 50;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       gap: 8px;
     }
 
     .brand-side {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       flex-shrink: 0;
     }
 
     .brand-title {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 900;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       color: var(--neon-green);
       white-space: nowrap;
-      text-shadow: 0 1px 0 #008f56, 0 2px 0 #00663d, 0 3px 5px rgba(0,0,0,0.9), 0 0 12px var(--neon-glow);
     }
 
     /* العلم السوري الأخضر */
     .syria-flag {
-      width: 24px;
-      height: 16px;
-      border-radius: 3px;
+      width: 22px;
+      height: 15px;
+      border-radius: 2px;
       overflow: hidden;
       display: inline-flex;
       flex-direction: column;
-      border: 1px solid rgba(255,255,255,0.3);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.2);
       flex-shrink: 0;
     }
     .flag-green { background: #007a3d; height: 33.3%; }
@@ -112,60 +101,57 @@
     .flag-black { background: #000000; height: 33.4%; }
     .star { width: 3px; height: 3px; background: #ce1126; border-radius: 50%; }
 
-    /* أزرار الهيدر 3D */
+    /* أزرار الإجراءات العلوية المرتبة بنعومة */
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       flex-wrap: nowrap;
     }
 
     .head-pill-btn {
-      background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: #1e293b;
+      border: 1px solid #334155;
       color: #cbd5e1;
-      padding: 5px 9px;
-      border-radius: 9px;
+      padding: 5px 8px;
+      border-radius: 8px;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
       cursor: pointer;
       white-space: nowrap;
-      box-shadow: 0 3px 0 #070a11, 0 4px 6px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.15);
-      transition: all 0.1s;
+      transition: all 0.2s;
     }
     .head-pill-btn:active {
-      transform: translateY(2px);
-      box-shadow: 0 1px 0 #070a11, 0 2px 4px rgba(0,0,0,0.5);
+      background: rgba(0, 245, 160, 0.15);
+      border-color: var(--neon-green);
       color: var(--neon-green);
     }
 
     .lang-selector {
-      background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+      background: #1e293b;
       color: #cbd5e1;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid #334155;
       padding: 5px 6px;
-      border-radius: 9px;
+      border-radius: 8px;
       font-size: 11px;
       font-weight: bold;
       outline: none;
       cursor: pointer;
       max-width: 90px;
-      box-shadow: 0 3px 0 #070a11, 0 4px 6px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.15);
     }
 
-    /* شريط السحوبات الحية المجسم */
+    /* شريط السحوبات الحية */
     .ticker-wrap {
-      background: linear-gradient(90deg, rgba(15,23,42,0.9), rgba(8,12,20,0.95), rgba(15,23,42,0.9));
-      border-bottom: 1px solid rgba(0, 245, 160, 0.2);
+      background: rgba(17, 24, 39, 0.85);
+      border-bottom: 1px solid rgba(0, 245, 160, 0.15);
       overflow: hidden;
       white-space: nowrap;
-      padding: 7px 0;
+      padding: 6px 0;
       font-size: 11px;
       color: var(--text-muted);
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
     }
     .ticker-content {
       display: inline-block;
@@ -179,12 +165,10 @@
     }
     .ticker-badge {
       background: rgba(0, 245, 160, 0.15);
-      border: 1px solid rgba(0, 245, 160, 0.3);
       color: var(--neon-green);
-      padding: 2px 7px;
-      border-radius: 6px;
+      padding: 2px 6px;
+      border-radius: 4px;
       font-weight: bold;
-      text-shadow: 0 0 8px var(--neon-glow);
     }
     @keyframes tickerRun {
       0% { transform: translateX(0); }
@@ -197,178 +181,92 @@
       margin: 0 auto;
     }
 
-    /* كروت 3D Glassmorphic فخمة */
     .card {
-      background: linear-gradient(160deg, rgba(24, 34, 53, 0.8) 0%, rgba(10, 15, 26, 0.95) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 18px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
       padding: 16px;
       margin-bottom: 14px;
-      box-shadow: 
-        0 10px 25px -4px rgba(0, 0, 0, 0.7),
-        inset 0 1px 1px rgba(255, 255, 255, 0.15),
-        inset 0 -1px 2px rgba(0, 0, 0, 0.6);
-      position: relative;
     }
 
-    .balance-card { text-align: center; padding: 20px 16px; }
+    .balance-card { text-align: center; padding: 18px 16px; }
     .balance-title { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
-    
-    /* رصيد 3D بارز */
     .balance-value {
-      font-size: 34px;
+      font-size: 32px;
       font-weight: 900;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      text-shadow: 
-        0 1px 0 #cbd5e1,
-        0 2px 0 #94a3b8,
-        0 3px 0 #475569,
-        0 5px 12px rgba(0,0,0,0.9);
     }
-    .balance-value .curr { 
-      color: var(--neon-green); 
-      font-size: 19px; 
-      text-shadow: 0 1px 0 #00965a, 0 2px 4px rgba(0,0,0,0.8), 0 0 10px var(--neon-glow);
-    }
+    .balance-value .curr { color: var(--neon-green); font-size: 18px; }
     .stats-sub { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
 
-    /* زر 3D مضاعفة السرعة */
-    .btn-boost {
-      background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
-      color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      padding: 9px 20px;
-      border-radius: 22px;
-      font-size: 12px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      box-shadow: 0 4px 0 #92400e, 0 8px 18px rgba(245, 158, 11, 0.4), inset 0 1px 1px rgba(255,255,255,0.4);
-      margin: 0 auto 12px auto;
-      transition: all 0.1s;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-    }
-    .btn-boost:active {
-      transform: translateY(3px);
-      box-shadow: 0 1px 0 #92400e, 0 3px 6px rgba(245, 158, 11, 0.3);
-    }
-
-    /* مركز التعدين الهولوغرافي ثلاثي الأبعاد (3D Gyroscope & Core) */
+    /* دوران التعدين الحي */
     .mining-box {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 22px 0 18px 0;
-      perspective: 800px;
+      margin: 20px 0 16px 0;
     }
     .circle-wrap {
       position: relative;
-      width: 154px;
-      height: 154px;
+      width: 146px;
+      height: 146px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transform-style: preserve-3d;
-      transition: transform 0.2s;
     }
-    .circle-wrap:active {
-      transform: scale(0.96) translateZ(-10px);
-    }
-
-    /* حلقات الدوران 3D */
     .spinner-ring {
       position: absolute;
       inset: 0;
       border-radius: 50%;
       border: 3px dashed var(--neon-green);
-      animation: spinGear 5s linear infinite;
-      filter: drop-shadow(0 0 12px var(--neon-green));
-    }
-    .spinner-ring-outer {
-      position: absolute;
-      inset: -8px;
-      border-radius: 50%;
-      border: 2px dotted rgba(251, 191, 36, 0.5);
-      animation: spinGearReverse 8s linear infinite;
+      animation: spinGear 4s linear infinite;
+      box-shadow: 0 0 20px var(--neon-glow);
     }
     .spinner-pulse {
       position: absolute;
       inset: 6px;
       border-radius: 50%;
-      border: 2px solid rgba(0, 245, 160, 0.3);
-      animation: pulse3D 2.2s ease-in-out infinite alternate;
+      border: 2px solid rgba(0, 245, 160, 0.4);
+      animation: pulseGlow 2s ease-in-out infinite alternate;
     }
-
-    /* الكرة ثلاثية الأبعاد العميقة */
     .circle-core {
-      width: 114px;
-      height: 114px;
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, #1e293b 0%, #0d1527 55%, #030712 100%);
+      background: #0f172a;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       z-index: 2;
-      box-shadow: 
-        inset -6px -6px 14px rgba(0,0,0,0.9), 
-        inset 5px 5px 12px rgba(255,255,255,0.18), 
-        0 12px 25px rgba(0,0,0,0.8),
-        0 0 20px rgba(0, 245, 160, 0.25);
-      border: 1px solid rgba(255,255,255,0.08);
     }
-
-    .bolt-icon { 
-      font-size: 32px; 
-      color: var(--accent-gold); 
-      filter: drop-shadow(0 2px 8px rgba(251, 191, 36, 0.7));
-      animation: boltPulse 1.3s infinite alternate; 
-    }
-    .mining-text { 
-      font-size: 11px; 
-      font-weight: 800;
-      color: #e2e8f0; 
-      margin-top: 3px; 
-      transform: rotate(-10deg);
-      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-    }
+    .bolt-icon { font-size: 30px; color: var(--accent-gold); animation: boltFlash 1.2s infinite alternate; }
+    .mining-text { font-size: 11px; color: #cbd5e1; margin-top: 3px; transform: rotate(-10deg); }
 
     @keyframes spinGear { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    @keyframes spinGearReverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
-    @keyframes pulse3D { 0% { opacity: 0.3; transform: scale(0.97); } 100% { opacity: 1; transform: scale(1.03); } }
-    @keyframes boltPulse { 0% { transform: scale(0.92); } 100% { transform: scale(1.1); } }
+    @keyframes pulseGlow { 0% { opacity: 0.4; } 100% { opacity: 1; filter: drop-shadow(0 0 8px var(--neon-green)); } }
+    @keyframes boltFlash { 0% { transform: scale(0.92); opacity: 0.7; } 100% { transform: scale(1.1); opacity: 1; } }
 
-    /* الأرقام الحية 3D */
     .live-unclaimed {
-      font-size: 22px;
-      font-weight: 900;
+      font-size: 20px;
+      font-weight: 800;
       color: var(--neon-green);
-      margin-top: 14px;
+      margin-top: 12px;
       direction: ltr;
-      text-shadow: 0 1px 0 #00965a, 0 2px 4px rgba(0,0,0,0.8), 0 0 15px var(--neon-glow);
     }
-    .live-clock { 
-      font-size: 13px; 
-      color: #cbd5e1; 
-      margin-top: 4px; 
-      font-weight: bold;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.6);
-    }
+    .live-clock { font-size: 12px; color: var(--text-muted); margin-top: 4px; font-weight: bold; }
 
-    /* زر 3D تفاعلي مجسم (جمع الأرباح) */
     .btn-main {
       width: 100%;
-      background: linear-gradient(180deg, #00f5a0 0%, #00c878 100%);
-      color: #05070a;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      padding: 15px;
-      border-radius: 14px;
+      background: linear-gradient(90deg, #00c878, #00f5a0);
+      color: #07090e;
+      border: none;
+      padding: 14px;
+      border-radius: 12px;
       font-size: 16px;
       font-weight: 900;
       display: flex;
@@ -376,20 +274,28 @@
       justify-content: center;
       gap: 8px;
       cursor: pointer;
-      box-shadow: 
-        0 6px 0 var(--neon-green-dark),
-        0 12px 25px var(--neon-glow),
-        inset 0 1px 1px rgba(255, 255, 255, 0.6);
-      transition: all 0.1s;
+      box-shadow: 0 4px 15px var(--neon-glow);
+      transition: transform 0.1s;
       margin-top: 8px;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.4);
     }
-    .btn-main:active { 
-      transform: translateY(4px); 
-      box-shadow: 0 2px 0 var(--neon-green-dark), 0 4px 10px var(--neon-glow);
+    .btn-main:active { transform: scale(0.97); }
+
+    .btn-boost {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #fff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: 0 0 12px var(--accent-gold-glow);
+      margin: 0 auto 12px auto;
     }
 
-    /* شبكة الإحصائيات 3D */
     .grid-two {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -397,12 +303,11 @@
       margin-top: 14px;
     }
     .stat-box {
-      background: linear-gradient(160deg, rgba(24, 34, 53, 0.7) 0%, rgba(10, 15, 26, 0.9) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
       padding: 12px;
       text-align: center;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
     }
     .stat-label { font-size: 11px; color: var(--text-muted); margin-bottom: 5px; }
     .stat-val { font-size: 13px; font-weight: bold; }
@@ -411,7 +316,7 @@
     .block-line {
       font-size: 12px;
       color: #cbd5e1;
-      padding: 7px 0;
+      padding: 6px 0;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       display: flex;
       justify-content: flex-end;
@@ -419,7 +324,7 @@
       gap: 6px;
     }
 
-    /* كروت الإعلانات 3D */
+    /* 25 إعلاناً */
     .ads-grid {
       display: flex;
       flex-direction: column;
@@ -427,92 +332,71 @@
       margin-top: 12px;
     }
     .ad-card {
-      background: linear-gradient(160deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.95) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
-      padding: 12px 14px;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
     }
     .ad-btn {
-      background: linear-gradient(180deg, #00f5a0 0%, #00c878 100%);
-      color: #05070a;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      padding: 7px 15px;
-      border-radius: 9px;
+      background: var(--neon-green);
+      color: #07090e;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 8px;
       font-size: 12px;
-      font-weight: 800;
+      font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 3px 0 var(--neon-green-dark), 0 5px 12px rgba(0, 245, 160, 0.3);
-      transition: all 0.1s;
-    }
-    .ad-btn:active {
-      transform: translateY(2px);
-      box-shadow: 0 1px 0 var(--neon-green-dark), 0 2px 5px rgba(0, 245, 160, 0.2);
     }
 
-    /* باقات VIP ثلاثية الأبعاد الفخمة */
+    /* VIP */
     .vip-card {
-      background: linear-gradient(160deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.98) 100%);
-      border: 1px solid rgba(251, 191, 36, 0.4);
-      border-radius: 16px;
-      padding: 15px;
+      background: linear-gradient(180deg, #1e293b, #111827);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 14px;
+      padding: 14px;
       margin-bottom: 14px;
-      box-shadow: 0 8px 22px rgba(0,0,0,0.6), inset 0 1px 1px rgba(251, 191, 36, 0.25);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
     }
     .vip-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-    .vip-price { 
-      font-size: 20px; 
-      font-weight: 900; 
-      color: var(--accent-gold); 
-      text-shadow: 0 1px 0 #b45309, 0 2px 4px rgba(0,0,0,0.8), 0 0 10px var(--accent-gold-glow);
-    }
+    .vip-price { font-size: 18px; font-weight: 900; color: var(--accent-gold); }
     .vip-details {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
-      background: rgba(0,0,0,0.35);
-      padding: 10px;
-      border-radius: 10px;
+      background: rgba(0,0,0,0.3);
+      padding: 8px;
+      border-radius: 8px;
       font-size: 11px;
       margin-bottom: 10px;
-      border: 1px solid rgba(255,255,255,0.05);
     }
     .btn-vip {
       width: 100%;
-      background: linear-gradient(180deg, #fbbf24 0%, #f59e0b 100%);
+      background: linear-gradient(90deg, #f59e0b, #fbbf24);
       color: #000;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      padding: 11px;
-      border-radius: 10px;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
       font-weight: 900;
       font-size: 13px;
       cursor: pointer;
-      box-shadow: 0 4px 0 #b45309, 0 8px 18px var(--accent-gold-glow);
-      transition: all 0.1s;
-    }
-    .btn-vip:active {
-      transform: translateY(3px);
-      box-shadow: 0 1px 0 #b45309, 0 3px 6px var(--accent-gold-glow);
     }
 
     .tab-pane { display: none; }
     .tab-pane.active { display: block; }
 
-    /* شريط التنقل السفلي المجسم 3D */
+    /* شريط التنقل السفلي */
     .bottom-nav {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
       height: 65px;
-      background: rgba(8, 12, 20, 0.92);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      background: rgba(15, 23, 42, 0.98);
+      backdrop-filter: blur(15px);
       border-top: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.7);
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -530,22 +414,16 @@
       cursor: pointer;
       gap: 4px;
       flex: 1;
-      transition: all 0.2s;
     }
-    .nav-btn.active { 
-      color: var(--neon-green); 
-      font-weight: 900; 
-      transform: translateY(-2px);
-      text-shadow: 0 0 10px var(--neon-glow);
-    }
-    .nav-btn svg { width: 22px; height: 22px; stroke: currentColor; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+    .nav-btn.active { color: var(--neon-green); font-weight: bold; }
+    .nav-btn svg { width: 20px; height: 20px; stroke: currentColor; }
 
     /* النوافذ المنبثقة */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.88);
-      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(6px);
       display: none;
       align-items: center;
       justify-content: center;
@@ -553,33 +431,31 @@
       padding: 16px;
     }
     .modal-box {
-      background: linear-gradient(160deg, #1e293b 0%, #0f172a 100%);
-      border: 1px solid rgba(0, 245, 160, 0.4);
-      border-radius: 20px;
+      background: #0f172a;
+      border: 1px solid rgba(0, 245, 160, 0.3);
+      border-radius: 18px;
       width: 100%;
       max-width: 340px;
-      padding: 22px;
+      padding: 20px;
       text-align: center;
       max-height: 85vh;
       overflow-y: auto;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.2);
     }
 
     .toast {
       position: fixed;
-      top: 65px;
+      top: 60px;
       left: 50%;
       transform: translateX(-50%);
-      background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+      background: #1e293b;
       color: var(--neon-green);
-      padding: 9px 18px;
-      border-radius: 24px;
+      padding: 8px 16px;
+      border-radius: 20px;
       border: 1px solid var(--neon-green);
       font-size: 12px;
       font-weight: bold;
       display: none;
       z-index: 1000;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.7), 0 0 15px var(--neon-glow);
     }
   </style>
 </head>
@@ -588,7 +464,7 @@
   <div id="offline-banner">⚠️ انقطع الاتصال بالإنترنت.. جاري المحاولة تلقائياً</div>
   <div class="toast" id="toastBox"></div>
 
-  <!-- الهيدر العلوي المجسم الزجاجي -->
+  <!-- الهيدر العلوي المنظم بدقة وفخامة -->
   <header class="top-bar">
     <div class="brand-side">
       <div class="syria-flag">
@@ -629,13 +505,13 @@
 
   <div class="container">
 
-    <!-- 1. تبويب التعدين الرئيسي 3D -->
+    <!-- 1. تبويب التعدين -->
     <main id="tab-mining" class="tab-pane active">
       <div class="card balance-card">
         <div class="balance-title" data-i18n="total_bal_title">الرصيد الكلي للسحب</div>
         <div class="balance-value">
           <span class="curr">USDT</span>
-          <span id="totalBal">0.2366</span>
+          <span id="totalBal">0.0000</span>
         </div>
         <div class="stats-sub">
           <span data-i18n="speed">السرعة</span>: <span id="speedDisplay">1.0 MH/s</span> | 
@@ -645,13 +521,12 @@
 
       <button class="btn-boost" onclick="triggerBoost()">
         <span data-i18n="boost_btn">⚡ مضاعفة السرعة 2X</span>
-        <span id="boostBadge" style="font-size:10px; background:rgba(0,0,0,0.3); padding:2px 6px; border-radius:6px;" data-i18n="available">متاح</span>
+        <span id="boostBadge" style="font-size:10px; background:rgba(0,0,0,0.25); padding:1px 5px; border-radius:4px;" data-i18n="available">متاح</span>
       </button>
 
-      <!-- مركز التعدين الهولوغرافي ثلاثي الأبعاد -->
+      <!-- دائرة التعدين التي تدور باستمرار وتفتح إعلاناً عند النقر عليها -->
       <div class="mining-box">
         <div class="circle-wrap" onclick="clickMiningCircle()" title="اضغط لمشاهدة إعلان وزيادة سرعة التعدين">
-          <div class="spinner-ring-outer"></div>
           <div class="spinner-ring"></div>
           <div class="spinner-pulse"></div>
           <div class="circle-core">
@@ -659,7 +534,7 @@
             <span class="mining-text" data-i18n="working">يعمل...</span>
           </div>
         </div>
-        <div class="live-unclaimed">USDT +<span id="unclaimedBal">0.000600</span></div>
+        <div class="live-unclaimed">USDT +<span id="unclaimedBal">0.041067</span></div>
         <div class="live-clock">⏱ <span id="liveSessionTimer">03:59:59</span></div>
       </div>
 
@@ -671,13 +546,13 @@
       <div class="grid-two">
         <div class="stat-box">
           <div class="stat-label" data-i18n="server_status">حالة السيرفر</div>
-          <div class="stat-val" style="color: #22c55e; text-shadow: 0 0 8px rgba(34,197,94,0.5);">
+          <div class="stat-val" style="color: #22c55e;">
             <span data-i18n="connected">متصل (Cloud 1)</span> 🟢
           </div>
         </div>
         <div class="stat-box">
           <div class="stat-label" data-i18n="total_hash">قوة التجزئة الكلية</div>
-          <div class="stat-val" style="color: var(--accent-gold); text-shadow: 0 0 8px var(--accent-gold-glow);">
+          <div class="stat-val" style="color: var(--accent-gold);">
             <span id="hashRateVal">14.85 GH/s</span> ⚡
           </div>
         </div>
@@ -726,12 +601,12 @@
           <button class="ad-btn" onclick="executeTask(this, 0.025, 'https://t.me')">انضمام</button>
         </div>
 
-        <!-- قائمة 25 إعلاناً 3D -->
+        <!-- قائمة 25 إعلاناً -->
         <div class="ads-grid" id="adsContainer25"></div>
       </div>
     </section>
 
-    <!-- 3. تبويب الإحالة -->
+    <!-- 3. تبويب الإحالة المفصل -->
     <section id="tab-ref" class="tab-pane">
       <div class="card">
         <h3 style="color:var(--neon-green); margin-bottom:6px;" data-i18n="ref_title">👥 نظام الإحالة وكسب الأرباح</h3>
@@ -739,7 +614,7 @@
           اكسب دخلاً سلبياً مستمراً بمجرد دعوة أصدقائك للبدء في التعدين:
         </p>
 
-        <div style="background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.06); padding:12px; border-radius:12px; margin-bottom:12px; font-size:12px; line-height:1.7;">
+        <div style="background:#1e293b; padding:12px; border-radius:10px; margin-bottom:12px; font-size:12px; line-height:1.7;">
           <div>💰 <b style="color:var(--neon-green);">0.50 USDT</b> مكافأة فورية لكل صديق يسجل ويبدأ التعدين عبر رابطك.</div>
           <div>⚡ <b style="color:var(--accent-gold);">10% عمولة تعدين (مستوى 1)</b> من كافة أرباح أصدقائك اليومية مدى الحياة دون خصم شيء منهم!</div>
           <div>🌟 <b style="color:#60a5fa;">5% عمولة إضافية (مستوى 2)</b> من أصدقاء أصدقائك.</div>
@@ -756,17 +631,17 @@
           </div>
         </div>
 
-        <div style="background:#05070a; padding:11px; border-radius:10px; border:1px dashed #334155; font-size:12px; color:#cbd5e1; margin-bottom:12px; text-align:center;">
+        <div style="background:#07090e; padding:10px; border-radius:8px; border:1px dashed #334155; font-size:12px; color:#cbd5e1; margin-bottom:12px; text-align:center;">
           https://wael99998.github.io/?ref=78214
         </div>
         <button onclick="copyLink()" class="btn-main" style="padding:12px; font-size:14px;" data-i18n="copy_ref">نسخ رابط الدعوة 📋</button>
       </div>
     </section>
 
-    <!-- 4. تبويب VIP الباقات الخمس 3D -->
+    <!-- 4. تبويب VIP الباقات الخمس -->
     <section id="tab-vip" class="tab-pane">
-      <div class="card" style="border:none; padding:0; background:transparent; box-shadow:none;">
-        <h3 style="color:var(--accent-gold); margin-bottom:6px; text-shadow:0 0 10px var(--accent-gold-glow);" data-i18n="vip_title">💎 باقات التعدين السحابي VIP</h3>
+      <div class="card" style="border:none; padding:0; background:transparent;">
+        <h3 style="color:var(--accent-gold); margin-bottom:6px;" data-i18n="vip_title">💎 باقات التعدين السحابي VIP</h3>
         <p style="color:var(--text-muted); font-size:12px; margin-bottom:14px;" data-i18n="vip_sub">
           استأجر خوادم سحابية مخصصة، ضاعف أرباحك، واحصل على <b>سحب فوري بدون أي رسوم (0% Fee)</b>.
         </p>
@@ -832,10 +707,10 @@
         </div>
 
         <!-- باقة 200$ -->
-        <div class="vip-card" style="border: 2px solid var(--neon-green); box-shadow: 0 8px 25px var(--neon-glow);">
+        <div class="vip-card" style="border: 2px solid var(--neon-green);">
           <div class="vip-top">
             <div><b style="color:var(--neon-green);">باقة VIP 5 الماسية القصوى</b></div>
-            <div class="vip-price" style="color:var(--neon-green); text-shadow:0 0 10px var(--neon-glow);">200 USDT</div>
+            <div class="vip-price" style="color:var(--neon-green);">200 USDT</div>
           </div>
           <div class="vip-details">
             <div>⚡ قوة التجزئة: <b>800 GH/s</b></div>
@@ -843,18 +718,18 @@
             <div>📅 الربح الشهري: <b>480.00 $</b></div>
             <div>⚡ السحب: <b style="color:var(--neon-green);">فوري 0% رسوم + أولوية</b></div>
           </div>
-          <button class="btn-vip" style="background:var(--neon-green); box-shadow:0 4px 0 var(--neon-green-dark);" onclick="upgradeVIP('VIP 5', 200)">ترقية الباقة الآن (200$)</button>
+          <button class="btn-vip" style="background:var(--neon-green);" onclick="upgradeVIP('VIP 5', 200)">ترقية الباقة الآن (200$)</button>
         </div>
 
       </div>
     </section>
 
-    <!-- 5. تبويب السحب 3D -->
+    <!-- 5. تبويب السحب -->
     <section id="tab-withdraw" class="tab-pane">
       <div class="card">
         <h3 style="color:var(--neon-green); margin-bottom:10px;" data-i18n="withdraw_title">💳 سحب الأرباح (USDT - TRC20)</h3>
         
-        <div style="background:rgba(0,0,0,0.35); border-left:4px solid var(--accent-gold); padding:10px; border-radius:6px; font-size:12px; margin-bottom:14px; line-height:1.6;">
+        <div style="background:#1e293b; border-left:4px solid var(--accent-gold); padding:10px; border-radius:6px; font-size:12px; margin-bottom:14px; line-height:1.6;">
           <div>• <b style="color:var(--neon-green);">الحد الأدنى للسحب هو 10.00 USDT</b>.</div>
           <div>• <b>مشتركو VIP:</b> سحب فوري تلقائي <span style="color:var(--neon-green); font-weight:bold;">بدون رسوم إطلاقاً (0% Fee)</span>.</div>
           <div>• <b>الحسابات العادية المجانية:</b> رسوم نقل الشبكة هي 1.0 USDT.</div>
@@ -862,12 +737,12 @@
 
         <div style="margin-bottom:10px;">
           <label style="font-size:11px; color:var(--text-muted);" data-i18n="wallet_addr">عنوان محفظة USDT (شبكة TRC20):</label>
-          <input type="text" id="walletInput" placeholder="Txxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" style="width:100%; padding:11px; border-radius:10px; border:1px solid #334155; background:#05070a; color:#fff; font-size:12px; margin-top:4px; box-shadow:inset 0 2px 4px rgba(0,0,0,0.5);">
+          <input type="text" id="walletInput" placeholder="Txxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" style="width:100%; padding:11px; border-radius:8px; border:1px solid #334155; background:#07090e; color:#fff; font-size:12px; margin-top:4px;">
         </div>
 
         <div style="margin-bottom:14px;">
           <label style="font-size:11px; color:var(--text-muted);" data-i18n="amount_label">المبلغ المطلوب سحبه:</label>
-          <input type="number" id="withdrawAmount" placeholder="الحد الأدنى 10 USDT" style="width:100%; padding:11px; border-radius:10px; border:1px solid #334155; background:#05070a; color:#fff; font-size:12px; margin-top:4px; box-shadow:inset 0 2px 4px rgba(0,0,0,0.5);">
+          <input type="number" id="withdrawAmount" placeholder="الحد الأدنى 10 USDT" style="width:100%; padding:11px; border-radius:8px; border:1px solid #334155; background:#07090e; color:#fff; font-size:12px; margin-top:4px;">
         </div>
 
         <button onclick="requestWithdrawal()" class="btn-main" data-i18n="submit_withdraw">تأكيد طلب السحب 🚀</button>
@@ -876,10 +751,10 @@
 
   </div>
 
-  <!-- نافذة معلومات عنا 3D -->
+  <!-- نافذة معلومات عنا -->
   <div class="modal-backdrop" id="aboutModal">
     <div class="modal-box">
-      <h3 style="color:var(--neon-green); margin-bottom:8px; text-shadow:0 0 10px var(--neon-glow);">ℹ️ عن شركة Syria Cash</h3>
+      <h3 style="color:var(--neon-green); margin-bottom:8px;">ℹ️ عن شركة Syria Cash</h3>
       <div style="font-size:12px; color:#cbd5e1; line-height:1.7; text-align:right; margin-bottom:14px;">
         <p style="margin-bottom:8px;">
           شركة <b>Syria Cash</b> هي منصة رائدة متخصصة في توفير حلول الربح من الإنترنت والتعدين السحابي للعملات الرقمية المشفرة (USDT). تم تصميم المنصة لتمكين كافة المستخدمين من تحقيق دخل رقمي حقيقي بأبسط الخطوات وبأعلى مستويات الأمان والموثوقية.
@@ -895,20 +770,20 @@
     </div>
   </div>
 
-  <!-- نافذة الدعم الفني 3D -->
+  <!-- نافذة الدعم الفني -->
   <div class="modal-backdrop" id="supportModal">
     <div class="modal-box">
-      <h3 style="color:var(--neon-green); margin-bottom:6px; text-shadow:0 0 10px var(--neon-glow);">💬 الدعم الفني والإبلاغ عن مشكلة</h3>
+      <h3 style="color:var(--neon-green); margin-bottom:6px;">💬 الدعم الفني والإبلاغ عن مشكلة</h3>
       <p style="color:var(--text-muted); font-size:11px; margin-bottom:12px;">نحن هنا لمساعدتك على مدار الساعة، أرسل تفاصيل المشكلة وسيقوم الفريق بحلها فوراً:</p>
       
       <div style="text-align:right; margin-bottom:8px;">
         <label style="font-size:11px; color:var(--text-muted);">اسم المستخدم أو الحساب:</label>
-        <input type="text" id="supUser" placeholder="اسمك أو معرفك" style="width:100%; padding:9px; border-radius:8px; border:1px solid #334155; background:#05070a; color:#fff; font-size:12px; margin-top:3px; box-shadow:inset 0 2px 4px rgba(0,0,0,0.5);">
+        <input type="text" id="supUser" placeholder="اسمك أو معرفك" style="width:100%; padding:8px; border-radius:6px; border:1px solid #334155; background:#07090e; color:#fff; font-size:12px; margin-top:3px;">
       </div>
 
       <div style="text-align:right; margin-bottom:8px;">
         <label style="font-size:11px; color:var(--text-muted);">نوع المشكلة:</label>
-        <select id="supType" style="width:100%; padding:9px; border-radius:8px; border:1px solid #334155; background:#05070a; color:#fff; font-size:12px; margin-top:3px;">
+        <select id="supType" style="width:100%; padding:8px; border-radius:6px; border:1px solid #334155; background:#07090e; color:#fff; font-size:12px; margin-top:3px;">
           <option>مشكلة في السحب</option>
           <option>مشكلة في التعدين</option>
           <option>مشكلة في الإعلانات</option>
@@ -918,11 +793,11 @@
 
       <div style="text-align:right; margin-bottom:12px;">
         <label style="font-size:11px; color:var(--text-muted);">تفاصيل المشكلة:</label>
-        <textarea id="supMsg" rows="3" placeholder="اشرح لنا المشكلة بالتفصيل..." style="width:100%; padding:9px; border-radius:8px; border:1px solid #334155; background:#05070a; color:#fff; font-size:12px; margin-top:3px; box-shadow:inset 0 2px 4px rgba(0,0,0,0.5);"></textarea>
+        <textarea id="supMsg" rows="3" placeholder="اشرح لنا المشكلة بالتفصيل..." style="width:100%; padding:8px; border-radius:6px; border:1px solid #334155; background:#07090e; color:#fff; font-size:12px; margin-top:3px;"></textarea>
       </div>
 
       <button class="btn-main" style="padding:10px; font-size:13px; margin-bottom:8px;" onclick="sendSupport()">إرسال التذكرة 📩</button>
-      <button class="head-pill-btn" style="width:100%; padding:9px; font-size:12px; justify-content:center;" onclick="window.open('https://t.me/SyriaCash_Support', '_blank')">مراسلتنا مباشرة عبر تيليجرام ✈️</button>
+      <button class="head-pill-btn" style="width:100%; padding:8px; font-size:12px; justify-content:center;" onclick="window.open('https://t.me/SyriaCash_Support', '_blank')">مراسلتنا مباشرة عبر تيليجرام ✈️</button>
       <button style="background:transparent; border:none; color:var(--text-muted); font-size:11px; margin-top:10px; cursor:pointer;" onclick="closeModal('supportModal')">إلغاء</button>
     </div>
   </div>
@@ -930,14 +805,14 @@
   <!-- نافذة إعلان التعدين التفاعلي -->
   <div class="modal-backdrop" id="miningAdModal">
     <div class="modal-box">
-      <h3 style="color:var(--accent-gold); margin-bottom:6px; text-shadow:0 0 10px var(--accent-gold-glow);">⚡ إعلان التعدين السريع</h3>
+      <h3 style="color:var(--accent-gold); margin-bottom:6px;">⚡ إعلان التعدين السريع</h3>
       <p style="color:#cbd5e1; font-size:12px; margin-bottom:14px;">جاري تشغيل إعلان التعدين المدعوم لمضاعفة سرعة الحساب وإضافة بونص فوري...</p>
-      <div id="adTimerBox" style="font-size:26px; font-weight:900; color:var(--neon-green); margin-bottom:14px; text-shadow:0 0 12px var(--neon-glow);">5 ثوانٍ...</div>
+      <div id="adTimerBox" style="font-size:24px; font-weight:900; color:var(--neon-green); margin-bottom:14px;">5 ثوانٍ...</div>
       <p style="font-size:11px; color:var(--text-muted);">انتظر حتى ينتهي العداد لاستلام المكافأة</p>
     </div>
   </div>
 
-  <!-- شريط التنقل السفلي المجسم 3D -->
+  <!-- شريط التنقل السفلي -->
   <nav class="bottom-nav">
     <div class="nav-btn active" onclick="navigate('tab-mining', this)">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
@@ -1011,7 +886,7 @@
       localStorage.setItem('sc_lang', lang);
     }
 
-    // التفاعل الصوتي والحركي
+    // الصوت والاهتزاز
     const actx = new (window.AudioContext || window.webkitAudioContext)();
     function playTone(freq, dur = 0.1) {
       try {
@@ -1041,7 +916,7 @@
       setTimeout(() => { b.style.display = 'none'; }, 2500);
     }
 
-    // محرك الرصيد
+    // رصيد التعدين
     let totalBal = parseFloat(localStorage.getItem('sc_tot') || '0.2366');
     let unclaimedBal = parseFloat(localStorage.getItem('sc_uncl') || '0.000600');
     let boosted = false;
@@ -1057,7 +932,7 @@
     }, 1000);
 
     // مؤقت الجلسة التنازلي الحقيقي
-    let sessionSeconds = 14274;
+    let sessionSeconds = 14274; // 3:57:54
     setInterval(() => {
       sessionSeconds--;
       if (sessionSeconds <= 0) sessionSeconds = 14400;
@@ -1187,7 +1062,7 @@
       box.innerHTML = str + str;
     }
 
-    // توليد الكتل
+    // توليد الكتل المباشر
     let currentBlock = 94882;
     setInterval(() => {
       const feed = document.getElementById('blocksFeed');
