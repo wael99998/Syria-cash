@@ -5,5 +5,13 @@
   "display": "standalone",
   "background_color": "#07090e",
   "theme_color": "#07090e",
-  "description": "Syria Cash Cloud Mining"
+  "description": "Syria Cash Cloud Mining",
+  "icons": [
+    {
+      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Flag_of_Syria_%281932-1958%2C_1961-1963%29.svg/512px-Flag_of_Syria_%281932-1958%2C_1961-1963%29.svg.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
 }
