@@ -11,22 +11,22 @@
 body{background:var(--bg);color:#fff;min-height:100vh;padding:12px;padding-bottom:75px;}
 .hdr{display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border-bottom:1px solid var(--b);}
 .flag{width:24px;height:16px;border-radius:2px;display:inline-block;vertical-align:middle;}
-.card{background:var(--card);border:1px solid var(--b);border-radius:14px;padding:13px;text-align:center;margin-top:10px;}
-.bal{font-size:30px;font-weight:900;color:#fff;margin:3px 0;text-shadow:0 0 12px rgba(0,245,160,0.3);}
+.card{background:var(--card);border:1px solid var(--b);border-radius:14px;padding:16px;text-align:center;margin-top:10px;min-height:72vh;display:flex;flex-direction:column;justify-content:space-between;}
+.bal{font-size:32px;font-weight:900;color:#fff;margin:4px 0;text-shadow:0 0 12px rgba(0,245,160,0.3);}
 .ring{width:125px;height:125px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px dashed #374151;margin:12px auto;}
 .ring.active{border:2px solid var(--g);box-shadow:0 0 20px rgba(0,245,160,0.3);animation:spin 4s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .core{width:95px;height:95px;border-radius:50%;background:#1f2937;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;}
-.btn{width:100%;padding:10px;border:none;border-radius:9px;font-size:12px;font-weight:700;cursor:pointer;margin-top:6px;color:#fff;}
+.btn{width:100%;padding:12px;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;margin-top:8px;color:#fff;}
 .btn-g{background:linear-gradient(45deg,var(--g),#059669);}.btn-g:disabled{background:#1f2937;color:#4b5563;cursor:not-allowed;}
 .btn-yt{background:linear-gradient(45deg,#ff0000,#b91c1c);}.btn-ad{background:linear-gradient(45deg,var(--bl),#0284c7);}
 .btn-p{background:linear-gradient(45deg,var(--p),#7c3aed);}.btn-gold{background:linear-gradient(45deg,var(--gold),#d97706);}.btn-r{background:linear-gradient(45deg,var(--r),#b91c1c);}
 .tab{display:none;}.tab.active{display:block;}
-.item{display:flex;justify-content:space-between;align-items:center;background:#030712;padding:9px 10px;border-radius:9px;border:1px solid var(--b);margin-bottom:6px;text-align:right;}
-.inp{width:100%;padding:9px;margin:4px 0 6px 0;border-radius:8px;border:1px solid var(--b);background:#030712;color:#fff;font-size:12px;}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;}
-.stat-box{background:#030712;padding:8px;border-radius:8px;border:1px solid var(--b);font-size:11px;color:#9ca3af;}
-.stat-box b{display:block;font-size:14px;color:#fff;margin-top:2px;}
+.item{display:flex;justify-content:space-between;align-items:center;background:#030712;padding:12px 14px;border-radius:10px;border:1px solid var(--b);margin-bottom:8px;text-align:right;}
+.inp{width:100%;padding:11px;margin:6px 0;border-radius:9px;border:1px solid var(--b);background:#030712;color:#fff;font-size:14px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;}
+.stat-box{background:#030712;padding:12px;border-radius:10px;border:1px solid var(--b);font-size:13px;color:#9ca3af;}
+.stat-box b{display:block;font-size:16px;color:#fff;margin-top:4px;}
 .nav{position:fixed;bottom:0;left:0;width:100%;height:58px;background:#111827;border-top:1px solid var(--b);display:flex;justify-content:space-around;align-items:center;}
 .n-it{color:#9ca3af;font-size:10px;text-align:center;cursor:pointer;flex:1;}
 .n-it.active{color:var(--g);font-weight:700;}
@@ -38,7 +38,7 @@ body{background:var(--bg);color:#fff;min-height:100vh;padding:12px;padding-botto
     <svg class="flag" viewBox="0 0 30 20"><rect width="30" height="6.6" fill="#007a3d"/><rect y="6.6" width="30" height="6.6" fill="#fff"/><rect y="13.2" width="30" height="6.8" fill="#000"/><polygon points="7.5,7.5 8.2,9.7 6.5,8.3 8.5,8.3 6.8,9.7" fill="#ce1126"/><polygon points="15,7.5 15.7,9.7 14,8.3 16,8.3 14.3,9.7" fill="#ce1126"/><polygon points="22.5,7.5 23.2,9.7 21.5,8.3 23.5,8.3 21.8,9.7" fill="#ce1126"/></svg>
     <span>SYRIA CASH</span>
   </div>
-  <select id="lang" onchange="setL(this.value)" style="background:#1f2937;color:#fff;border:1px solid var(--b);padding:2px 5px;border-radius:6px;font-size:11px;">
+  <select id="lang" onchange="setL(this.value)" style="background:#1f2937;color:#fff;border:1px solid var(--b);padding:4px 8px;border-radius:6px;font-size:12px;">
     <option value="ar">العربية</option><option value="en">English</option><option value="fa">فارسی</option>
     <option value="ru">Русский</option><option value="tr">Türkçe</option><option value="fr">Français</option>
   </select>
@@ -47,71 +47,83 @@ body{background:var(--bg);color:#fff;min-height:100vh;padding:12px;padding-botto
 <!-- 1. التعدين -->
 <div id="t1" class="tab active">
   <div class="card">
-    <span style="font-size:11px;color:#9ca3af;" data-k="bal_t">الرصيد الكلي للسحب</span>
-    <div class="bal"><span id="ubal">0.0000</span> <span style="font-size:13px;color:var(--g);">USDT</span></div>
-    <div style="font-size:11px;color:#9ca3af;"><span data-k="spd">السرعة:</span> <b id="upow">1.0</b> MH/s | الإنتاج: <b id="udaily">0.48</b> $/يوم</div>
-  </div>
-  <div class="ring" id="mring"><div class="core" onclick="toggleM()"><div style="font-size:24px;">⚡</div><b style="font-size:10px;" id="ctxt" data-k="sm">بدء التعدين</b></div></div>
-  <div style="text-align:center;font-size:15px;font-weight:700;color:var(--g);font-family:monospace;" id="ticker">+0.000000 USDT</div>
-  <div style="text-align:center;font-size:10px;color:#9ca3af;margin:2px 0 6px;" id="timer" data-k="ih">اضغط لبدء التعدين</div>
-  <button class="btn btn-g" id="btnc" onclick="claim()" disabled data-k="clm">📥 جمع الأرباح إلى المحفظة</button>
-  <!-- قسم إحصائيات التعدين وسجل الكتل -->
-<div style="margin: 15px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-  <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 12px; text-align: center;">
-    <div style="color: #8a99ad; font-size: 11px;">حالة السيرفر</div>
-    <div style="color: #00e676; font-size: 13px; font-weight: bold; margin-top: 4px;">🟢 متصل (Cloud 1)</div>
-  </div>
-  <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 12px; text-align: center;">
-    <div style="color: #8a99ad; font-size: 11px;">قوة التجزئة الكلية</div>
-    <div style="color: #ffb300; font-size: 13px; font-weight: bold; margin-top: 4px;">⚡ 14.85 GH/s</div>
-  </div>
-</div>
+    <div>
+      <span style="font-size:13px;color:#9ca3af;" data-k="bal_t">الرصيد الكلي للسحب</span>
+      <div class="bal"><span id="ubal">0.0000</span> <span style="font-size:14px;color:var(--g);">USDT</span></div>
+      <div style="font-size:13px;color:#9ca3af;"><span data-k="spd">السرعة:</span> <b id="upow">1.0</b> MH/s | الإنتاج: <b id="udaily">0.48</b> $/يوم</div>
+    </div>
+    
+    <div class="ring" id="mring"><div class="core" onclick="toggleM()"><div style="font-size:26px;">⚡</div><b style="font-size:11px;" id="ctxt" data-k="sm">بدء التعدين</b></div></div>
+    
+    <div>
+      <div style="text-align:center;font-size:16px;font-weight:700;color:var(--g);font-family:monospace;" id="ticker">+0.000000 USDT</div>
+      <div style="text-align:center;font-size:12px;color:#9ca3af;margin:4px 0 8px;" id="timer" data-k="ih">اضغط لبدء التعدين</div>
+      <button class="btn btn-g" id="btnc" onclick="claim()" disabled data-k="clm">📥 جمع الأرباح إلى المحفظة</button>
+    </div>
 
-<div style="margin: 10px 0 20px 0; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 14px; padding: 14px;">
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-    <span style="color: #fff; font-size: 12px; font-weight: bold;">سجل الكتل المعدنة (Live Blocks)</span>
-    <span style="color: #00e676; font-size: 10px;">تحديث مباشر</span>
+    <div style="margin: 10px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 10px; text-align: center;">
+        <div style="color: #8a99ad; font-size: 12px;">حالة السيرفر</div>
+        <div style="color: #00e676; font-size: 13px; font-weight: bold; margin-top: 4px;">🟢 متصل (Cloud 1)</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 10px; text-align: center;">
+        <div style="color: #8a99ad; font-size: 12px;">قوة التجزئة الكلية</div>
+        <div style="color: #ffb300; font-size: 13px; font-weight: bold; margin-top: 4px;">⚡ 14.85 GH/s</div>
+      </div>
+    </div>
+
+    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 12px; text-align: left;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+        <span style="color: #fff; font-size: 13px; font-weight: bold;">سجل الكتل المعدنة (Live Blocks)</span>
+        <span style="color: #00e676; font-size: 11px;">تحديث مباشر</span>
+      </div>
+      <div style="font-size: 12px; color: #78909c; line-height: 1.6; font-family: monospace;">
+        <div>✔ Block #94821 - تم التأكيد (+0.004 USDT)</div>
+        <div>✔ Block #94822 - تم التأكيد (+0.008 USDT)</div>
+        <div>⏳ جاري تعدين Block #94823...</div>
+      </div>
+    </div>
   </div>
-  <div style="font-size: 11px; color: #78909c; line-height: 1.8; font-family: monospace;">
-    <div>✔ Block #94821 - تم التأكيد (+0.004 USDT)</div>
-    <div>✔ Block #94822 - تم التأكيد (+0.008 USDT)</div>
-    <div>⏳ جاري تعدين Block #94823...</div>
-  </div>
-</div>
-  
 </div>
 
 <!-- 2. مركز الإعلانات واليوتيوب -->
 <div id="t2" class="tab">
   <div class="card" style="text-align:inherit;">
-    <h3 style="color:var(--bl);margin-bottom:6px;" data-k="tsk">🎯 مركز الإعلانات والمكافآت</h3>
-    <div class="item"><div><b>فيديو يوتيوب القناة</b><br><small style="color:#9ca3af;">+0.5 MH/s سرعة إضافية</small></div><button class="btn btn-yt" style="width:auto;padding:3px 8px;" onclick="yt()">مشاهدة ▶</button></div>
-    <div class="item"><div><b>اشتراك بقناة يوتيوب</b><br><small style="color:#9ca3af;">+0.30 USDT كاش فوري</small></div><button class="btn btn-yt" style="width:auto;padding:3px 8px;" onclick="sub()">اشتراك 🔔</button></div>
-    <div class="item"><div><b>إعلان سرعة التوربين</b><br><small style="color:#9ca3af;">+0.4x سرعة تعدين</small></div><button class="btn btn-ad" style="width:auto;padding:3px 8px;" onclick="ad(1)">مشاهدة 📺</button></div>
-    <div class="item"><div><b>إعلان كاش فوري</b><br><small style="color:#9ca3af;">+0.05 USDT في رصيدك</small></div><button class="btn btn-ad" style="width:auto;padding:3px 8px;" onclick="ad(2)">كاش 💰</button></div>
-    <div class="item"><div><b>إعلان مضاعفة الطاقة</b><br><small style="color:#9ca3af;">+4 ساعات طاقة إضافية</small></div><button class="btn btn-ad" style="width:auto;padding:3px 8px;" onclick="ad(3)">طاقة ⚡</button></div>
+    <div>
+      <h3 style="color:var(--bl);margin-bottom:10px;font-size:16px;" data-k="tsk">🎯 مركز الإعلانات والمكافآت</h3>
+      <div class="item"><div><b style="font-size:14px;">فيديو يوتيوب القناة</b><br><small style="color:#9ca3af;font-size:12px;">+0.5 MH/s سرعة إضافية</small></div><button class="btn btn-yt" style="width:auto;padding:6px 12px;font-size:12px;" onclick="yt()">مشاهدة ▶</button></div>
+      <div class="item"><div><b style="font-size:14px;">اشتراك بقناة يوتيوب</b><br><small style="color:#9ca3af;font-size:12px;">+0.30 USDT كاش فوري</small></div><button class="btn btn-yt" style="width:auto;padding:6px 12px;font-size:12px;" onclick="sub()">اشتراك 🔔</button></div>
+      <div class="item"><div><b style="font-size:14px;">إعلان سرعة التوربين</b><br><small style="color:#9ca3af;font-size:12px;">+0.4x سرعة تعدين</small></div><button class="btn btn-ad" style="width:auto;padding:6px 12px;font-size:12px;" onclick="ad(1)">مشاهدة 📺</button></div>
+      <div class="item"><div><b style="font-size:14px;">إعلان كاش فوري</b><br><small style="color:#9ca3af;font-size:12px;">+0.05 USDT في رصيدك</small></div><button class="btn btn-ad" style="width:auto;padding:6px 12px;font-size:12px;" onclick="ad(2)">كاش 💰</button></div>
+      <div class="item"><div><b style="font-size:14px;">إعلان مضاعفة الطاقة</b><br><small style="color:#9ca3af;font-size:12px;">+4 ساعات طاقة إضافية</small></div><button class="btn btn-ad" style="width:auto;padding:6px 12px;font-size:12px;" onclick="ad(3)">طاقة ⚡</button></div>
+    </div>
+    <div style="text-align:center;color:#6b7280;font-size:11px;margin-top:10px;">Syria Cash Rewards Engine v2.4</div>
   </div>
 </div>
 
 <!-- 3. تفاصيل دعوة الأصدقاء -->
 <div id="t3" class="tab">
   <div class="card" style="text-align:inherit;">
-    <h3 style="color:var(--p);margin-bottom:6px;" data-k="ref">👥 تفاصيل الإحالة والدعوة</h3>
-    <div class="grid2">
-      <div class="stat-box">المدعوون النشطون:<b id="ref_count">0 صديق</b></div>
-      <div class="stat-box">أرباح الإحالات:<b id="ref_earn" style="color:var(--g);">0.00 USDT</b></div>
+    <div>
+      <h3 style="color:var(--p);margin-bottom:10px;font-size:16px;" data-k="ref">👥 تفاصيل الإحالة والدعوة</h3>
+      <div class="grid2">
+        <div class="stat-box">المدعوون النشطون:<b id="ref_count">0 صديق</b></div>
+        <div class="stat-box">أرباح الإحالات:<b id="ref_earn" style="color:var(--g);">0.00 USDT</b></div>
+      </div>
+      <div style="background:#030712;padding:10px;border-radius:9px;margin:10px 0;border:1px solid var(--b);font-size:12px;color:#9ca3af;line-height:1.5;">
+        نظام المكافآت: <b>+0.25 USDT</b> لكل صديق يسجل بكودك + <b>10%</b> نسبة أرباح دائمة من كل سحوباته.
+      </div>
+      <div style="background:#030712;padding:8px;border-radius:9px;text-align:center;border:1px dashed var(--p);">
+        <small style="color:#9ca3af;font-size:11px;">كودك الخاص:</small><div style="font-size:18px;font-weight:900;color:var(--g);" id="myc">SYRIA-992</div>
+      </div>
     </div>
-    <div style="background:#030712;padding:8px;border-radius:8px;margin:8px 0;border:1px solid var(--b);font-size:11px;color:#9ca3af;">
-      نظام المكافآت: <b>+0.25 USDT</b> لكل صديق يسجل بكودك + <b>10%</b> نسبة أرباح دائمة من كل سحوباته.
-    </div>
-    <div style="background:#030712;padding:6px;border-radius:8px;text-align:center;border:1px dashed var(--p);">
-      <small style="color:#9ca3af;">كودك الخاص:</small><div style="font-size:17px;font-weight:900;color:var(--g);" id="myc">SYRIA-992</div>
-    </div>
-    <button class="btn btn-p" onclick="copyRef()" data-k="cpref">📋 نسخ ومشاركة كود الإحالة</button>
-    <div style="margin-top:8px;border-top:1px solid var(--b);padding-top:6px;">
-      <small style="color:#9ca3af;">هل دعاك صديق؟</small>
-      <input type="text" id="incode" class="inp" placeholder="اكتب كود صديقك (+0.20 USDT)">
-      <button class="btn btn-g" onclick="redRef()" data-k="actref">تفعيل كود الصديق</button>
+    <div>
+      <button class="btn btn-p" onclick="copyRef()" data-k="cpref">📋 نسخ ومشاركة كود الإحالة</button>
+      <div style="margin-top:10px;border-top:1px solid var(--b);padding-top:8px;">
+        <small style="color:#9ca3af;font-size:12px;">هل دعاك صديق؟</small>
+        <input type="text" id="incode" class="inp" placeholder="اكتب كود صديقك (+0.20 USDT)">
+        <button class="btn btn-g" onclick="redRef()" data-k="actref">تفعيل كود الصديق</button>
+      </div>
     </div>
   </div>
 </div>
@@ -119,44 +131,52 @@ body{background:var(--bg);color:#fff;min-height:100vh;padding:12px;padding-botto
 <!-- 4. باقات VIP -->
 <div id="t4" class="tab">
   <div class="card" style="text-align:inherit;">
-    <h3 style="color:var(--gold);margin-bottom:4px;" data-k="vip">💎 باقات VIP وأرباحها اليومية</h3>
-    <p style="font-size:10px;color:#9ca3af;margin-bottom:6px;">عوائد يومية وشهرية مضمونة تدفع لمحفظتك:</p>
-    
-    <div class="item">
-      <div><b>باقة برونزية (10$)</b><br><small style="color:#9ca3af;">سرعة 2.5x | يومي: <b>0.60$</b> | شهري: <b>18$</b></small></div>
-      <b style="color:var(--gold);">10$</b>
-    </div>
-    <div class="item">
-      <div><b>باقة فضية (25$)</b><br><small style="color:#9ca3af;">سرعة 6.0x | يومي: <b>1.60$</b> | شهري: <b>48$</b></small></div>
-      <b style="color:var(--gold);">25$</b>
-    </div>
-    <div class="item">
-      <div><b>باقة ذهبية (50$)</b><br><small style="color:#9ca3af;">سرعة 13.0x | يومي: <b>3.60$</b> | شهري: <b>108$</b></small></div>
-      <b style="color:var(--gold);">50$</b>
-    </div>
-    <div class="item">
-      <div><b>باقة ملكية VIP (100$)</b><br><small style="color:#9ca3af;">سرعة 30.0x | يومي: <b>8.50$</b> | شهري: <b>255$</b></small></div>
-      <b style="color:var(--gold);">100$</b>
+    <div>
+      <h3 style="color:var(--gold);margin-bottom:6px;font-size:16px;" data-k="vip">💎 باقات VIP وأرباحها اليومية</h3>
+      <p style="font-size:12px;color:#9ca3af;margin-bottom:10px;">عوائد يومية وشهرية مضمونة تدفع لمحفظتك:</p>
+      
+      <div class="item">
+        <div><b style="font-size:14px;">باقة برونزية (10$)</b><br><small style="color:#9ca3af;font-size:12px;">سرعة 2.5x | يومي: <b>0.60$</b> | شهري: <b>18$</b></small></div>
+        <b style="color:var(--gold);font-size:15px;">10$</b>
+      </div>
+      <div class="item">
+        <div><b style="font-size:14px;">باقة فضية (25$)</b><br><small style="color:#9ca3af;font-size:12px;">سرعة 6.0x | يومي: <b>1.60$</b> | شهري: <b>48$</b></small></div>
+        <b style="color:var(--gold);font-size:15px;">25$</b>
+      </div>
+      <div class="item">
+        <div><b style="font-size:14px;">باقة ذهبية (50$)</b><br><small style="color:#9ca3af;font-size:12px;">سرعة 13.0x | يومي: <b>3.60$</b> | شهري: <b>108$</b></small></div>
+        <b style="color:var(--gold);font-size:15px;">50$</b>
+      </div>
+      <div class="item">
+        <div><b style="font-size:14px;">باقة ملكية VIP (100$)</b><br><small style="color:#9ca3af;font-size:12px;">سرعة 30.0x | يومي: <b>8.50$</b> | شهري: <b>255$</b></small></div>
+        <b style="color:var(--gold);font-size:15px;">100$</b>
+      </div>
     </div>
 
-    <div style="background:#030712;padding:6px;border-radius:6px;font-size:10px;border:1px dashed var(--b);color:var(--g);margin:6px 0;word-break:break-all;">USDT TRC20: TP9xQZ8...SYRIA_CASH...7xLa3</div>
-    <input type="number" id="damt" class="inp" placeholder="المبلغ المشحون ($)">
-    <input type="text" id="dtx" class="inp" placeholder="رقم العملية (TxID)">
-    <button class="btn btn-gold" onclick="dep()" data-k="cdep">تأكيد الشحن وتفعيل السرعة</button>
+    <div>
+      <div style="background:#030712;padding:8px;border-radius:8px;font-size:11px;border:1px dashed var(--b);color:var(--g);margin:6px 0;word-break:break-all;text-align:center;">USDT TRC20: TP9xQZ8...SYRIA_CASH...7xLa3</div>
+      <input type="number" id="damt" class="inp" placeholder="المبلغ المشحون ($)">
+      <input type="text" id="dtx" class="inp" placeholder="رقم العملية (TxID)">
+      <button class="btn btn-gold" onclick="dep()" data-k="cdep">تأكيد الشحن وتفعيل السرعة</button>
+    </div>
   </div>
 </div>
 
 <!-- 5. السحب -->
 <div id="t5" class="tab">
   <div class="card" style="text-align:inherit;">
-    <h3 style="color:var(--r);margin-bottom:4px;" data-k="wit">💳 سحب الأرباح</h3>
-    <div style="background:#030712;padding:7px;border-radius:8px;border:1px solid var(--b);font-size:11px;color:#9ca3af;margin-bottom:6px;">
-      الحد الأدنى للسحب: <b style="color:var(--g);">10 USDT</b> (شبكة TRC20 / TON)<br>
-      <span style="font-size:10px;color:var(--gold);">* يتم التحويل بدون رسوم شبكة لمن يملك باقة VIP.</span>
+    <div>
+      <h3 style="color:var(--r);margin-bottom:8px;font-size:16px;" data-k="wit">💳 سحب الأرباح</h3>
+      <div style="background:#030712;padding:10px;border-radius:9px;border:1px solid var(--b);font-size:12px;color:#9ca3af;margin-bottom:10px;line-height:1.5;">
+        الحد الأدنى للسحب: <b style="color:var(--g);">10 USDT</b> (شبكة TRC20 / TON)<br>
+        <span style="font-size:11px;color:var(--gold);">* يتم التحويل بدون رسوم شبكة لمن يملك باقة VIP.</span>
+      </div>
     </div>
-    <input type="text" id="wadr" class="inp" placeholder="عنوان محفظتك (T...)">
-    <input type="number" id="wamt" class="inp" placeholder="الحد الأدنى 10 USDT">
-    <button class="btn btn-r" onclick="wit()" data-k="cwit">تأكيد السحب الآن</button>
+    <div>
+      <input type="text" id="wadr" class="inp" placeholder="عنوان محفظتك (T...)">
+      <input type="number" id="wamt" class="inp" placeholder="الحد الأدنى 10 USDT">
+      <button class="btn btn-r" onclick="wit()" data-k="cwit">تأكيد السحب الآن</button>
+    </div>
   </div>
 </div>
 
