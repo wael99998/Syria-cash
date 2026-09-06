@@ -140,7 +140,7 @@
       color: var(--neon-green);
     }
 
-    /* قائمة لغات نظيفة بدون إيموجي العلم الأحمر */
+    /* قائمة لغات بدون إيموجي العلم الأحمر */
     .lang-selector {
       background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
       color: #cbd5e1;
@@ -332,7 +332,7 @@
     @keyframes pulse3D { 0% { opacity: 0.3; transform: scale(0.97); } 100% { opacity: 1; transform: scale(1.03); } }
     @keyframes boltPulse { 0% { transform: scale(0.92); } 100% { transform: scale(1.1); } }
 
-    /* جعل العداد قابلاً للنقر والتفاعل الإعلاني */
+    /* العداد التفاعلي للنقر والإعلان */
     .counter-clickable-box {
       cursor: pointer;
       display: flex;
@@ -340,9 +340,7 @@
       align-items: center;
       transition: transform 0.15s;
     }
-    .counter-clickable-box:active {
-      transform: scale(0.95);
-    }
+    .counter-clickable-box:active { transform: scale(0.95); }
 
     .live-unclaimed {
       font-size: 22px;
@@ -419,7 +417,98 @@
       gap: 6px;
     }
 
-    /* 25 إعلاناً */
+    /* --- قسم الألعاب وعجلة الحظ 3D --- */
+    .game-hero {
+      background: linear-gradient(160deg, #1e1b4b 0%, #0f172a 100%);
+      border: 2px solid #818cf8;
+      border-radius: 18px;
+      padding: 18px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+      margin-bottom: 16px;
+    }
+    .wheel-container {
+      position: relative;
+      width: 210px;
+      height: 210px;
+      margin: 16px auto;
+    }
+    .wheel-spinner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 6px solid #fbbf24;
+      background: conic-gradient(
+        #00f5a0 0deg 60deg, 
+        #3b82f6 60deg 120deg, 
+        #f59e0b 120deg 180deg, 
+        #ec4899 180deg 240deg, 
+        #8b5cf6 240deg 300deg, 
+        #00c878 300deg 360deg
+      );
+      box-shadow: 0 0 25px rgba(251, 191, 36, 0.4), inset 0 0 15px rgba(0,0,0,0.6);
+      transition: transform 4s cubic-bezier(0.15, 0.9, 0.25, 1);
+    }
+    .wheel-pointer {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 14px solid transparent;
+      border-right: 14px solid transparent;
+      border-top: 22px solid #ef4444;
+      z-index: 5;
+      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.8));
+    }
+    .wheel-center-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fbbf24 0%, #b45309 100%);
+      border: 3px solid #fff;
+      color: #000;
+      font-weight: 900;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    }
+
+    /* لعبة النقر Tap Mining */
+    .tap-game-box {
+      background: linear-gradient(160deg, #1e293b 0%, #0f172a 100%);
+      border: 1px solid rgba(0, 245, 160, 0.3);
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .tap-gem-btn {
+      width: 100px;
+      height: 100px;
+      margin: 12px auto;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #00f5a0 0%, #007a48 100%);
+      border: 3px solid #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      cursor: pointer;
+      box-shadow: 0 8px 25px var(--neon-glow);
+      transition: transform 0.08s;
+    }
+    .tap-gem-btn:active { transform: scale(0.9); }
+
+    /* قائمة الإعلانات 25 */
     .ads-grid {
       display: flex;
       flex-direction: column;
@@ -472,36 +561,13 @@
       font-weight: bold;
     }
 
-    /* ألوان وهوية كل باقة */
-    .vip-bronze {
-      background: linear-gradient(160deg, #2a1b12 0%, #150e09 100%);
-      border: 1px solid #b45309;
-    }
-    .vip-silver {
-      background: linear-gradient(160deg, #1e293b 0%, #0f172a 100%);
-      border: 1px solid #94a3b8;
-    }
-    .vip-gold {
-      background: linear-gradient(160deg, #2d2006 0%, #140e02 100%);
-      border: 2px solid #f59e0b;
-      box-shadow: 0 0 18px rgba(245, 158, 11, 0.25);
-    }
-    .vip-platinum {
-      background: linear-gradient(160deg, #082f49 0%, #031320 100%);
-      border: 1px solid #38bdf8;
-    }
-    .vip-diamond {
-      background: linear-gradient(160deg, #022c22 0%, #01140f 100%);
-      border: 2px solid var(--neon-green);
-      box-shadow: 0 0 22px var(--neon-glow);
-    }
+    .vip-bronze { background: linear-gradient(160deg, #2a1b12 0%, #150e09 100%); border: 1px solid #b45309; }
+    .vip-silver { background: linear-gradient(160deg, #1e293b 0%, #0f172a 100%); border: 1px solid #94a3b8; }
+    .vip-gold { background: linear-gradient(160deg, #2d2006 0%, #140e02 100%); border: 2px solid #f59e0b; box-shadow: 0 0 18px rgba(245, 158, 11, 0.25); }
+    .vip-platinum { background: linear-gradient(160deg, #082f49 0%, #031320 100%); border: 1px solid #38bdf8; }
+    .vip-diamond { background: linear-gradient(160deg, #022c22 0%, #01140f 100%); border: 2px solid var(--neon-green); box-shadow: 0 0 22px var(--neon-glow); }
 
-    .vip-header-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
+    .vip-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
     .vip-plan-title { font-size: 15px; font-weight: 900; }
     .vip-price-tag { font-size: 20px; font-weight: 900; }
 
@@ -530,7 +596,7 @@
     }
     .btn-vip-action:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0,0,0,0.5); }
 
-    /* طرق السحب المتعددة */
+    /* طرق السحب */
     .withdraw-select {
       width: 100%;
       padding: 11px;
@@ -559,7 +625,7 @@
     .tab-pane { display: none; }
     .tab-pane.active { display: block; }
 
-    /* شريط التنقل السفلي */
+    /* شريط التنقل السفلي المطور ليشمل الألعاب (6 خيارات متناسقة) */
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -584,9 +650,9 @@
       align-items: center;
       justify-content: center;
       color: var(--text-muted);
-      font-size: 11px;
+      font-size: 10px;
       cursor: pointer;
-      gap: 4px;
+      gap: 3px;
       flex: 1;
       transition: all 0.2s;
     }
@@ -596,7 +662,7 @@
       transform: translateY(-2px);
       text-shadow: 0 0 10px var(--neon-glow);
     }
-    .nav-btn svg { width: 22px; height: 22px; stroke: currentColor; }
+    .nav-btn svg { width: 20px; height: 20px; stroke: currentColor; }
 
     /* النوافذ المنبثقة */
     .modal-backdrop {
@@ -668,7 +734,7 @@
       <button class="head-pill-btn" onclick="openModal('supportModal')" title="الدعم الفني">
         <span>💬</span> <span>الدعم</span>
       </button>
-      <!-- خيارات اللغات بنص واضح وبدون إيموجي النظام الأحمر -->
+      <!-- قائمة لغات نظيفة تماماً بدون أي إيموجي علم أحمر -->
       <select class="lang-selector" id="langSelect" onchange="changeLang(this.value)">
         <option value="ar">العربية</option>
         <option value="en">English</option>
@@ -707,7 +773,7 @@
         <span id="boostBadge" style="font-size:10px; background:rgba(0,0,0,0.3); padding:2px 6px; border-radius:6px;" data-i18n="available">متاح</span>
       </button>
 
-      <!-- مركز التعدين ثلاثي الأبعاد -->
+      <!-- مركز التعدين 3D -->
       <div class="mining-box">
         <div class="circle-wrap" onclick="clickMiningCircle()" title="اضغط لمشاهدة إعلان وزيادة سرعة التعدين">
           <div class="spinner-ring-outer"></div>
@@ -719,8 +785,8 @@
           </div>
         </div>
         
-        <!-- العداد التفاعلي (عند النقر عليه يفتح إعلاناً ويمنح بونص) -->
-        <div class="counter-clickable-box" onclick="clickCounterBox()" title="اضغط على العداد لمشاهدة إعلان وكسب مكافأة فورية">
+        <!-- العداد التفاعلي (عند الضغط عليه يفتح إعلاناً ويمنح مكافأة) -->
+        <div class="counter-clickable-box" onclick="clickCounterBox()" title="اضغط على العداد لمشاهدة إعلان وكسب مكافأة">
           <div class="live-unclaimed">USDT +<span id="unclaimedBal">0.000600</span></div>
           <div class="live-clock">⏱ <span id="liveSessionTimer">03:59:59</span></div>
         </div>
@@ -759,7 +825,42 @@
       </div>
     </main>
 
-    <!-- 2. تبويب الإعلانات (25 إعلاناً مرقماً + يوتيوب وتيليجرام) -->
+    <!-- 2. تبويب الألعاب والترفيه (Play-to-Earn) الجديد والمربح -->
+    <section id="tab-games" class="tab-pane">
+      <!-- عجلة الحظ 3D -->
+      <div class="game-hero">
+        <h3 style="color:var(--accent-gold); font-size:16px;">🎡 عجلة الحظ الكبرى (Lucky Spin)</h3>
+        <p style="color:#cbd5e1; font-size:12px; margin-top:4px;">دوّر العجلة واربح رصيد USDT وطاقة تجزئة مجانية فوراً!</p>
+        
+        <div class="wheel-container">
+          <div class="wheel-pointer"></div>
+          <div class="wheel-spinner" id="wheelSpinner"></div>
+          <div class="wheel-center-btn" onclick="spinLuckyWheel()">دَوّر 🎯</div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.3); padding:8px 12px; border-radius:10px; font-size:12px; margin-top:10px;">
+          <span>اللفات المتبقية: <b id="spinsLeft" style="color:var(--neon-green);">3 لفات</b></span>
+          <button onclick="watchAdForSpin()" class="ad-btn" style="padding:5px 10px; font-size:11px;">+ لفة بمشاهدة إعلان 🎬</button>
+        </div>
+      </div>
+
+      <!-- لعبة النقر السريع -->
+      <div class="tap-game-box">
+        <h4 style="color:var(--neon-green);">⛏️ لعبة صائد العملات (Tap Mining Quest)</h4>
+        <p style="color:var(--text-muted); font-size:11px; margin-top:4px;">انقر على الجوهرة لجمع شظايا الذهب وتحويلها إلى USDT!</p>
+        
+        <div class="tap-gem-btn" onclick="tapMineGem()">💎</div>
+        
+        <div style="font-size:13px; font-weight:bold; color:var(--accent-gold);">
+          شظايا مجمعة: <span id="tapScore">0</span> / 50
+        </div>
+        <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">
+          (عند اكتمال 50 شظية تحصل على +0.02 USDT بمشاهدة فيديو سريع)
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. تبويب الإعلانات (25 إعلاناً مرقماً + يوتيوب وتيليجرام) -->
     <section id="tab-ads" class="tab-pane">
       <div class="card">
         <h3 style="color:var(--neon-green); margin-bottom:6px;" data-i18n="ads_title">🎯 المهام والإعلانات المأجورة</h3>
@@ -793,7 +894,7 @@
       </div>
     </section>
 
-    <!-- 3. تبويب الإحالة -->
+    <!-- 4. تبويب الإحالة -->
     <section id="tab-ref" class="tab-pane">
       <div class="card">
         <h3 style="color:var(--neon-green); margin-bottom:6px;" data-i18n="ref_title">👥 نظام الإحالة وكسب الأرباح</h3>
@@ -825,7 +926,7 @@
       </div>
     </section>
 
-    <!-- 4. تبويب VIP المطور بتصميم مخصص وفخم لكل باقة -->
+    <!-- 5. تبويب VIP الباقات الخمس 3D -->
     <section id="tab-vip" class="tab-pane">
       <div class="card" style="border:none; padding:0; background:transparent; box-shadow:none;">
         <h3 style="color:var(--accent-gold); margin-bottom:6px; text-shadow:0 0 10px var(--accent-gold-glow);" data-i18n="vip_title">💎 باقات التعدين السحابي VIP</h3>
@@ -916,7 +1017,7 @@
       </div>
     </section>
 
-    <!-- 5. تبويب السحب (طرق سحب متعددة وديناميكية) -->
+    <!-- 6. تبويب السحب (بدون أي إيموجي علم أحمر) -->
     <section id="tab-withdraw" class="tab-pane">
       <div class="card">
         <h3 style="color:var(--neon-green); margin-bottom:10px;" data-i18n="withdraw_title">💳 سحب الأرباح</h3>
@@ -927,7 +1028,6 @@
           <div>• <b>الحسابات العادية:</b> رسوم معالجة موحدة 1.0 USDT.</div>
         </div>
 
-        <!-- اختيار طريقة السحب -->
         <div style="margin-bottom:12px;">
           <label style="font-size:11px; color:var(--text-muted);">اختر طريقة استلام الأرباح:</label>
           <select id="withdrawMethodSelect" class="withdraw-select" onchange="updateWithdrawFields(this.value)">
@@ -935,14 +1035,11 @@
             <option value="google_play">🎁 بطاقة غوغل بلاي TR (Google Play)</option>
             <option value="turkish_cash">🏦 كاش: حساب مصرفي تركي (IBAN TR)</option>
             <option value="telegram_stars">⭐ نجوم تلجرام (Telegram Stars)</option>
-            <option value="sham_cash">🇸🇾 شام كاش (Sham Cash)</option>
+            <option value="sham_cash">🟢 شام كاش (Sham Cash)</option>
           </select>
         </div>
 
-        <!-- خانات الإدخال الديناميكية -->
-        <div id="dynamicWithdrawFields" style="margin-bottom:12px;">
-          <!-- يتم تحديثها تلقائياً بالـ JavaScript -->
-        </div>
+        <div id="dynamicWithdrawFields" style="margin-bottom:12px;"></div>
 
         <div style="margin-bottom:14px;">
           <label style="font-size:11px; color:var(--text-muted);" data-i18n="amount_label">المبلغ المراد سحبه (بما يعادل USDT):</label>
@@ -967,7 +1064,7 @@
           🚀 خطط التوسع القادمة:
         </p>
         <p>
-          يسر إدارة Syria Cash الإعلان عن العمل حالياً على إطلاق وتطوير <b>عدة تطبيقات ومنصات إلكترونية تابعة</b> في المستقبل القريب، والتي ستوفر مصادر ربح متعددة، أسواق رقمية، وخيارات سحب أوسع لتحقيق أقصى استفادة لمجتمعنا العربي والعالمي!
+          يسر إدارة Syria Cash الإعلان عن العمل حالياً على إطلاق وتطوير <b>عدة تطبيقات ومنصات إلكترونية تابعة</b> في المستقبل القريب، والتي ستوفر مصادر ربح متعددة، ألعاب تفاعلية، وخيارات سحب أوسع لتحقيق أقصى استفادة لمجتمعنا العربي والعالمي!
         </p>
       </div>
       <button class="btn-main" style="padding:10px; font-size:13px;" onclick="closeModal('aboutModal')">إغلاق النافذة</button>
@@ -990,6 +1087,7 @@
         <select id="supType" class="input-3d" style="background:#0f172a;">
           <option>مشكلة في السحب</option>
           <option>مشكلة في التعدين</option>
+          <option>مشكلة في الألعاب</option>
           <option>مشكلة في الإعلانات</option>
           <option>استفسار عام</option>
         </select>
@@ -1006,21 +1104,25 @@
     </div>
   </div>
 
-  <!-- نافذة إعلان التعدين والعداد -->
+  <!-- نافذة الإعلان التجريبي الموحد -->
   <div class="modal-backdrop" id="miningAdModal">
     <div class="modal-box">
       <h3 style="color:var(--accent-gold); margin-bottom:6px; text-shadow:0 0 10px var(--accent-gold-glow);" id="adModalTitle">⚡ إعلان التعدين السريع</h3>
-      <p style="color:#cbd5e1; font-size:12px; margin-bottom:14px;" id="adModalDesc">جاري تشغيل إعلان التعدين المدعوم لمضاعفة سرعة الحساب وإضافة بونص فوري...</p>
+      <p style="color:#cbd5e1; font-size:12px; margin-bottom:14px;" id="adModalDesc">جاري تشغيل الإعلان لمضاعفة سرعة الحساب وإضافة بونص فوري...</p>
       <div id="adTimerBox" style="font-size:26px; font-weight:900; color:var(--neon-green); margin-bottom:14px; text-shadow:0 0 12px var(--neon-glow);">5 ثوانٍ...</div>
       <p style="font-size:11px; color:var(--text-muted);">انتظر حتى ينتهي العداد لاستلام المكافأة</p>
     </div>
   </div>
 
-  <!-- شريط التنقل السفلي -->
+  <!-- شريط التنقل السفلي المطور (6 تبويبات مريحة مع قسم الألعاب) -->
   <nav class="bottom-nav">
     <div class="nav-btn active" onclick="navigate('tab-mining', this)">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
       <span data-i18n="nav_mining">التعدين</span>
+    </div>
+    <div class="nav-btn" onclick="navigate('tab-games', this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4m-2-2v4m10-2h.01m-3 0h.01"></path></svg>
+      <span>الألعاب 🎮</span>
     </div>
     <div class="nav-btn" onclick="navigate('tab-ads', this)">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
@@ -1040,7 +1142,7 @@
     </div>
   </nav>
 
-  <!-- المحرك البرمجي -->
+  <!-- المحرك البرمجي المتكامل -->
   <script>
     const dict = {
       ar: {
@@ -1145,7 +1247,7 @@
 
     // النقر على دائرة التعدين
     function clickMiningCircle() {
-      triggerAdWorkflow('⚡ إعلان التعدين السريع', 'جاري تشغيل إعلان التعدين لزيادة سرعة التجزئة والحصول على مكافأة...', 0.005);
+      triggerAdWorkflow('⚡ إعلان التعدين السريع', 'جاري تشغيل إعلان التعدين لزيادة سرعة التجزئة وكسب مكافأة...', 0.005);
     }
 
     // النقر على العداد
@@ -1223,7 +1325,64 @@
       }, 1000);
     }
 
-    // توليد 25 إعلاناً
+    // --- محرك الألعاب التفاعلي ---
+    let spinsLeft = parseInt(localStorage.getItem('sc_spins') || '3');
+    let wheelDeg = 0;
+    let isSpinning = false;
+    document.getElementById('spinsLeft').innerText = `${spinsLeft} لفات`;
+
+    function spinLuckyWheel() {
+      if (isSpinning) return;
+      if (spinsLeft <= 0) {
+        alert('لقد استهلكت لفاتك اليومية! اضغط على "مشاهدة إعلان" للحصول على لفة جديدة مجاناً 🎬');
+        return;
+      }
+      isSpinning = true;
+      spinsLeft--;
+      localStorage.setItem('sc_spins', spinsLeft);
+      document.getElementById('spinsLeft').innerText = `${spinsLeft} لفات`;
+
+      haptic('heavy');
+      playTone(520, 0.3);
+      const extraRounds = 5 + Math.floor(Math.random() * 5);
+      const randomStop = Math.floor(Math.random() * 360);
+      wheelDeg += (extraRounds * 360) + randomStop;
+      document.getElementById('wheelSpinner').style.transform = `rotate(${wheelDeg}deg)`;
+
+      setTimeout(() => {
+        isSpinning = false;
+        haptic('success');
+        playTone(980, 0.25);
+        const prize = (Math.random() * 0.03 + 0.01).toFixed(3);
+        totalBal += parseFloat(prize);
+        document.getElementById('totalBal').innerText = totalBal.toFixed(4);
+        localStorage.setItem('sc_tot', totalBal);
+        alert(`🎉 مبروك! ربحت +${prize} USDT من عجلة الحظ!`);
+      }, 4200);
+    }
+
+    function watchAdForSpin() {
+      triggerAdWorkflow('🎬 مشاهدة إعلان للحصول على لفة', 'شاهد هذا الإعلان السريع للحصول على لفة إضافية في عجلة الحظ...', 0);
+      spinsLeft++;
+      localStorage.setItem('sc_spins', spinsLeft);
+      document.getElementById('spinsLeft').innerText = `${spinsLeft} لفات`;
+    }
+
+    // لعبة النقر
+    let tapCount = 0;
+    function tapMineGem() {
+      haptic('light');
+      playTone(700 + (tapCount * 15), 0.06);
+      tapCount++;
+      document.getElementById('tapScore').innerText = tapCount;
+      if (tapCount >= 50) {
+        tapCount = 0;
+        document.getElementById('tapScore').innerText = '0';
+        triggerAdWorkflow('💎 مكافأة إكمال تعدين الجوهرة', 'مبروك إكمال 50 نقرة! شاهد إعلاناً قصيراً لاستلام جائزتك...', 0.02);
+      }
+    }
+
+    // 25 إعلاناً
     function render25Ads() {
       const container = document.getElementById('adsContainer25');
       let html = '';
@@ -1261,7 +1420,7 @@
       }, 5000);
     }
 
-    // إدارة الحقول المتغيرة للسحب
+    // طرق السحب بدون أي إيموجي علم أحمر
     function updateWithdrawFields(method) {
       const container = document.getElementById('dynamicWithdrawFields');
       if (method === 'usdt') {
@@ -1290,8 +1449,8 @@
         container.innerHTML = `
           <label style="font-size:11px; color:var(--text-muted);">عنوان السحب / المحافظة والمدينة:</label>
           <input type="text" id="targetAccount" placeholder="مثال: دمشق / حلب - مكتب شام كاش" class="input-3d">
-          <label style="font-size:11px; color:var(--text-muted); margin-top:6px; display:block;">الاسم الثلاثي ورقم الهاتف:</label>
-          <input type="text" id="targetExtra" placeholder="الاسم الثلاثي ورقم الهاتف للتسليم" class="input-3d">
+          <label style="font-size:11px; color:var(--text-muted); margin-top:6px; display:block;">الاسم الثلاثي ورقم الهاتف للتسليم:</label>
+          <input type="text" id="targetExtra" placeholder="الاسم الثلاثي ورقم الهاتف" class="input-3d">
         `;
       }
     }
@@ -1303,7 +1462,7 @@
       const amt = parseFloat(document.getElementById('withdrawAmount').value);
 
       if (!target) {
-        alert('يرجى ملء بيانات حساب السحب بدقة!');
+        alert('يرجى ملء كافة بيانات حساب السحب بدقة!');
         return;
       }
       if (method === 'turkish_cash' && !target.toUpperCase().startsWith('TR')) {
