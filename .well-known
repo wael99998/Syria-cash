@@ -2,7 +2,7 @@
       "relation": ["delegate_permission/common.handle_all_urls"],
       "target": {
         "namespace": "android_app",
-        "package_name": "io.github.wael99998.twa",
-        "sha256_cert_fingerprints": ["00:D5:BC:3C:8A:67:8F:20:D6:7E:D0:21:5C:9A:42:0B:C8:F2:A5:7A:B6:29:AA:FA:BF:AE:98:49:FA:9E:D9:B6"]
+        "package_name": "app.vercel.syriacash_app_2026.twa",
+        "sha256_cert_fingerprints": ["CE:E1:7F:49:CA:2C:60:C3:B6:C2:C9:F8:31:70:FA:31:25:67:1E:0B:A7:3B:CA:2C:28:38:C6:3F:BF:26:0D:5D"]
       }
     }]
