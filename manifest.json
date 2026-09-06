@@ -1,6 +1,16 @@
 {
-  "src": "icon.svg",
-  "sizes": "512x512",
-  "type": "image/svg+xml",
-  "purpose": "any maskable"
+  "name": "Syria Cash",
+  "short_name": "Syria Cash",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#07090e",
+  "theme_color": "#00f5a0",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
 }
