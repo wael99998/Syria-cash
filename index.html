@@ -55,6 +55,30 @@ body{background:var(--bg);color:#fff;min-height:100vh;padding:12px;padding-botto
   <div style="text-align:center;font-size:15px;font-weight:700;color:var(--g);font-family:monospace;" id="ticker">+0.000000 USDT</div>
   <div style="text-align:center;font-size:10px;color:#9ca3af;margin:2px 0 6px;" id="timer" data-k="ih">اضغط لبدء التعدين</div>
   <button class="btn btn-g" id="btnc" onclick="claim()" disabled data-k="clm">📥 جمع الأرباح إلى المحفظة</button>
+  <!-- قسم إحصائيات التعدين وسجل الكتل -->
+<div style="margin: 15px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+  <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 12px; text-align: center;">
+    <div style="color: #8a99ad; font-size: 11px;">حالة السيرفر</div>
+    <div style="color: #00e676; font-size: 13px; font-weight: bold; margin-top: 4px;">🟢 متصل (Cloud 1)</div>
+  </div>
+  <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 12px; text-align: center;">
+    <div style="color: #8a99ad; font-size: 11px;">قوة التجزئة الكلية</div>
+    <div style="color: #ffb300; font-size: 13px; font-weight: bold; margin-top: 4px;">⚡ 14.85 GH/s</div>
+  </div>
+</div>
+
+<div style="margin: 10px 0 20px 0; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 14px; padding: 14px;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+    <span style="color: #fff; font-size: 12px; font-weight: bold;">سجل الكتل المعدنة (Live Blocks)</span>
+    <span style="color: #00e676; font-size: 10px;">تحديث مباشر</span>
+  </div>
+  <div style="font-size: 11px; color: #78909c; line-height: 1.8; font-family: monospace;">
+    <div>✔ Block #94821 - تم التأكيد (+0.004 USDT)</div>
+    <div>✔ Block #94822 - تم التأكيد (+0.008 USDT)</div>
+    <div>⏳ جاري تعدين Block #94823...</div>
+  </div>
+</div>
+  
 </div>
 
 <!-- 2. مركز الإعلانات واليوتيوب -->
