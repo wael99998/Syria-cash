@@ -61,7 +61,6 @@
       box-shadow: 0 4px 15px rgba(239, 68, 68, 0.5);
     }
 
-    /* الهيدر العلوي */
     .top-bar {
       display: flex;
       justify-content: space-between;
@@ -94,7 +93,6 @@
       text-shadow: 0 1px 0 #008f56, 0 2px 0 #00663d, 0 3px 5px rgba(0,0,0,0.9), 0 0 12px var(--neon-glow);
     }
 
-    /* العلم السوري الأخضر الرسمي */
     .syria-flag {
       width: 24px;
       height: 16px;
@@ -249,7 +247,6 @@
       box-shadow: 0 1px 0 #92400e, 0 3px 6px rgba(245, 158, 11, 0.3);
     }
 
-    /* مركز التعدين 3D */
     .mining-box {
       display: flex;
       flex-direction: column;
@@ -415,7 +412,85 @@
       gap: 6px;
     }
 
-    /* --- كروت وألعاب الترفيه 3D --- */
+    /* كرت الجاكبوت الكبرى */
+    .jackpot-box {
+      background: linear-gradient(160deg, #451a03 0%, #1c0a00 100%);
+      border: 2px solid #f59e0b;
+      border-radius: 16px;
+      padding: 14px;
+      text-align: center;
+      margin-bottom: 14px;
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+    }
+    .jackpot-amount {
+      font-size: 26px;
+      font-weight: 900;
+      color: #fbbf24;
+      text-shadow: 0 0 12px rgba(251, 191, 36, 0.6);
+      margin: 4px 0;
+    }
+
+    /* كرت "امسح واربح" 3D */
+    .scratch-card-box {
+      background: linear-gradient(160deg, #1f2937 0%, #111827 100%);
+      border: 2px solid #10b981;
+      border-radius: 18px;
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
+    }
+    .scratch-area-wrap {
+      position: relative;
+      width: 260px;
+      height: 110px;
+      margin: 12px auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    }
+    .scratch-secret {
+      position: absolute;
+      inset: 0;
+      background: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--neon-green);
+      font-size: 18px;
+      font-weight: 900;
+      border: 2px dashed #00f5a0;
+      border-radius: 12px;
+    }
+    #scratchCanvas {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      cursor: crosshair;
+    }
+
+    /* صناديق الحظ */
+    .mystery-boxes-row {
+      display: flex;
+      justify-content: space-around;
+      margin: 14px 0;
+      gap: 8px;
+    }
+    .mystery-box-item {
+      flex: 1;
+      background: linear-gradient(160deg, #374151 0%, #1f2937 100%);
+      border: 2px solid var(--accent-gold);
+      border-radius: 14px;
+      padding: 14px 6px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+      transition: transform 0.15s;
+    }
+    .mystery-box-item:active { transform: scale(0.92); }
+
+    /* عجلة الحظ */
     .game-hero {
       background: linear-gradient(160deg, #1e1b4b 0%, #0f172a 100%);
       border: 2px solid #818cf8;
@@ -458,7 +533,6 @@
       border-right: 14px solid transparent;
       border-top: 22px solid #ef4444;
       z-index: 5;
-      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.8));
     }
     .wheel-center-btn {
       position: absolute;
@@ -480,69 +554,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.6);
     }
 
-    /* كرت الحك والربح (Scratch & Win) */
-    .scratch-card-box {
-      background: linear-gradient(160deg, #1f2937 0%, #111827 100%);
-      border: 2px solid #10b981;
-      border-radius: 18px;
-      padding: 16px;
-      text-align: center;
-      margin-bottom: 16px;
-      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
-    }
-    .scratch-area-wrap {
-      position: relative;
-      width: 260px;
-      height: 110px;
-      margin: 12px auto;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-    }
-    .scratch-secret {
-      position: absolute;
-      inset: 0;
-      background: #0f172a;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: var(--neon-green);
-      font-size: 18px;
-      font-weight: 900;
-      border: 2px dashed #00f5a0;
-      border-radius: 12px;
-    }
-    #scratchCanvas {
-      position: absolute;
-      inset: 0;
-      z-index: 3;
-      cursor: crosshair;
-    }
-
-    /* صناديق الحظ الثلاثية 3D (Mystery Boxes) */
-    .mystery-boxes-row {
-      display: flex;
-      justify-content: space-around;
-      margin: 14px 0;
-      gap: 8px;
-    }
-    .mystery-box-item {
-      flex: 1;
-      background: linear-gradient(160deg, #374151 0%, #1f2937 100%);
-      border: 2px solid var(--accent-gold);
-      border-radius: 14px;
-      padding: 14px 6px;
-      text-align: center;
-      cursor: pointer;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.5);
-      transition: transform 0.15s, box-shadow 0.15s;
-    }
-    .mystery-box-item:active {
-      transform: scale(0.92);
-    }
-
-    /* لعبة النقر Tap Mining */
+    /* لعبة النقر */
     .tap-game-box {
       background: linear-gradient(160deg, #1e293b 0%, #0f172a 100%);
       border: 1px solid rgba(0, 245, 160, 0.3);
@@ -568,7 +580,7 @@
     }
     .tap-gem-btn:active { transform: scale(0.9); }
 
-    /* قائمة الإعلانات 25 */
+    /* الإعلانات */
     .ads-grid {
       display: flex;
       flex-direction: column;
@@ -602,7 +614,7 @@
       box-shadow: 0 1px 0 var(--neon-green-dark), 0 2px 5px rgba(0, 245, 160, 0.2);
     }
 
-    /* باقات VIP ثلاثية الأبعاد الفخمة */
+    /* باقات VIP */
     .vip-card-enhanced {
       border-radius: 16px;
       padding: 15px;
@@ -656,7 +668,7 @@
     }
     .btn-vip-action:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0,0,0,0.5); }
 
-    /* طرق السحب */
+    /* السحب */
     .withdraw-select {
       width: 100%;
       padding: 11px;
@@ -883,26 +895,34 @@
       </div>
     </main>
 
-    <!-- 2. تبويب الألعاب والترفيه (Play-to-Earn) الشامل والمربح -->
+    <!-- 2. تبويب الألعاب والترفيه (امسح واربح + الجاكبوت) -->
     <section id="tab-games" class="tab-pane">
       
-      <!-- 1. بطاقة الحك والربح (Scratch & Win) -->
+      <!-- كرت الجاكبوت الكبرى -->
+      <div class="jackpot-box">
+        <div style="font-size:11px; color:#fde68a; font-weight:bold;">🔥 السحب اليومي على الخزنة الكبرى (Daily Jackpot)</div>
+        <div class="jackpot-amount">$<span id="jackpotVal">148.50</span> USDT</div>
+        <div style="font-size:11px; color:#cbd5e1; margin-bottom:8px;">كل 3 إعلانات تشاهدها تمنحك تذكرة دخول السحب على الجائزة!</div>
+        <button onclick="enterJackpot()" class="ad-btn" style="background:#fbbf24; color:#000; width:100%; padding:9px;">دخول السحب الآن (مشاهدة إعلان 🎟️)</button>
+      </div>
+
+      <!-- كرت (امسح واربح) بالعامية المألوفة -->
       <div class="scratch-card-box">
-        <h3 style="color:var(--neon-green); font-size:16px;">🎟️ بطاقة الحك والربح الفوري</h3>
-        <p style="color:var(--text-muted); font-size:11px; margin-top:2px;">احك بإصبعك على البطاقة الفضية لكشف جائزتك النقدية!</p>
+        <h3 style="color:var(--neon-green); font-size:16px;">🎟️ كرت (امسح واربح) 🪙</h3>
+        <p style="color:var(--text-muted); font-size:11px; margin-top:2px;">امسح بإصبعك على البطاقة واكشف هديتك النقدية فوراً!</p>
         
         <div class="scratch-area-wrap">
           <div class="scratch-secret" id="scratchSecretText">🎁 ربحت +0.025 USDT!</div>
           <canvas id="scratchCanvas" width="260" height="110"></canvas>
         </div>
 
-        <button onclick="newScratchCard()" class="ad-btn" style="width:100%; padding:10px; margin-top:4px;">بطاقة كشط جديدة (مشاهدة إعلان 🎬)</button>
+        <button onclick="newScratchCard()" class="ad-btn" style="width:100%; padding:10px; margin-top:4px;">كرت (امسح واربح) جديد 🎬</button>
       </div>
 
-      <!-- 2. صناديق الحظ الثلاثية (Mystery Boxes 3D) -->
+      <!-- صناديق الحظ الثلاثية -->
       <div class="card" style="text-align:center;">
-        <h3 style="color:var(--accent-gold); font-size:15px;">🎁 صناديق الحظ الثلاثية (Mystery Boxes)</h3>
-        <p style="color:var(--text-muted); font-size:11px; margin-top:2px;">اختر أحد الصناديق الثلاثة وافتحه لربح USDT أو بونص تجزئة مضاعف!</p>
+        <h3 style="color:var(--accent-gold); font-size:15px;">🎁 صناديق الحظ الثلاثية</h3>
+        <p style="color:var(--text-muted); font-size:11px; margin-top:2px;">اختر صندوقاً لفتحه وربح جوائز نقدية أو بونص تجزئة!</p>
         
         <div class="mystery-boxes-row">
           <div class="mystery-box-item" onclick="openMysteryBox(1)">
@@ -920,10 +940,10 @@
         </div>
       </div>
 
-      <!-- 3. عجلة الحظ 3D -->
+      <!-- عجلة الحظ 3D -->
       <div class="game-hero">
-        <h3 style="color:var(--accent-gold); font-size:16px;">🎡 عجلة الحظ الكبرى (Lucky Spin)</h3>
-        <p style="color:#cbd5e1; font-size:12px; margin-top:4px;">دوّر العجلة واربح رصيد وطاقة تجزئة فوراً!</p>
+        <h3 style="color:var(--accent-gold); font-size:16px;">🎡 عجلة الحظ الكبرى</h3>
+        <p style="color:#cbd5e1; font-size:12px; margin-top:4px;">دوّر العجلة واربح رصيد وطاقة تجزئة مجانية فوراً!</p>
         
         <div class="wheel-container">
           <div class="wheel-pointer"></div>
@@ -937,10 +957,10 @@
         </div>
       </div>
 
-      <!-- 4. لعبة النقر السريع -->
+      <!-- لعبة النقر السريع -->
       <div class="tap-game-box">
-        <h4 style="color:var(--neon-green);">⛏️ لعبة صائد العملات (Tap Mining Quest)</h4>
-        <p style="color:var(--text-muted); font-size:11px; margin-top:4px;">انقر على الجوهرة لجمع شظايا الذهب وتحويلها إلى USDT!</p>
+        <h4 style="color:var(--neon-green);">⛏️ لعبة صائد العملات</h4>
+        <p style="color:var(--text-muted); font-size:11px; margin-top:4px;">انقر على الجوهرة لجمع 50 شظية واستبدالها برصيد USDT فوري!</p>
         
         <div class="tap-gem-btn" onclick="tapMineGem()">💎</div>
         
@@ -984,7 +1004,7 @@
       </div>
     </section>
 
-    <!-- 4. تبويب الإحالة -->
+    <!-- 4. تبويب الإحالة مع لوحة الشرف التنافسية -->
     <section id="tab-ref" class="tab-pane">
       <div class="card">
         <h3 style="color:var(--neon-green); margin-bottom:6px;" data-i18n="ref_title">👥 نظام الإحالة وكسب الأرباح</h3>
@@ -996,6 +1016,20 @@
           <div>💰 <b style="color:var(--neon-green);">0.50 USDT</b> مكافأة فورية لكل صديق يسجل ويبدأ التعدين عبر رابطك.</div>
           <div>⚡ <b style="color:var(--accent-gold);">10% عمولة تعدين (مستوى 1)</b> من كافة أرباح أصدقائك اليومية مدى الحياة دون خصم شيء منهم!</div>
           <div>🌟 <b style="color:#60a5fa;">5% عمولة إضافية (مستوى 2)</b> من أصدقاء أصدقائك.</div>
+        </div>
+
+        <!-- مسابقة أفضل المحيلين لتشجيع النشر -->
+        <div style="background:#1e293b; border:1px solid rgba(251, 191, 36, 0.3); border-radius:12px; padding:10px; margin-bottom:12px;">
+          <div style="font-size:12px; font-weight:bold; color:var(--accent-gold); margin-bottom:6px;">🏆 مسابقة الأسبوع لأكثر المحيلين (جائزة 25$):</div>
+          <div style="font-size:11px; color:#cbd5e1; display:flex; justify-content:space-between; padding:3px 0;">
+            <span>🥇 المركز 1: user_982 (48 إحالة)</span> <b style="color:var(--neon-green);">+15 USDT</b>
+          </div>
+          <div style="font-size:11px; color:#cbd5e1; display:flex; justify-content:space-between; padding:3px 0;">
+            <span>🥈 المركز 2: wael_pro (32 إحالة)</span> <b style="color:var(--neon-green);">+7 USDT</b>
+          </div>
+          <div style="font-size:11px; color:#cbd5e1; display:flex; justify-content:space-between; padding:3px 0;">
+            <span>🥉 المركز 3: kasem_sy (19 إحالة)</span> <b style="color:var(--neon-green);">+3 USDT</b>
+          </div>
         </div>
 
         <div class="grid-two" style="margin-bottom:14px;">
@@ -1223,7 +1257,7 @@
     </div>
   </div>
 
-  <!-- نافذة الإعلان التجريبي الموحد -->
+  <!-- نافذة الإعلان الموحد -->
   <div class="modal-backdrop" id="miningAdModal">
     <div class="modal-box">
       <h3 style="color:var(--accent-gold); margin-bottom:6px; text-shadow:0 0 10px var(--accent-gold-glow);" id="adModalTitle">⚡ إعلان التعدين السريع</h3>
@@ -1263,8 +1297,6 @@
 
   <!-- المحرك البرمجي المتكامل -->
   <script>
-    // --- إعدادات استقبال الإشعارات عبر بوت تيليجرام ---
-    // يمكنك استبدال هذه القيم لاحقاً بالتوكن والآيدي الخاص بك
     const TG_BOT_TOKEN = "7900000000:AAExampleTokenPlaceholder";
     const TG_CHAT_ID = "123456789";
 
@@ -1464,7 +1496,7 @@
       }, 1000);
     }
 
-    // --- محرك بطاقة الحك والربح (Canvas Scratch Card) ---
+    // كرت (امسح واربح)
     function initScratchCard() {
       const canvas = document.getElementById('scratchCanvas');
       if (!canvas) return;
@@ -1475,9 +1507,9 @@
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
       ctx.fillStyle = '#cbd5e1';
-      ctx.font = 'bold 14px sans-serif';
+      ctx.font = 'bold 15px sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText('احك هنا لكشف الجائزة 🪙', canvas.width / 2, canvas.height / 2 + 5);
+      ctx.fillText('امسح الشاشة واكشف هديتك 🎁', canvas.width / 2, canvas.height / 2 + 5);
 
       let isDrawing = false;
       function scratch(e) {
@@ -1490,7 +1522,7 @@
 
         ctx.globalCompositeOperation = 'destination-out';
         ctx.beginPath();
-        ctx.arc(x, y, 16, 0, Math.PI * 2, false);
+        ctx.arc(x, y, 18, 0, Math.PI * 2, false);
         ctx.fill();
       }
 
@@ -1504,7 +1536,7 @@
     }
 
     function newScratchCard() {
-      triggerAdWorkflow('🎟️ جاري تجهيز بطاقة كشط جديدة', 'شاهد هذا الإعلان السريع لتجهيز كرت حك جديد وجائزة نقدية...', 0);
+      triggerAdWorkflow('🎟️ جاري تجهيز كرت امسح واربح جديد', 'شاهد هذا الإعلان السريع لتجهيز كرت كشط وجائزة كاش جديدة...', 0);
       const prizes = ['+0.015 USDT', '+0.030 USDT', '+0.050 USDT', '+0.020 USDT'];
       const p = prizes[Math.floor(Math.random() * prizes.length)];
       document.getElementById('scratchSecretText').innerText = `🎁 ربحت ${p}!`;
@@ -1514,7 +1546,13 @@
       initScratchCard();
     }
 
-    // صناديق الحظ الثلاثية
+    // الجاكبوت
+    function enterJackpot() {
+      triggerAdWorkflow('🔥 تذكرة سحب الجاكبوت الكبرى', 'جاري تسجيل تذكرتك في السحب اليومي على جائزة الـ 148$...', 0.01);
+      alert('🎟️ مبروك! تم تسجيل اسمك في سحب الجاكبوت اليومي بنجاح!');
+    }
+
+    // صناديق الحظ
     function openMysteryBox(num) {
       haptic('heavy');
       triggerAdWorkflow(`🎁 فتح صندوق الحظ رقم ${num}`, 'جاري فتح الصندوق بالمفتاح الذهبي بعد مشاهدة الإعلان...', 0.025);
@@ -1650,7 +1688,6 @@
       }
     }
 
-    // إرسال طلب السحب مع إشعار تيليجرام
     function requestWithdrawal() {
       haptic('heavy');
       const method = document.getElementById('withdrawMethodSelect').value;
@@ -1679,7 +1716,6 @@
       document.getElementById('totalBal').innerText = totalBal.toFixed(4);
       localStorage.setItem('sc_tot', totalBal);
 
-      // صياغة رسالة تيليجرام للأدمن
       const tgMsg = `🚨 <b>طلب سحب جديد في Syria Cash:</b>\n\n` +
                     `💰 <b>المبلغ:</b> ${amt} USDT\n` +
                     `💳 <b>الطريقة:</b> ${method}\n` +
@@ -1691,7 +1727,6 @@
       alert(`✅ تم استلام طلب السحب بنجاح وإرساله للمعالجة!\nالمبلغ: ${amt} USDT\nالرسوم: 0% لمشتركي VIP.`);
     }
 
-    // بوابة إيداع وترقية VIP
     let currentVipPlan = '';
     let currentVipCost = 0;
     function openDepositModal(planName, cost) {
@@ -1766,7 +1801,6 @@
     function openModal(id) { document.getElementById(id).style.display = 'flex'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-    // إرسال الدعم مع إشعار تيليجرام
     function sendSupport() {
       const u = document.getElementById('supUser').value.trim();
       const t = document.getElementById('supType').value;
