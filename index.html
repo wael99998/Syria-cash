@@ -36,11 +36,10 @@
     body {
       background-color: var(--bg-dark);
       color: var(--text-main);
-      padding-bottom: 90px;
+      padding-bottom: 95px;
       overflow-x: hidden;
     }
 
-    /* شريط انقطاع الإنترنت */
     #offline-banner {
       display: none;
       position: fixed;
@@ -61,13 +60,19 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 16px;
+      padding: 10px 14px;
       background: rgba(7, 9, 14, 0.95);
       backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
       z-index: 50;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .lang-selector {
@@ -82,16 +87,28 @@
       cursor: pointer;
     }
 
+    .head-icon-btn {
+      background: #1e293b;
+      color: var(--neon-green);
+      border: 1px solid #334155;
+      padding: 5px 8px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
     .brand-title {
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 900;
       letter-spacing: 1px;
       color: var(--neon-green);
     }
 
+    /* العلم السوري الأخضر */
     .syria-flag {
       width: 24px;
       height: 16px;
@@ -106,7 +123,7 @@
     .flag-black { background: #000000; height: 33.4%; }
     .star { width: 3px; height: 3px; background: #ce1126; border-radius: 50%; }
 
-    /* شريط السحوبات الحية */
+    /* شريط السحوبات */
     .ticker-wrap {
       background: rgba(17, 24, 39, 0.85);
       border-bottom: 1px solid rgba(0, 245, 160, 0.15);
@@ -138,7 +155,6 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* الحاوية والكروت */
     .container {
       padding: 12px 16px;
       max-width: 480px;
@@ -153,7 +169,6 @@
       margin-bottom: 14px;
     }
 
-    /* كرت الرصيد */
     .balance-card { text-align: center; padding: 18px 16px; }
     .balance-title { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
     .balance-value {
@@ -167,12 +182,12 @@
     .balance-value .curr { color: var(--neon-green); font-size: 18px; }
     .stats-sub { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
 
-    /* دوران التعدين الحي */
+    /* دوران التعدين الحي التفاعلي */
     .mining-box {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 22px 0 16px 0;
+      margin: 20px 0 16px 0;
     }
     .circle-wrap {
       position: relative;
@@ -181,13 +196,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
     }
     .spinner-ring {
       position: absolute;
       inset: 0;
       border-radius: 50%;
       border: 3px dashed var(--neon-green);
-      animation: spinGear 5s linear infinite;
+      animation: spinGear 4s linear infinite;
       box-shadow: 0 0 20px var(--neon-glow);
     }
     .spinner-pulse {
@@ -222,9 +238,8 @@
       margin-top: 12px;
       direction: ltr;
     }
-    .live-clock { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+    .live-clock { font-size: 12px; color: var(--text-muted); margin-top: 4px; font-weight: bold; }
 
-    /* الأزرار الفخمة */
     .btn-main {
       width: 100%;
       background: linear-gradient(90deg, #00c878, #00f5a0);
@@ -261,7 +276,6 @@
       margin: 0 auto 12px auto;
     }
 
-    /* شبكة الخادم وقوة التجزئة */
     .grid-two {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -278,7 +292,6 @@
     .stat-label { font-size: 11px; color: var(--text-muted); margin-bottom: 5px; }
     .stat-val { font-size: 13px; font-weight: bold; }
 
-    /* سجل الكتل المباشرة */
     .blocks-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
     .block-line {
       font-size: 12px;
@@ -291,18 +304,23 @@
       gap: 6px;
     }
 
-    /* قوائم الإعلانات والمهام */
-    .task-item {
+    /* قائمة الإعلانات 1 حتى 25 */
+    .ads-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .ad-card {
       background: #1e293b;
       border: 1px solid #334155;
       border-radius: 12px;
       padding: 12px;
-      margin-bottom: 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .task-btn {
+    .ad-btn {
       background: var(--neon-green);
       color: #07090e;
       border: none;
@@ -346,7 +364,6 @@
       cursor: pointer;
     }
 
-    /* التبويبات */
     .tab-pane { display: none; }
     .tab-pane.active { display: block; }
 
@@ -381,7 +398,7 @@
     .nav-btn.active { color: var(--neon-green); font-weight: bold; }
     .nav-btn svg { width: 20px; height: 20px; stroke: currentColor; }
 
-    /* نافذة المكافأة اليومية */
+    /* نوافذ منبثقة */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -398,23 +415,11 @@
       border: 1px solid rgba(0, 245, 160, 0.3);
       border-radius: 18px;
       width: 100%;
-      max-width: 320px;
+      max-width: 340px;
       padding: 20px;
       text-align: center;
-    }
-    .streak-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 14px 0; }
-    .streak-cell {
-      background: #1e293b;
-      border: 1px solid #334155;
-      border-radius: 8px;
-      padding: 8px 2px;
-      font-size: 11px;
-    }
-    .streak-cell.active {
-      background: rgba(0, 245, 160, 0.15);
-      border-color: var(--neon-green);
-      color: var(--neon-green);
-      font-weight: bold;
+      max-height: 85vh;
+      overflow-y: auto;
     }
 
     .toast {
@@ -436,23 +441,28 @@
 </head>
 <body>
 
-  <div id="offline-banner" data-i18n="offline_txt">⚠️ انقطع الاتصال بالإنترنت.. جاري المحاولة تلقائياً</div>
+  <div id="offline-banner">⚠️ انقطع الاتصال بالإنترنت.. جاري المحاولة تلقائياً</div>
   <div class="toast" id="toastBox"></div>
 
   <!-- الهيدر العلوي -->
   <header class="top-bar">
-    <select class="lang-selector" id="langSelect" onchange="changeLang(this.value)">
-      <option value="ar">🇸🇾 العربية</option>
-      <option value="en">🇬🇧 English</option>
-      <option value="fa">🇮🇷 فارسی</option>
-      <option value="ru">🇷🇺 Русский</option>
-      <option value="hi">🇮🇳 हिन्दी</option>
-      <option value="ku">☀️ کوردی</option>
-      <option value="tr">🇹🇷 Türkçe</option>
-      <option value="es">🇪🇸 Español</option>
-      <option value="fr">🇫🇷 Français</option>
-      <option value="zh">🇨🇳 中文</option>
-    </select>
+    <div class="header-actions">
+      <select class="lang-selector" id="langSelect" onchange="changeLang(this.value)">
+        <option value="ar">العربية (Syria)</option>
+        <option value="en">English</option>
+        <option value="fa">فارسی</option>
+        <option value="ru">Русский</option>
+        <option value="hi">हिन्दी</option>
+        <option value="ku">کوردی</option>
+        <option value="tr">Türkçe</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="zh">中文</option>
+      </select>
+      <button class="head-icon-btn" onclick="openModal('aboutModal')">معلومات عنا ℹ️</button>
+      <button class="head-icon-btn" onclick="openModal('supportModal')">الدعم 💬</button>
+    </div>
+
     <div class="brand-title">
       <span>SYRIA CASH</span>
       <div class="syria-flag">
@@ -467,14 +477,14 @@
     </div>
   </header>
 
-  <!-- شريط السحوبات الفورية -->
+  <!-- شريط السحوبات الحية -->
   <div class="ticker-wrap">
     <div class="ticker-content" id="payoutTicker"></div>
   </div>
 
   <div class="container">
 
-    <!-- 1. تبويب التعدين -->
+    <!-- 1. تبويب التعدين الرئيسي -->
     <main id="tab-mining" class="tab-pane active">
       <div class="card balance-card">
         <div class="balance-title" data-i18n="total_bal_title">الرصيد الكلي للسحب</div>
@@ -493,9 +503,9 @@
         <span id="boostBadge" style="font-size:10px; background:rgba(0,0,0,0.25); padding:1px 5px; border-radius:4px;" data-i18n="available">متاح</span>
       </button>
 
-      <!-- دائرة التعدين التي تدور باستمرار -->
+      <!-- دائرة التعدين التي تدور باستمرار وتفتح إعلاناً عند النقر عليها -->
       <div class="mining-box">
-        <div class="circle-wrap">
+        <div class="circle-wrap" onclick="clickMiningCircle()" title="اضغط لمشاهدة إعلان وزيادة سرعة التعدين">
           <div class="spinner-ring"></div>
           <div class="spinner-pulse"></div>
           <div class="circle-core">
@@ -504,7 +514,7 @@
           </div>
         </div>
         <div class="live-unclaimed">USDT +<span id="unclaimedBal">0.041067</span></div>
-        <div class="live-clock"><span id="timerTxt">171:33</span> ⏱</div>
+        <div class="live-clock">⏱ <span id="liveSessionTimer">03:59:59</span></div>
       </div>
 
       <button class="btn-main" onclick="collectReward()">
@@ -533,72 +543,46 @@
           <div style="font-size:11px; color:var(--neon-green);" data-i18n="live_update">تحديث مباشر 🟢</div>
         </div>
         <div id="blocksFeed">
-          <div class="block-line">✓ Block #94821 - تم التأكيد (+USDT 0.004)</div>
-          <div class="block-line">✓ Block #94822 - تم التأكيد (+USDT 0.008)</div>
-          <div class="block-line" style="color: var(--accent-gold);">⏳ جاري تعدين Block #94823...</div>
+          <div class="block-line">✓ Block #94880 - تم التأكيد (+USDT 0.008)</div>
+          <div class="block-line">✓ Block #94881 - تم التأكيد (+USDT 0.005)</div>
+          <div class="block-line" style="color: var(--accent-gold);">⏳ جاري تعدين Block #94882...</div>
         </div>
       </div>
     </main>
 
-    <!-- 2. تبويب الإعلانات والمهام (يوتيوب، اشتراكات، إعلانات) -->
+    <!-- 2. تبويب الإعلانات (25 إعلاناً مرقماً + يوتيوب وتيليجرام) -->
     <section id="tab-ads" class="tab-pane">
       <div class="card">
         <h3 style="color:var(--neon-green); margin-bottom:6px;" data-i18n="ads_title">🎯 المهام والإعلانات المأجورة</h3>
-        <p style="color:var(--text-muted); font-size:12px; margin-bottom:14px;" data-i18n="ads_sub">شاهد الفيديوهات واشترك بالقنوات لربح رصيد USDT فوري مضاعف!</p>
+        <p style="color:var(--text-muted); font-size:12px; margin-bottom:14px;" data-i18n="ads_sub">شاهد الفيديوهات والإعلانات المتاحة لربح رصيد USDT فوري مضاعف!</p>
 
-        <!-- مهمة يوتيوب 1 -->
-        <div class="task-item">
+        <!-- يوتيوب وتيليجرام الأساسية -->
+        <div class="ad-card">
           <div>
-            <div style="font-weight:bold; font-size:13px;">▶️ مشاهدة فيديو رسمي (يوتيوب)</div>
-            <div style="font-size:11px; color:var(--text-muted);">شاهد لمدة 30 ثانية | +0.020 USDT</div>
+            <div style="font-weight:bold; font-size:13px;">▶️ مشاهدة فيديو يوتيوب الرسمي</div>
+            <div style="font-size:11px; color:var(--text-muted);">شاهد لمدة 30 ثانية | +0.030 USDT</div>
           </div>
-          <button class="task-btn" onclick="executeTask(this, 0.02, 'https://youtube.com')">مشاهدة</button>
+          <button class="ad-btn" onclick="executeTask(this, 0.030, 'https://youtube.com')">مشاهدة</button>
         </div>
 
-        <!-- مهمة يوتيوب 2 -->
-        <div class="task-item">
+        <div class="ad-card">
           <div>
             <div style="font-weight:bold; font-size:13px;">🔔 اشتراك بقناة يوتيوب الرسمية</div>
-            <div style="font-size:11px; color:var(--text-muted);">اشترك وفعل الجرس | +0.040 USDT</div>
+            <div style="font-size:11px; color:var(--text-muted);">اشترك وفعل الجرس | +0.050 USDT</div>
           </div>
-          <button class="task-btn" onclick="executeTask(this, 0.04, 'https://youtube.com')">اشتراك</button>
+          <button class="ad-btn" onclick="executeTask(this, 0.050, 'https://youtube.com')">اشتراك</button>
         </div>
 
-        <!-- مهمة تيليجرام 1 -->
-        <div class="task-item">
+        <div class="ad-card">
           <div>
             <div style="font-weight:bold; font-size:13px;">✈️ انضمام لقناة تيليجرام للأخبار</div>
-            <div style="font-size:11px; color:var(--text-muted);">انضم للقناة الرسمية | +0.030 USDT</div>
+            <div style="font-size:11px; color:var(--text-muted);">انضم للقناة الرسمية | +0.025 USDT</div>
           </div>
-          <button class="task-btn" onclick="executeTask(this, 0.03, 'https://t.me')">انضمام</button>
+          <button class="ad-btn" onclick="executeTask(this, 0.025, 'https://t.me')">انضمام</button>
         </div>
 
-        <!-- مهمة تيليجرام 2 -->
-        <div class="task-item">
-          <div>
-            <div style="font-weight:bold; font-size:13px;">💬 الانضمام لمجموعة دردشة المعدنين</div>
-            <div style="font-size:11px; color:var(--text-muted);">تفاعل مع المجتمع | +0.025 USDT</div>
-          </div>
-          <button class="task-btn" onclick="executeTask(this, 0.025, 'https://t.me')">انضمام</button>
-        </div>
-
-        <!-- إعلان سريع -->
-        <div class="task-item">
-          <div>
-            <div style="font-weight:bold; font-size:13px;">🎬 مشاهدة إعلان فيديو سريع (Ad)</div>
-            <div style="font-size:11px; color:var(--text-muted);">فيديو مدفوع 15 ثانية | +0.015 USDT</div>
-          </div>
-          <button class="task-btn" onclick="executeTask(this, 0.015)">تشغيل</button>
-        </div>
-
-        <!-- زيارة موقع -->
-        <div class="task-item">
-          <div>
-            <div style="font-weight:bold; font-size:13px;">🌐 زيارة موقع الراعي الرسمي</div>
-            <div style="font-size:11px; color:var(--text-muted);">تصفح لمدة 20 ثانية | +0.010 USDT</div>
-          </div>
-          <button class="task-btn" onclick="executeTask(this, 0.01)">زيارة</button>
-        </div>
+        <!-- توليد 25 إعلاناً مرقماً -->
+        <div class="ads-grid" id="adsContainer25"></div>
       </div>
     </section>
 
@@ -611,9 +595,9 @@
         </p>
 
         <div style="background:#1e293b; padding:12px; border-radius:10px; margin-bottom:12px; font-size:12px; line-height:1.7;">
-          <div>💰 <b style="color:var(--neon-green);">0.50 USDT</b> هدية تسجيل فورية لكل شخص ينضم عبر رابطك.</div>
-          <div>⚡ <b style="color:var(--accent-gold);">10% عمولة تعدين</b> (المستوى 1) من كافة أرباح أصدقائك اليومية مدى الحياة دون أن ينقص ذلك من أرباحهم شيئاً!</div>
-          <div>🌟 <b style="color:#60a5fa;">5% عمولة إضافية</b> (المستوى 2) من أصدقاء أصدقائك.</div>
+          <div>💰 <b style="color:var(--neon-green);">0.50 USDT</b> مكافأة فورية لكل صديق يسجل ويبدأ التعدين عبر رابطك.</div>
+          <div>⚡ <b style="color:var(--accent-gold);">10% عمولة تعدين (مستوى 1)</b> من كافة أرباح أصدقائك اليومية مدى الحياة دون خصم شيء منهم!</div>
+          <div>🌟 <b style="color:#60a5fa;">5% عمولة إضافية (مستوى 2)</b> من أصدقاء أصدقائك.</div>
         </div>
 
         <div class="grid-two" style="margin-bottom:14px;">
@@ -634,7 +618,7 @@
       </div>
     </section>
 
-    <!-- 4. تبويب VIP (الباقات الخمس كاملة مع الأرباح اليومية والشهرية) -->
+    <!-- 4. تبويب VIP (الباقات الخمس كاملة مع الأرباح) -->
     <section id="tab-vip" class="tab-pane">
       <div class="card" style="border:none; padding:0; background:transparent;">
         <h3 style="color:var(--accent-gold); margin-bottom:6px;" data-i18n="vip_title">💎 باقات التعدين السحابي VIP</h3>
@@ -747,13 +731,64 @@
 
   </div>
 
-  <!-- نافذة مكافأة الدخول اليومية -->
-  <div class="modal-backdrop" id="streakModal">
+  <!-- نافذة معلومات عنا (About Us) -->
+  <div class="modal-backdrop" id="aboutModal">
     <div class="modal-box">
-      <h3 style="color:#fff; margin-bottom:4px;">🎁 مكافأة الدخول اليومي</h3>
-      <p style="color:var(--text-muted); font-size:11px;">سجل دخولك يومياً لزيادة سرعة التعدين مجاناً!</p>
-      <div class="streak-grid" id="streakGrid"></div>
-      <button class="btn-main" style="padding:10px; font-size:14px;" onclick="claimBonus()">استلام المكافأة ⚡</button>
+      <h3 style="color:var(--neon-green); margin-bottom:8px;">ℹ️ عن شركة Syria Cash</h3>
+      <div style="font-size:12px; color:#cbd5e1; line-height:1.7; text-align:right; margin-bottom:14px;">
+        <p style="margin-bottom:8px;">
+          شركة <b>Syria Cash</b> هي منصة رائدة متخصصة في توفير حلول الربح من الإنترنت والتعدين السحابي للعملات الرقمية المشفرة (USDT). تم تصميم المنصة لتمكين كافة المستخدمين من تحقيق دخل رقمي حقيقي بأبسط الخطوات وبأعلى مستويات الأمان والموثوقية.
+        </p>
+        <p style="margin-bottom:8px; color:var(--accent-gold); font-weight:bold;">
+          🚀 خطط التوسع القادمة:
+        </p>
+        <p>
+          يسر إدارة Syria Cash الإعلان عن العمل حالياً على إطلاق وتطوير <b>عدة تطبيقات ومنصات إلكترونية تابعة</b> في المستقبل القريب، والتي ستوفر مصادر ربح متعددة، أسواق رقمية، وخيارات سحب أوسع لتحقيق أقصى استفادة لمجتمعنا العربي والعالمي!
+        </p>
+      </div>
+      <button class="btn-main" style="padding:10px; font-size:13px;" onclick="closeModal('aboutModal')">إغلاق النافذة</button>
+    </div>
+  </div>
+
+  <!-- نافذة تواصل معنا والدعم الفني -->
+  <div class="modal-backdrop" id="supportModal">
+    <div class="modal-box">
+      <h3 style="color:var(--neon-green); margin-bottom:6px;">💬 الدعم الفني والإبلاغ عن مشكلة</h3>
+      <p style="color:var(--text-muted); font-size:11px; margin-bottom:12px;">نحن هنا لمساعدتك على مدار الساعة، أرسل تفاصيل المشكلة وسيقوم الفريق بحلها فوراً:</p>
+      
+      <div style="text-align:right; margin-bottom:8px;">
+        <label style="font-size:11px; color:var(--text-muted);">اسم المستخدم أو الحساب:</label>
+        <input type="text" id="supUser" placeholder="اسمك أو معرفك" style="width:100%; padding:8px; border-radius:6px; border:1px solid #334155; background:#07090e; color:#fff; font-size:12px; margin-top:3px;">
+      </div>
+
+      <div style="text-align:right; margin-bottom:8px;">
+        <label style="font-size:11px; color:var(--text-muted);">نوع المشكلة:</label>
+        <select id="supType" style="width:100%; padding:8px; border-radius:6px; border:1px solid #334155; background:#07090e; color:#fff; font-size:12px; margin-top:3px;">
+          <option>مشكلة في السحب</option>
+          <option>مشكلة في التعدين</option>
+          <option>مشكلة في الإعلانات</option>
+          <option>استفسار عام</option>
+        </select>
+      </div>
+
+      <div style="text-align:right; margin-bottom:12px;">
+        <label style="font-size:11px; color:var(--text-muted);">تفاصيل المشكلة:</label>
+        <textarea id="supMsg" rows="3" placeholder="اشرح لنا المشكلة بالتفصيل..." style="width:100%; padding:8px; border-radius:6px; border:1px solid #334155; background:#07090e; color:#fff; font-size:12px; margin-top:3px;"></textarea>
+      </div>
+
+      <button class="btn-main" style="padding:10px; font-size:13px; margin-bottom:8px;" onclick="sendSupport()">إرسال التذكرة 📩</button>
+      <button class="head-icon-btn" style="width:100%; padding:8px; font-size:12px;" onclick="window.open('https://t.me/SyriaCash_Support', '_blank')">مراسلتنا مباشرة عبر تيليجرام ✈️</button>
+      <button style="background:transparent; border:none; color:var(--text-muted); font-size:11px; margin-top:10px; cursor:pointer;" onclick="closeModal('supportModal')">إلغاء</button>
+    </div>
+  </div>
+
+  <!-- نافذة إعلان التعدين التفاعلي -->
+  <div class="modal-backdrop" id="miningAdModal">
+    <div class="modal-box">
+      <h3 style="color:var(--accent-gold); margin-bottom:6px;">⚡ إعلان التعدين السريع</h3>
+      <p style="color:#cbd5e1; font-size:12px; margin-bottom:14px;">جاري تشغيل إعلان التعدين المدعوم لمضاعفة سرعة الحساب وإضافة بونص فوري...</p>
+      <div id="adTimerBox" style="font-size:24px; font-weight:900; color:var(--neon-green); margin-bottom:14px;">5 ثوانٍ...</div>
+      <p style="font-size:11px; color:var(--text-muted);">انتظر حتى ينتهي العداد لاستلام المكافأة</p>
     </div>
   </div>
 
@@ -783,7 +818,7 @@
 
   <!-- الكود البرمجي التفاعلي -->
   <script>
-    // --- قاموس اللغات العالمي ---
+    // قاموس اللغات العالمي
     const dict = {
       ar: {
         total_bal_title: "الرصيد الكلي للسحب", speed: "السرعة", production: "الإنتاج",
@@ -798,8 +833,7 @@
         vip_sub: "استأجر خوادم سحابية مخصصة، ضاعف أرباحك، واحصل على سحب فوري بدون أي رسوم (0% Fee).",
         withdraw_title: "💳 سحب الأرباح (USDT - TRC20)", wallet_addr: "عنوان محفظة USDT (شبكة TRC20):",
         amount_label: "المبلغ المطلوب سحبه:", submit_withdraw: "تأكيد طلب السحب 🚀",
-        nav_mining: "التعدين", nav_ads: "الإعلانات", nav_ref: "الإحالة", nav_vip: "VIP", nav_withdraw: "السحب",
-        offline_txt: "⚠️ انقطع الاتصال بالإنترنت.. جاري المحاولة تلقائياً"
+        nav_mining: "التعدين", nav_ads: "الإعلانات", nav_ref: "الإحالة", nav_vip: "VIP", nav_withdraw: "السحب"
       },
       en: {
         total_bal_title: "Total Withdrawable Balance", speed: "Speed", production: "Production",
@@ -807,85 +841,14 @@
         collect_btn: "Claim Profits", server_status: "Server Status", connected: "Connected (Cloud 1)",
         total_hash: "Total Hashrate", live_blocks: "Live Mined Blocks",
         live_update: "Live Feed 🟢", ads_title: "🎯 Paid Tasks & Video Ads",
-        ads_sub: "Watch videos & subscribe to channels to earn instant USDT!",
+        ads_sub: "Watch videos & ads to earn instant USDT!",
         ref_title: "👥 Referral Program & Earnings",
         ref_desc: "Earn passive recurring income by inviting your friends to mine:",
         copy_ref: "Copy Invite Link 📋", vip_title: "💎 Cloud Mining VIP Plans",
         vip_sub: "Rent dedicated mining servers, boost earnings & enjoy 0% withdrawal fees!",
         withdraw_title: "💳 Withdraw Funds (USDT - TRC20)", wallet_addr: "USDT Wallet Address (TRC20):",
         amount_label: "Amount to Withdraw:", submit_withdraw: "Submit Withdrawal 🚀",
-        nav_mining: "Mining", nav_ads: "Ads", nav_ref: "Referral", nav_vip: "VIP", nav_withdraw: "Withdraw",
-        offline_txt: "⚠️ Internet connection lost.. Retrying automatically"
-      },
-      fa: {
-        total_bal_title: "موجودی کل قابل برداشت", speed: "سرعت", production: "تولید",
-        boost_btn: "⚡ تقویت سرعت 2X", available: "در دسترس", working: "در حال استخراج...",
-        collect_btn: "جمع‌آوری سود", server_status: "وضعیت سرور", connected: "متصل (ابری 1)",
-        total_hash: "کل هش‌ریت", live_blocks: "بلاک‌های زنده", live_update: "بروزرسانی زنده 🟢",
-        ads_title: "🎯 وظایف و تبلیغات", ads_sub: "ویدیوها را ببینید و سابسکرایب کنید و USDT بگیرید!",
-        ref_title: "👥 سیستم زیرمجموعه‌گیری", ref_desc: "با دعوت دوستان خود درآمد دائمی کسب کنید:",
-        copy_ref: "کپی لینک دعوت 📋", vip_title: "💎 پلن‌های استخراج VIP",
-        vip_sub: "سرعت بالا و برداشت فوری بدون کارمزد (0%).",
-        withdraw_title: "💳 برداشت وجه (USDT - TRC20)", wallet_addr: "آدرس کیف پول TRC20:",
-        amount_label: "مبلغ برداشت:", submit_withdraw: "تأیید درخواست برداشت 🚀",
-        nav_mining: "استخراج", nav_ads: "تبلیغات", nav_ref: "زیرمجموعه", nav_vip: "VIP", nav_withdraw: "برداشت",
-        offline_txt: "⚠️ اتصال اینترنت قطع شد.."
-      },
-      ru: {
-        total_bal_title: "Общий баланс для вывода", speed: "Скорость", production: "Доходность",
-        boost_btn: "⚡ Ускорение 2X", available: "Готово", working: "Майнинг...",
-        collect_btn: "Собрать прибыль", server_status: "Статус сервера", connected: "Подключено (Cloud 1)",
-        total_hash: "Общий хешрейт", live_blocks: "Добытые блоки (Live)", live_update: "В реальном времени 🟢",
-        ads_title: "🎯 Задания и Реклама", ads_sub: "Смотрите видео, подписывайтесь и получайте USDT!",
-        ref_title: "👥 Реферальная программа", ref_desc: "Получайте пассивный доход, приглашая друзей:",
-        copy_ref: "Скопировать ссылку 📋", vip_title: "💎 VIP Тарифы Майнинга",
-        vip_sub: "Увеличенная мощность и мгновенный вывод без комиссии (0%)!",
-        withdraw_title: "💳 Вывод средств (USDT - TRC20)", wallet_addr: "Адрес кошелька TRC20:",
-        amount_label: "Сумма вывода:", submit_withdraw: "Подтвердить вывод 🚀",
-        nav_mining: "Майнинг", nav_ads: "Задания", nav_ref: "Рефералы", nav_vip: "VIP", nav_withdraw: "Вывод",
-        offline_txt: "⚠️ Связь с интернетом потеряна.."
-      },
-      hi: {
-        total_bal_title: "निकासी के लिए कुल बैलेंस", speed: "गति", production: "उत्पादन",
-        boost_btn: "⚡ 2X स्पीड बूस्ट", available: "उपलब्ध", working: "माइनिंग जारी है...",
-        collect_btn: "लाभ इकट्ठा करें", server_status: "सर्वर स्थिति", connected: "कनेक्टेड (Cloud 1)",
-        total_hash: "कुल हैशरेट", live_blocks: "लाइव ब्लॉक", live_update: "लाइव अपडेट 🟢",
-        ads_title: "🎯 कार्य और विज्ञापन", ads_sub: "वीडियो देखें, सब्सक्राइब करें और तुरंत USDT कमाएं!",
-        ref_title: "👥 रेफरल और कमाई", ref_desc: "दोस्तों को आमंत्रित करके लगातार आय अर्जित करें:",
-        copy_ref: "रेफरल लिंक कॉपी करें 📋", vip_title: "💎 VIP क्लाउड माइनिंग",
-        vip_sub: "बिना किसी निकासी शुल्क (0%) के तुरंत भुगतान प्राप्त करें!",
-        withdraw_title: "💳 निकासी (USDT - TRC20)", wallet_addr: "TRC20 वॉलेट पता:",
-        amount_label: "निकासी राशि:", submit_withdraw: "निकासी की पुष्टि करें 🚀",
-        nav_mining: "माइनिंग", nav_ads: "विज्ञापन", nav_ref: "रेफरल", nav_vip: "VIP", nav_withdraw: "निकासी",
-        offline_txt: "⚠️ इंटरनेट कनेक्शन टूट गया है.."
-      },
-      ku: {
-        total_bal_title: "Balyansa giştî ya kişandinê", speed: "Lez", production: "Hilberîn",
-        boost_btn: "⚡ Zêdekirina lezê 2X", available: "Amade ye", working: "Dixebite...",
-        collect_btn: "Qezencê kom bike", server_status: "Rewşa serverê", connected: "Girêdayî ye",
-        total_hash: "Hêza giştî ya Hash", live_blocks: "Dîroka blokan", live_update: "Zindî 🟢",
-        ads_title: "🎯 Kar û Reklam", ads_sub: "Vîdyoyan temaşe bike û bibe abone ji bo USDT!",
-        ref_title: "👥 Pergala vexwendinê", ref_desc: "Hevalên xwe vexwîne û qezencek domdar bistîne:",
-        copy_ref: "Lînkê kopî bike 📋", vip_title: "💎 Paketên VIP yên ewrî",
-        vip_sub: "Kişandina lezgîn a bê xerc (0% Fee).",
-        withdraw_title: "💳 Kişandina drav (USDT)", wallet_addr: "Navnîşana Walletê:",
-        amount_label: "Mîqdara kişandinê:", submit_withdraw: "Daxwazê bişîne 🚀",
-        nav_mining: "Maynîng", nav_ads: "Reklam", nav_ref: "Vexwendin", nav_vip: "VIP", nav_withdraw: "Kişandin",
-        offline_txt: "⚠️ Girêdana înternetê qut bû.."
-      },
-      tr: {
-        total_bal_title: "Çekilebilir Toplam Bakiye", speed: "Hız", production: "Üretim",
-        boost_btn: "⚡ 2X Hız Artırıcı", available: "Hazır", working: "Madencilik aktif...",
-        collect_btn: "Kazancı Topla", server_status: "Sunucu Durumu", connected: "Bağlı (Cloud 1)",
-        total_hash: "Toplam Hash Gücü", live_blocks: "Canlı Bloklar", live_update: "Canlı 🟢",
-        ads_title: "🎯 Görevler ve Reklamlar", ads_sub: "Videoları izleyin, abone olun, USDT kazanın!",
-        ref_title: "👥 Referans Sistemi", ref_desc: "Arkadaşlarınızı davet ederek sürekli pasif gelir elde edin:",
-        copy_ref: "Bağlantıyı Kopyala 📋", vip_title: "💎 VIP Bulut Madenciliği",
-        vip_sub: "%0 kesinti ile anında para çekme ayrıcalığı!",
-        withdraw_title: "💳 Para Çekme (USDT - TRC20)", wallet_addr: "TRC20 Cüzdan Adresi:",
-        amount_label: "Çekilecek Miktar:", submit_withdraw: "Çekim Talebini Onayla 🚀",
-        nav_mining: "Madencilik", nav_ads: "Görevler", nav_ref: "Referans", nav_vip: "VIP", nav_withdraw: "Para Çek",
-        offline_txt: "⚠️ İnternet bağlantısı kesildi.."
+        nav_mining: "Mining", nav_ads: "Ads", nav_ref: "Referral", nav_vip: "VIP", nav_withdraw: "Withdraw"
       }
     };
 
@@ -895,7 +858,6 @@
         const key = el.getAttribute('data-i18n');
         if (selected[key]) el.innerText = selected[key];
       });
-      // تعديل الاتجاه RTL / LTR
       if (['ar', 'fa', 'ku'].includes(lang)) {
         document.documentElement.setAttribute('dir', 'rtl');
       } else {
@@ -904,7 +866,7 @@
       localStorage.setItem('sc_lang', lang);
     }
 
-    // --- نظام التفاعل الحركي والصوتي المدمج ---
+    // التفاعل الصوتي والحركي
     const actx = new (window.AudioContext || window.webkitAudioContext)();
     function playTone(freq, dur = 0.1) {
       try {
@@ -934,9 +896,9 @@
       setTimeout(() => { b.style.display = 'none'; }, 2500);
     }
 
-    // --- محرك التعدين والأرصدة ---
-    let totalBal = parseFloat(localStorage.getItem('sc_tot') || '0.0000');
-    let unclaimedBal = parseFloat(localStorage.getItem('sc_uncl') || '0.041067');
+    // محرك الرصيد والتعدين
+    let totalBal = parseFloat(localStorage.getItem('sc_tot') || '0.2349');
+    let unclaimedBal = parseFloat(localStorage.getItem('sc_uncl') || '0.000570');
     let boosted = false;
 
     document.getElementById('totalBal').innerText = totalBal.toFixed(4);
@@ -948,6 +910,41 @@
       document.getElementById('unclaimedBal').innerText = unclaimedBal.toFixed(6);
       localStorage.setItem('sc_uncl', unclaimedBal);
     }, 1000);
+
+    // مؤقت الجلسة الحي التنازلي الحقيقي
+    let sessionSeconds = 14399; // 4 ساعات
+    setInterval(() => {
+      sessionSeconds--;
+      if (sessionSeconds <= 0) sessionSeconds = 14400;
+      const h = Math.floor(sessionSeconds / 3600);
+      const m = Math.floor((sessionSeconds % 3600) / 60);
+      const s = sessionSeconds % 60;
+      document.getElementById('liveSessionTimer').innerText = 
+        `${h < 10 ? '0':''}${h}:${m < 10 ? '0':''}${m}:${s < 10 ? '0':''}${s}`;
+    }, 1000);
+
+    // الضغط على دائرة التعدين لتشغيل إعلان ومكافأة
+    function clickMiningCircle() {
+      haptic('heavy');
+      openModal('miningAdModal');
+      let countdown = 5;
+      const timerBox = document.getElementById('adTimerBox');
+      timerBox.innerText = `${countdown} ثوانٍ...`;
+
+      const cd = setInterval(() => {
+        countdown--;
+        timerBox.innerText = `${countdown} ثوانٍ...`;
+        if (countdown <= 0) {
+          clearInterval(cd);
+          closeModal('miningAdModal');
+          haptic('success');
+          playTone(950, 0.2);
+          unclaimedBal += 0.005;
+          document.getElementById('unclaimedBal').innerText = unclaimedBal.toFixed(6);
+          notify('🎉 تم الانتهاء من الإعلان وحصلت على +0.005 USDT لبونص التعدين!');
+        }
+      }, 1000);
+    }
 
     function collectReward() {
       if (unclaimedBal <= 0.0001) {
@@ -995,7 +992,45 @@
       }, 1000);
     }
 
-    // --- شريط السحوبات التلقائي ---
+    // توليد 25 إعلاناً مرقماً
+    function render25Ads() {
+      const container = document.getElementById('adsContainer25');
+      let html = '';
+      for (let i = 1; i <= 25; i++) {
+        const reward = (0.010 + (i * 0.001)).toFixed(3);
+        html += `
+          <div class="ad-card">
+            <div>
+              <div style="font-weight:bold; font-size:13px;">🎬 إعلان فيديو رقم ${i}</div>
+              <div style="font-size:11px; color:var(--text-muted);">شاهد لمدة 15 ثانية | +${reward} USDT</div>
+            </div>
+            <button class="ad-btn" onclick="executeTask(this, ${reward})">مشاهدة</button>
+          </div>
+        `;
+      }
+      container.innerHTML = html;
+    }
+
+    function executeTask(btn, reward, url = null) {
+      haptic('light');
+      if (url) window.open(url, '_blank');
+      btn.disabled = true;
+      btn.innerText = 'جاري التشغيل...';
+      btn.style.background = '#475569';
+
+      setTimeout(() => {
+        haptic('success');
+        playTone(900, 0.2);
+        totalBal += parseFloat(reward);
+        document.getElementById('totalBal').innerText = totalBal.toFixed(4);
+        localStorage.setItem('sc_tot', totalBal);
+        btn.innerText = 'مكتملة ✓';
+        btn.style.background = '#15803d';
+        notify(`🎉 أحسنت! كسبت +${reward} USDT`);
+      }, 5000);
+    }
+
+    // شريط السحوبات التلقائي
     function makeTicker() {
       const box = document.getElementById('payoutTicker');
       const wallets = ['0x8d...3e1', 'TQ2...9k5', '0x14...a9f', 'TP7...6d2', '0x99...2b4', 'TY8...1m0'];
@@ -1007,8 +1042,8 @@
       box.innerHTML = str + str;
     }
 
-    // --- توليد الكتل المستمر ---
-    let currentBlock = 94823;
+    // توليد الكتل
+    let currentBlock = 94882;
     setInterval(() => {
       const feed = document.getElementById('blocksFeed');
       const r = (Math.random() * 0.006 + 0.002).toFixed(3);
@@ -1020,33 +1055,11 @@
       `;
     }, 10000);
 
-    // --- المهام والإعلانات المأجورة ---
-    function executeTask(btn, reward, url = null) {
-      haptic('light');
-      if (url) window.open(url, '_blank');
-      btn.disabled = true;
-      btn.innerText = 'جاري التحقق...';
-      btn.style.background = '#475569';
-
-      setTimeout(() => {
-        haptic('success');
-        playTone(900, 0.2);
-        totalBal += reward;
-        document.getElementById('totalBal').innerText = totalBal.toFixed(4);
-        localStorage.setItem('sc_tot', totalBal);
-        btn.innerText = 'مكتملة ✓';
-        btn.style.background = '#15803d';
-        notify(`🎉 أحسنت! كسبت +${reward} USDT`);
-      }, 5000);
-    }
-
-    // --- ترقية VIP ---
     function upgradeVIP(name, price) {
       haptic('heavy');
       alert(`طلب ترقية إلى باقة ${name} بمبلغ ${price} USDT.\n\nسيتم نقلك إلى بوابة الإيداع لتأكيد الخادم وتفعيل السحب الفوري (0% Fee).`);
     }
 
-    // --- السحب مع شرط الحد الأدنى 10$ ---
     function requestWithdrawal() {
       haptic('heavy');
       const addr = document.getElementById('walletInput').value.trim();
@@ -1057,7 +1070,7 @@
         return;
       }
       if (isNaN(amt) || amt < 10) {
-        alert('⚠️ تنبيه: الحد الأدنى للسحب هو 10.00 USDT. واصل التعدين وجمع المكافآت للوصول للحد الأدنى!');
+        alert('⚠️ تنبيه: الحد الأدنى للسحب هو 10.00 USDT. واصل التعدين ومشاهدة الإعلانات للوصول للحد الأدنى!');
         return;
       }
       if (amt > totalBal) {
@@ -1071,7 +1084,6 @@
       alert(`✅ تم تسجيل طلب سحب بمبلغ ${amt} USDT بنجاح!\nالمحفظة: ${addr}\nالرسوم: 0% لمشتركي VIP.`);
     }
 
-    // --- نسخ الرابط والتنقل ---
     function copyLink() {
       haptic('light');
       navigator.clipboard.writeText('https://wael99998.github.io/?ref=78214');
@@ -1087,48 +1099,26 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // --- مكافأة الدخول اليومية ---
-    function checkDaily() {
-      const d = localStorage.getItem('sc_bonus_date');
-      const today = new Date().toDateString();
-      if (d !== today) {
-        const grid = document.getElementById('streakGrid');
-        let streak = parseInt(localStorage.getItem('sc_streak_count') || '0');
-        grid.innerHTML = '';
-        for (let i = 1; i <= 7; i++) {
-          const cur = (i === (streak % 7) + 1);
-          grid.innerHTML += `<div class="streak-cell ${cur ? 'active':''}"><div>يوم ${i}</div><div style="margin-top:4px;">+${(i*0.01).toFixed(2)}</div></div>`;
-        }
-        document.getElementById('streakModal').style.display = 'flex';
+    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+    function sendSupport() {
+      const u = document.getElementById('supUser').value.trim();
+      const m = document.getElementById('supMsg').value.trim();
+      if (!u || !m) {
+        alert('يرجى كتابة اسمك وتفاصيل المشكلة لنتمكن من مساعدتك!');
+        return;
       }
+      alert('تم إرسال تذكرتك بنجاح! سيقوم فريق دعم Syria Cash بمراجعتها والتواصل معك.');
+      closeModal('supportModal');
     }
 
-    function claimBonus() {
-      haptic('success');
-      playTone(1000, 0.2);
-      let s = parseInt(localStorage.getItem('sc_streak_count') || '0') + 1;
-      localStorage.setItem('sc_streak_count', s);
-      localStorage.setItem('sc_bonus_date', new Date().toDateString());
-      totalBal += 0.05;
-      document.getElementById('totalBal').innerText = totalBal.toFixed(4);
-      localStorage.setItem('sc_tot', totalBal);
-      document.getElementById('streakModal').style.display = 'none';
-      notify('🎉 استلمت مكافأة الدخول اليومي بنجاح!');
-    }
-
-    // حالة الاتصال
     window.addEventListener('offline', () => document.getElementById('offline-banner').style.display = 'block');
     window.addEventListener('online', () => document.getElementById('offline-banner').style.display = 'none');
 
-    // التشغيل عند الفتح
     window.addEventListener('DOMContentLoaded', () => {
       makeTicker();
-      setTimeout(checkDaily, 1200);
-      const savedLang = localStorage.getItem('sc_lang');
-      if (savedLang) {
-        document.getElementById('langSelect').value = savedLang;
-        changeLang(savedLang);
-      }
+      render25Ads();
     });
   </script>
 </body>
