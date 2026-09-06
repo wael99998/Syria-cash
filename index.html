@@ -234,5 +234,10 @@ let curL=localStorage.getItem('sc_l2')||'ar';
 document.getElementById('lang').value=curL;
 setL(curL);ui();
 </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+  </script>
 </body>
 </html>
