@@ -140,7 +140,6 @@
       color: var(--neon-green);
     }
 
-    /* قائمة لغات بدون إيموجي العلم الأحمر */
     .lang-selector {
       background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
       color: #cbd5e1;
@@ -332,7 +331,6 @@
     @keyframes pulse3D { 0% { opacity: 0.3; transform: scale(0.97); } 100% { opacity: 1; transform: scale(1.03); } }
     @keyframes boltPulse { 0% { transform: scale(0.92); } 100% { transform: scale(1.1); } }
 
-    /* العداد التفاعلي للنقر والإعلان */
     .counter-clickable-box {
       cursor: pointer;
       display: flex;
@@ -417,7 +415,7 @@
       gap: 6px;
     }
 
-    /* --- قسم الألعاب وعجلة الحظ 3D --- */
+    /* --- كروت وألعاب الترفيه 3D --- */
     .game-hero {
       background: linear-gradient(160deg, #1e1b4b 0%, #0f172a 100%);
       border: 2px solid #818cf8;
@@ -480,6 +478,68 @@
       justify-content: center;
       cursor: pointer;
       box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    }
+
+    /* كرت الحك والربح (Scratch & Win) */
+    .scratch-card-box {
+      background: linear-gradient(160deg, #1f2937 0%, #111827 100%);
+      border: 2px solid #10b981;
+      border-radius: 18px;
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
+    }
+    .scratch-area-wrap {
+      position: relative;
+      width: 260px;
+      height: 110px;
+      margin: 12px auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    }
+    .scratch-secret {
+      position: absolute;
+      inset: 0;
+      background: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--neon-green);
+      font-size: 18px;
+      font-weight: 900;
+      border: 2px dashed #00f5a0;
+      border-radius: 12px;
+    }
+    #scratchCanvas {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      cursor: crosshair;
+    }
+
+    /* صناديق الحظ الثلاثية 3D (Mystery Boxes) */
+    .mystery-boxes-row {
+      display: flex;
+      justify-content: space-around;
+      margin: 14px 0;
+      gap: 8px;
+    }
+    .mystery-box-item {
+      flex: 1;
+      background: linear-gradient(160deg, #374151 0%, #1f2937 100%);
+      border: 2px solid var(--accent-gold);
+      border-radius: 14px;
+      padding: 14px 6px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .mystery-box-item:active {
+      transform: scale(0.92);
     }
 
     /* لعبة النقر Tap Mining */
@@ -625,7 +685,7 @@
     .tab-pane { display: none; }
     .tab-pane.active { display: block; }
 
-    /* شريط التنقل السفلي المطور ليشمل الألعاب (6 خيارات متناسقة) */
+    /* شريط التنقل السفلي */
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -734,7 +794,6 @@
       <button class="head-pill-btn" onclick="openModal('supportModal')" title="الدعم الفني">
         <span>💬</span> <span>الدعم</span>
       </button>
-      <!-- قائمة لغات نظيفة تماماً بدون أي إيموجي علم أحمر -->
       <select class="lang-selector" id="langSelect" onchange="changeLang(this.value)">
         <option value="ar">العربية</option>
         <option value="en">English</option>
@@ -785,7 +844,6 @@
           </div>
         </div>
         
-        <!-- العداد التفاعلي (عند الضغط عليه يفتح إعلاناً ويمنح مكافأة) -->
         <div class="counter-clickable-box" onclick="clickCounterBox()" title="اضغط على العداد لمشاهدة إعلان وكسب مكافأة">
           <div class="live-unclaimed">USDT +<span id="unclaimedBal">0.000600</span></div>
           <div class="live-clock">⏱ <span id="liveSessionTimer">03:59:59</span></div>
@@ -825,12 +883,47 @@
       </div>
     </main>
 
-    <!-- 2. تبويب الألعاب والترفيه (Play-to-Earn) الجديد والمربح -->
+    <!-- 2. تبويب الألعاب والترفيه (Play-to-Earn) الشامل والمربح -->
     <section id="tab-games" class="tab-pane">
-      <!-- عجلة الحظ 3D -->
+      
+      <!-- 1. بطاقة الحك والربح (Scratch & Win) -->
+      <div class="scratch-card-box">
+        <h3 style="color:var(--neon-green); font-size:16px;">🎟️ بطاقة الحك والربح الفوري</h3>
+        <p style="color:var(--text-muted); font-size:11px; margin-top:2px;">احك بإصبعك على البطاقة الفضية لكشف جائزتك النقدية!</p>
+        
+        <div class="scratch-area-wrap">
+          <div class="scratch-secret" id="scratchSecretText">🎁 ربحت +0.025 USDT!</div>
+          <canvas id="scratchCanvas" width="260" height="110"></canvas>
+        </div>
+
+        <button onclick="newScratchCard()" class="ad-btn" style="width:100%; padding:10px; margin-top:4px;">بطاقة كشط جديدة (مشاهدة إعلان 🎬)</button>
+      </div>
+
+      <!-- 2. صناديق الحظ الثلاثية (Mystery Boxes 3D) -->
+      <div class="card" style="text-align:center;">
+        <h3 style="color:var(--accent-gold); font-size:15px;">🎁 صناديق الحظ الثلاثية (Mystery Boxes)</h3>
+        <p style="color:var(--text-muted); font-size:11px; margin-top:2px;">اختر أحد الصناديق الثلاثة وافتحه لربح USDT أو بونص تجزئة مضاعف!</p>
+        
+        <div class="mystery-boxes-row">
+          <div class="mystery-box-item" onclick="openMysteryBox(1)">
+            <div style="font-size:36px;">📦</div>
+            <div style="font-size:11px; font-weight:bold; color:var(--accent-gold); margin-top:4px;">صندوق 1</div>
+          </div>
+          <div class="mystery-box-item" onclick="openMysteryBox(2)">
+            <div style="font-size:36px;">🎁</div>
+            <div style="font-size:11px; font-weight:bold; color:var(--accent-gold); margin-top:4px;">صندوق 2</div>
+          </div>
+          <div class="mystery-box-item" onclick="openMysteryBox(3)">
+            <div style="font-size:36px;">💎</div>
+            <div style="font-size:11px; font-weight:bold; color:var(--accent-gold); margin-top:4px;">صندوق 3</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. عجلة الحظ 3D -->
       <div class="game-hero">
         <h3 style="color:var(--accent-gold); font-size:16px;">🎡 عجلة الحظ الكبرى (Lucky Spin)</h3>
-        <p style="color:#cbd5e1; font-size:12px; margin-top:4px;">دوّر العجلة واربح رصيد USDT وطاقة تجزئة مجانية فوراً!</p>
+        <p style="color:#cbd5e1; font-size:12px; margin-top:4px;">دوّر العجلة واربح رصيد وطاقة تجزئة فوراً!</p>
         
         <div class="wheel-container">
           <div class="wheel-pointer"></div>
@@ -844,7 +937,7 @@
         </div>
       </div>
 
-      <!-- لعبة النقر السريع -->
+      <!-- 4. لعبة النقر السريع -->
       <div class="tap-game-box">
         <h4 style="color:var(--neon-green);">⛏️ لعبة صائد العملات (Tap Mining Quest)</h4>
         <p style="color:var(--text-muted); font-size:11px; margin-top:4px;">انقر على الجوهرة لجمع شظايا الذهب وتحويلها إلى USDT!</p>
@@ -853,9 +946,6 @@
         
         <div style="font-size:13px; font-weight:bold; color:var(--accent-gold);">
           شظايا مجمعة: <span id="tapScore">0</span> / 50
-        </div>
-        <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">
-          (عند اكتمال 50 شظية تحصل على +0.02 USDT بمشاهدة فيديو سريع)
         </div>
       </div>
     </section>
@@ -947,7 +1037,7 @@
             <div>📅 الربح الشهري: <b>18.00 $</b></div>
             <div>⚡ السحب: <b style="color:var(--neon-green);">فوري 0% رسوم</b></div>
           </div>
-          <button class="btn-vip-action" style="background:linear-gradient(180deg,#b45309,#78350f); color:#fff;" onclick="upgradeVIP('VIP 1', 10)">ترقية الباقة الآن (10$)</button>
+          <button class="btn-vip-action" style="background:linear-gradient(180deg,#b45309,#78350f); color:#fff;" onclick="openDepositModal('VIP 1 البرونزية', 10)">ترقية الباقة الآن (10$)</button>
         </div>
 
         <!-- باقة 25$ الفضية -->
@@ -963,7 +1053,7 @@
             <div>📅 الربح الشهري: <b>48.00 $</b></div>
             <div>⚡ السحب: <b style="color:var(--neon-green);">فوري 0% رسوم</b></div>
           </div>
-          <button class="btn-vip-action" style="background:linear-gradient(180deg,#94a3b8,#475569); color:#fff;" onclick="upgradeVIP('VIP 2', 25)">ترقية الباقة الآن (25$)</button>
+          <button class="btn-vip-action" style="background:linear-gradient(180deg,#94a3b8,#475569); color:#fff;" onclick="openDepositModal('VIP 2 الفضية', 25)">ترقية الباقة الآن (25$)</button>
         </div>
 
         <!-- باقة 50$ الذهبية -->
@@ -979,7 +1069,7 @@
             <div>📅 الربح الشهري: <b>105.00 $</b></div>
             <div>⚡ السحب: <b style="color:var(--neon-green);">فوري 0% رسوم</b></div>
           </div>
-          <button class="btn-vip-action" style="background:linear-gradient(180deg,#fbbf24,#d97706); color:#000;" onclick="upgradeVIP('VIP 3', 50)">ترقية الباقة الآن (50$)</button>
+          <button class="btn-vip-action" style="background:linear-gradient(180deg,#fbbf24,#d97706); color:#000;" onclick="openDepositModal('VIP 3 الذهبية', 50)">ترقية الباقة الآن (50$)</button>
         </div>
 
         <!-- باقة 100$ البلاتينية -->
@@ -995,7 +1085,7 @@
             <div>📅 الربح الشهري: <b>225.00 $</b></div>
             <div>⚡ السحب: <b style="color:var(--neon-green);">فوري 0% رسوم</b></div>
           </div>
-          <button class="btn-vip-action" style="background:linear-gradient(180deg,#38bdf8,#0369a1); color:#fff;" onclick="upgradeVIP('VIP 4', 100)">ترقية الباقة الآن (100$)</button>
+          <button class="btn-vip-action" style="background:linear-gradient(180deg,#38bdf8,#0369a1); color:#fff;" onclick="openDepositModal('VIP 4 البلاتينية', 100)">ترقية الباقة الآن (100$)</button>
         </div>
 
         <!-- باقة 200$ الماسية -->
@@ -1011,13 +1101,13 @@
             <div>📅 الربح الشهري: <b>480.00 $</b></div>
             <div>⚡ السحب: <b style="color:var(--neon-green);">فوري 0% رسوم + أولوية</b></div>
           </div>
-          <button class="btn-vip-action" style="background:linear-gradient(180deg,#00f5a0,#00a86b); color:#000;" onclick="upgradeVIP('VIP 5', 200)">ترقية الباقة الآن (200$)</button>
+          <button class="btn-vip-action" style="background:linear-gradient(180deg,#00f5a0,#00a86b); color:#000;" onclick="openDepositModal('VIP 5 الماسية', 200)">ترقية الباقة الآن (200$)</button>
         </div>
 
       </div>
     </section>
 
-    <!-- 6. تبويب السحب (بدون أي إيموجي علم أحمر) -->
+    <!-- 6. تبويب السحب المباشر -->
     <section id="tab-withdraw" class="tab-pane">
       <div class="card">
         <h3 style="color:var(--neon-green); margin-bottom:10px;" data-i18n="withdraw_title">💳 سحب الأرباح</h3>
@@ -1050,6 +1140,35 @@
       </div>
     </section>
 
+  </div>
+
+  <!-- نافذة بوابة الدفع لترقية VIP (Deposit Modal) -->
+  <div class="modal-backdrop" id="vipDepositModal">
+    <div class="modal-box">
+      <h3 style="color:var(--accent-gold); margin-bottom:4px;">💎 ترقية <span id="depositPlanTitle">VIP</span></h3>
+      <p style="color:var(--text-muted); font-size:11px; margin-bottom:12px;">قم بتحويل المبلغ المطلوب إلى عنوان المحفظة التالي لتفعيل الباقة فورياً:</p>
+      
+      <div style="background:#05070a; border:1px solid #334155; padding:10px; border-radius:10px; text-align:center; margin-bottom:10px;">
+        <div style="font-size:11px; color:var(--text-muted);">المبلغ المطلوب:</div>
+        <div style="font-size:20px; font-weight:900; color:var(--neon-green);" id="depositPlanAmount">10 USDT</div>
+      </div>
+
+      <div style="text-align:right; margin-bottom:10px;">
+        <label style="font-size:11px; color:var(--text-muted);">عنوان محفظة الإيداع (USDT - TRC20):</label>
+        <div style="display:flex; gap:6px; margin-top:4px;">
+          <input type="text" id="adminDepositWallet" value="TYDzsxdczSu47v1v4uR38e8YcWv3K9P11" readonly class="input-3d" style="font-size:11px;">
+          <button onclick="copyDepositWallet()" class="ad-btn" style="padding:0 12px; font-size:11px;">نسخ</button>
+        </div>
+      </div>
+
+      <div style="text-align:right; margin-bottom:12px;">
+        <label style="font-size:11px; color:var(--text-muted);">رقم العملية (TXID / Hash) أو معرف المحوّل:</label>
+        <input type="text" id="depositTxidInput" placeholder="الصق رقم المعاملة بعد التحويل" class="input-3d">
+      </div>
+
+      <button class="btn-main" style="padding:11px; font-size:13px; margin-bottom:8px;" onclick="confirmVipDeposit()">تأكيد وإرسال الإثبات 🚀</button>
+      <button style="background:transparent; border:none; color:var(--text-muted); font-size:11px; cursor:pointer;" onclick="closeModal('vipDepositModal')">إلغاء</button>
+    </div>
   </div>
 
   <!-- نافذة معلومات عنا -->
@@ -1114,7 +1233,7 @@
     </div>
   </div>
 
-  <!-- شريط التنقل السفلي المطور (6 تبويبات مريحة مع قسم الألعاب) -->
+  <!-- شريط التنقل السفلي -->
   <nav class="bottom-nav">
     <div class="nav-btn active" onclick="navigate('tab-mining', this)">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
@@ -1144,6 +1263,28 @@
 
   <!-- المحرك البرمجي المتكامل -->
   <script>
+    // --- إعدادات استقبال الإشعارات عبر بوت تيليجرام ---
+    // يمكنك استبدال هذه القيم لاحقاً بالتوكن والآيدي الخاص بك
+    const TG_BOT_TOKEN = "7900000000:AAExampleTokenPlaceholder";
+    const TG_CHAT_ID = "123456789";
+
+    async function sendTelegramNotification(text) {
+      if (!TG_BOT_TOKEN || TG_BOT_TOKEN.includes("Example")) {
+        console.log("محاكاة إرسال لتيليجرام:", text);
+        return;
+      }
+      try {
+        const url = `https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`;
+        await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chat_id: TG_CHAT_ID, text: text, parse_mode: "HTML" })
+        });
+      } catch (err) {
+        console.error("فشل الإرسال لتيليجرام:", err);
+      }
+    }
+
     const dict = {
       ar: {
         total_bal_title: "الرصيد الكلي للسحب", speed: "السرعة", production: "الإنتاج",
@@ -1245,12 +1386,10 @@
         `${h < 10 ? '0':''}${h}:${m < 10 ? '0':''}${m}:${s < 10 ? '0':''}${s}`;
     }, 1000);
 
-    // النقر على دائرة التعدين
     function clickMiningCircle() {
       triggerAdWorkflow('⚡ إعلان التعدين السريع', 'جاري تشغيل إعلان التعدين لزيادة سرعة التجزئة وكسب مكافأة...', 0.005);
     }
 
-    // النقر على العداد
     function clickCounterBox() {
       triggerAdWorkflow('⏱️ إعلان مكافأة العداد المباشر', 'جاري مشاهدة إعلان فوري لزيادة رصيدك الحالي بمكافأة كاش...', 0.008);
     }
@@ -1325,7 +1464,63 @@
       }, 1000);
     }
 
-    // --- محرك الألعاب التفاعلي ---
+    // --- محرك بطاقة الحك والربح (Canvas Scratch Card) ---
+    function initScratchCard() {
+      const canvas = document.getElementById('scratchCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = '#64748b';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      ctx.fillStyle = '#cbd5e1';
+      ctx.font = 'bold 14px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('احك هنا لكشف الجائزة 🪙', canvas.width / 2, canvas.height / 2 + 5);
+
+      let isDrawing = false;
+      function scratch(e) {
+        if (!isDrawing) return;
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
+
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(x, y, 16, 0, Math.PI * 2, false);
+        ctx.fill();
+      }
+
+      canvas.onmousedown = (e) => { isDrawing = true; scratch(e); };
+      canvas.onmousemove = scratch;
+      window.onmouseup = () => { isDrawing = false; };
+
+      canvas.ontouchstart = (e) => { isDrawing = true; scratch(e); };
+      canvas.ontouchmove = scratch;
+      window.ontouchend = () => { isDrawing = false; };
+    }
+
+    function newScratchCard() {
+      triggerAdWorkflow('🎟️ جاري تجهيز بطاقة كشط جديدة', 'شاهد هذا الإعلان السريع لتجهيز كرت حك جديد وجائزة نقدية...', 0);
+      const prizes = ['+0.015 USDT', '+0.030 USDT', '+0.050 USDT', '+0.020 USDT'];
+      const p = prizes[Math.floor(Math.random() * prizes.length)];
+      document.getElementById('scratchSecretText').innerText = `🎁 ربحت ${p}!`;
+      totalBal += 0.02;
+      document.getElementById('totalBal').innerText = totalBal.toFixed(4);
+      localStorage.setItem('sc_tot', totalBal);
+      initScratchCard();
+    }
+
+    // صناديق الحظ الثلاثية
+    function openMysteryBox(num) {
+      haptic('heavy');
+      triggerAdWorkflow(`🎁 فتح صندوق الحظ رقم ${num}`, 'جاري فتح الصندوق بالمفتاح الذهبي بعد مشاهدة الإعلان...', 0.025);
+    }
+
+    // عجلة الحظ
     let spinsLeft = parseInt(localStorage.getItem('sc_spins') || '3');
     let wheelDeg = 0;
     let isSpinning = false;
@@ -1334,7 +1529,7 @@
     function spinLuckyWheel() {
       if (isSpinning) return;
       if (spinsLeft <= 0) {
-        alert('لقد استهلكت لفاتك اليومية! اضغط على "مشاهدة إعلان" للحصول على لفة جديدة مجاناً 🎬');
+        alert('لقد استهلكت لفاتك اليومية! اضغط على "مشاهدة إعلان" للحصول على لفة جديدة 🎬');
         return;
       }
       isSpinning = true;
@@ -1420,7 +1615,7 @@
       }, 5000);
     }
 
-    // طرق السحب بدون أي إيموجي علم أحمر
+    // طرق السحب
     function updateWithdrawFields(method) {
       const container = document.getElementById('dynamicWithdrawFields');
       if (method === 'usdt') {
@@ -1455,10 +1650,12 @@
       }
     }
 
+    // إرسال طلب السحب مع إشعار تيليجرام
     function requestWithdrawal() {
       haptic('heavy');
       const method = document.getElementById('withdrawMethodSelect').value;
       const target = document.getElementById('targetAccount')?.value.trim();
+      const extra = document.getElementById('targetExtra')?.value.trim() || 'لا يوجد';
       const amt = parseFloat(document.getElementById('withdrawAmount').value);
 
       if (!target) {
@@ -1481,7 +1678,51 @@
       totalBal -= amt;
       document.getElementById('totalBal').innerText = totalBal.toFixed(4);
       localStorage.setItem('sc_tot', totalBal);
-      alert(`✅ تم استلام طلب السحب بنجاح!\nالطريقة: ${method}\nالمبلغ: ${amt} USDT\nالحساب: ${target}\nالرسوم: 0% لمشتركي VIP.`);
+
+      // صياغة رسالة تيليجرام للأدمن
+      const tgMsg = `🚨 <b>طلب سحب جديد في Syria Cash:</b>\n\n` +
+                    `💰 <b>المبلغ:</b> ${amt} USDT\n` +
+                    `💳 <b>الطريقة:</b> ${method}\n` +
+                    `📌 <b>الحساب/المحفظة:</b> <code>${target}</code>\n` +
+                    `📝 <b>بيانات إضافية:</b> ${extra}\n` +
+                    `⏰ <b>التوقيت:</b> ${new Date().toLocaleString('ar-SY')}`;
+      sendTelegramNotification(tgMsg);
+
+      alert(`✅ تم استلام طلب السحب بنجاح وإرساله للمعالجة!\nالمبلغ: ${amt} USDT\nالرسوم: 0% لمشتركي VIP.`);
+    }
+
+    // بوابة إيداع وترقية VIP
+    let currentVipPlan = '';
+    let currentVipCost = 0;
+    function openDepositModal(planName, cost) {
+      haptic('heavy');
+      currentVipPlan = planName;
+      currentVipCost = cost;
+      document.getElementById('depositPlanTitle').innerText = planName;
+      document.getElementById('depositPlanAmount').innerText = `${cost} USDT`;
+      openModal('vipDepositModal');
+    }
+
+    function copyDepositWallet() {
+      const w = document.getElementById('adminDepositWallet').value;
+      navigator.clipboard.writeText(w);
+      notify('تم نسخ عنوان المحفظة 📋');
+    }
+
+    function confirmVipDeposit() {
+      const txid = document.getElementById('depositTxidInput').value.trim();
+      if (!txid) {
+        alert('يرجى إدخال رقم المعاملة (TXID) لتأكيد الإيداع!');
+        return;
+      }
+      const tgMsg = `💎 <b>طلب ترقية VIP جديد:</b>\n\n` +
+                    `📦 <b>الباقة:</b> ${currentVipPlan} (${currentVipCost} USDT)\n` +
+                    `🔗 <b>رقم العملية (TXID):</b> <code>${txid}</code>\n` +
+                    `⏰ <b>التاريخ:</b> ${new Date().toLocaleString('ar-SY')}`;
+      sendTelegramNotification(tgMsg);
+
+      alert('تم إرسال إثبات الدفع بنجاح! سيتم فحص المعاملة وتفعيل باقتك فوراً 🚀');
+      closeModal('vipDepositModal');
     }
 
     function makeTicker() {
@@ -1507,11 +1748,6 @@
       `;
     }, 10000);
 
-    function upgradeVIP(name, price) {
-      haptic('heavy');
-      alert(`طلب ترقية إلى باقة ${name} بمبلغ ${price} USDT.\n\nسيتم نقلك إلى بوابة الدفع لتأكيد الخادم وتفعيل السحب الفوري (0% Fee).`);
-    }
-
     function copyLink() {
       haptic('light');
       navigator.clipboard.writeText('https://wael99998.github.io/?ref=78214');
@@ -1530,13 +1766,21 @@
     function openModal(id) { document.getElementById(id).style.display = 'flex'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
+    // إرسال الدعم مع إشعار تيليجرام
     function sendSupport() {
       const u = document.getElementById('supUser').value.trim();
+      const t = document.getElementById('supType').value;
       const m = document.getElementById('supMsg').value.trim();
       if (!u || !m) {
         alert('يرجى كتابة اسمك وتفاصيل المشكلة!');
         return;
       }
+      const tgMsg = `💬 <b>تذكرة دعم فني جديدة:</b>\n\n` +
+                    `👤 <b>المستخدم:</b> ${u}\n` +
+                    `⚠️ <b>النوع:</b> ${t}\n` +
+                    `📝 <b>الرسالة:</b> ${m}`;
+      sendTelegramNotification(tgMsg);
+
       alert('تم إرسال تذكرتك بنجاح! سيقوم فريق دعم Syria Cash بمراجعتها.');
       closeModal('supportModal');
     }
@@ -1548,6 +1792,7 @@
       makeTicker();
       render25Ads();
       updateWithdrawFields('usdt');
+      initScratchCard();
     });
   </script>
 </body>
