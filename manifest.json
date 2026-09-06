@@ -1,23 +1,17 @@
 {
   "name": "Syria Cash",
   "short_name": "Syria Cash",
-"start_url": "/"
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#07090e",
   "theme_color": "#07090e",
   "description": "Syria Cash Cloud Mining",
   "icons": [
     {
-      "src": "75893 (1) (1).png",
+      "src": "icon.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "75893 (1) (1).png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
   ]
 }
