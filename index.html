@@ -1037,22 +1037,24 @@
       <div id="adsContainer25" style="display:flex; flex-direction:column; gap:8px;"></div>
     </section>
 
+    <!-- تبويب الإحالة المحمي من التكرار والتحايل -->
     <section id="tab-ref" class="tab-view">
       <div class="section-header" data-i18n="ref_header">برنامج دعوة الأصدقاء والوكالة</div>
       <div class="mining-hub-card" style="text-align:right;">
         <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:12px; border-radius:12px; margin-bottom:12px; font-size:12px; line-height:1.7;">
-          <div data-i18n="ref_rule_1">💰 <b>0.50 USDT كاش + 50 $SYC</b> هدية تسجيل فورية لكل شخص ينضم عبر رابطك!</div>
-          <div data-i18n="ref_rule_2">⚡ عمولة تعدين <b>10% (مستوى 1)</b> مدى الحياة من أرباح أصدقائك دون خصم شيء منهم.</div>
-          <div data-i18n="ref_rule_3">🌟 عمولة إضافية <b>5% (مستوى 2)</b> من أصدقاء أصدقائك.</div>
+          <div>💰 <b>0.50 USDT كاش + 50 $SYC</b> هدية فورية لكل صديق جديد ينضم لأول مرة عبر رابطك!</div>
+          <div>⚡ عمولة تعدين <b>10%</b> مدى الحياة من أرباح أصدقائك دون خصم أي سنت منهم.</div>
+          <div style="color:var(--primary-green); font-weight:bold; margin-top:4px;">🛡️ نظام الحماية مفعل ضد الحسابات المكررة والوهمية من نفس الجهاز.</div>
         </div>
 
-        <div style="background:#f8fafc; border:1px solid #cbd5e1; padding:10px; border-radius:10px; font-size:12px; color:#475569; margin-bottom:12px; text-align:center;">
-          https://wael99998.github.io/?ref=78214
+        <div style="background:#f8fafc; border:1px solid #cbd5e1; padding:10px; border-radius:10px; font-size:12px; color:#475569; margin-bottom:12px; text-align:center; word-break:break-all;" id="myReferralLinkDisplay">
+          جاري تجهيز الرابط...
         </div>
         <button onclick="copyLink()" class="btn-official-green" data-i18n="copy_ref_btn">نسخ رابط الإحالة الرسمي 📋</button>
       </div>
     </section>
 
+    <!-- تبويب السحب المالي المرتبط بقاعدة البيانات السحابية -->
     <section id="tab-withdraw" class="tab-view">
       <div class="section-header" data-i18n="withdraw_header">طلب سحب الأرباح المالي</div>
       <div class="mining-hub-card" style="text-align:right;">
@@ -1076,7 +1078,7 @@
         <label style="font-size:11px; font-weight:700; color:var(--text-muted);" data-i18n="amount_label">المبلغ المطلوب سحبه:</label>
         <input type="number" id="withdrawAmount" placeholder="الحد الأدنى 10 USDT" class="input-clean" style="margin-bottom:12px;">
 
-        <button onclick="requestWithdrawal()" class="btn-official-green" data-i18n="submit_withdraw_btn">تأكيد طلب السحب المالي 🚀</button>
+        <button id="withdrawSubmitBtn" onclick="requestWithdrawal()" class="btn-official-green" data-i18n="submit_withdraw_btn">تأكيد طلب السحب المالي 🚀</button>
       </div>
     </section>
 
@@ -1155,7 +1157,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
         <circle cx="12" cy="12" r="10"></circle>
         <circle cx="12" cy="12" r="6"></circle>
-        <circle cx="12" cy="12" r="2"></circle>
+        <circle cx="12" cy="2"></circle>
       </svg>
       <span data-i18n="nav_ads">الإعلانات</span>
     </div>
@@ -1188,27 +1190,52 @@
       console.error('Supabase init error:', e);
     }
 
-    // دالة المزامنة السحابية الذكية والشاملة لكافة الأرصدة واسم المستخدم
+    // توليد بصمة متقدمة للجهاز لمكافحة مسح البيانات وتكرار الحسابات
+    function getDeviceFingerprint() {
+      let saved = localStorage.getItem('sc_device_id');
+      if (saved) return saved;
+      
+      const screenInfo = `${screen.width}x${screen.height}_${screen.colorDepth}`;
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'unknown';
+      const randomPart = Math.random().toString(36).substring(2, 8);
+      const generated = 'dev_' + btoa(`${screenInfo}_${tz}_${randomPart}`).replace(/[^a-zA-Z0-9]/g, '').substring(0, 16);
+      
+      localStorage.setItem('sc_device_id', generated);
+      return generated;
+    }
+
+    let globalDeviceId = getDeviceFingerprint();
+    let globalUsername = 'مستخدم';
+
+    // المزامنة الذكية مع الحماية من التحايل
     async function syncUserWithCloud() {
       if (!_supabase) return;
       try {
-        let deviceId = localStorage.getItem('sc_device_id');
-        if (!deviceId) {
-          deviceId = 'dev_' + Math.random().toString(36).substring(2, 12);
-          localStorage.setItem('sc_device_id', deviceId);
+        const urlParams = new URLSearchParams(window.location.search);
+        const incomingRef = urlParams.get('ref')?.trim().toUpperCase();
+
+        let myRefCode = localStorage.getItem('sc_ref_code');
+        if (!myRefCode) {
+          myRefCode = 'REF_' + Math.random().toString(36).substring(2, 8).toUpperCase();
+          localStorage.setItem('sc_ref_code', myRefCode);
         }
 
-        const refCode = localStorage.getItem('sc_ref_code') || ('REF_' + Math.random().toString(36).substring(2, 8).toUpperCase());
-        localStorage.setItem('sc_ref_code', refCode);
+        // عرض رابط الإحالة الخاص بالمستخدم فوراً
+        const myAppUrl = window.location.origin + window.location.pathname + '?ref=' + myRefCode;
+        const linkDisplay = document.getElementById('myReferralLinkDisplay');
+        if (linkDisplay) linkDisplay.innerText = myAppUrl;
 
+        // التحقق من وجود المستخدم في قاعدة البيانات
         let { data: existingUser } = await _supabase
           .from('users')
           .select('*')
-          .eq('device_id', deviceId)
+          .eq('device_id', globalDeviceId)
           .maybeSingle();
 
         if (existingUser) {
-          // مقارنة الأرصدة واعتماد القيمة الأعلى دائماً لمنع أي فقدان للأرباح
+          // جهاز مسجل مسبقاً: استعادة الأرصدة واسم المستخدم
+          globalUsername = existingUser.username || ('مستخدم_' + (existingUser.referral_code || myRefCode).replace('REF_', ''));
+          
           const cloudUsdt = parseFloat(existingUser.balance || 0);
           const cloudSyc = parseFloat(existingUser.syc_balance || 0);
 
@@ -1221,24 +1248,48 @@
           localStorage.setItem('sc_tot', totalBal);
           localStorage.setItem('sc_syc_tot', sycTotal);
 
-          // تحديث السحابة بالرصيد الحقيقي واسم المستخدم المميز
-          const customName = 'مستخدم_' + (existingUser.referral_code || refCode).replace('REF_', '');
+          // تحديث السحابة لضمان دقة الأرصدة
           await _supabase.from('users').update({
-            username: customName,
+            username: globalUsername,
             balance: totalBal,
             syc_balance: sycTotal
-          }).eq('device_id', deviceId);
+          }).eq('device_id', globalDeviceId);
 
         } else {
-          // إنشاء السجل الجديد لأول مرة
-          const customName = 'مستخدم_' + refCode.replace('REF_', '');
+          // جهاز جديد تماماً (New Unique Device)
+          globalUsername = 'مستخدم_' + myRefCode.replace('REF_', '');
+          let validReferrer = null;
+
+          // فحص مكافحة الاحتيال: هل رابط الإحالة صالح وليس إحالة ذاتية؟
+          if (incomingRef && incomingRef !== myRefCode) {
+            let { data: referrerUser } = await _supabase
+              .from('users')
+              .select('*')
+              .eq('referral_code', incomingRef)
+              .maybeSingle();
+
+            if (referrerUser) {
+              validReferrer = incomingRef;
+              // إضافة مكافأة الإحالة لحساب الداعي (+0.50 USDT و +50 SYC)
+              const refNewUsdt = parseFloat(referrerUser.balance || 0) + 0.50;
+              const refNewSyc = parseFloat(referrerUser.syc_balance || 0) + 50.0;
+              
+              await _supabase.from('users').update({
+                balance: refNewUsdt,
+                syc_balance: refNewSyc
+              }).eq('id', referrerUser.id);
+            }
+          }
+
+          // تسجيل الحساب الجديد في Supabase
           await _supabase.from('users').insert([
             {
-              username: customName,
+              username: globalUsername,
               balance: totalBal,
               syc_balance: sycTotal,
-              device_id: deviceId,
-              referral_code: refCode
+              device_id: globalDeviceId,
+              referral_code: myRefCode,
+              referred_by: validReferrer
             }
           ]);
         }
@@ -1247,19 +1298,72 @@
       }
     }
 
-    // دالة تحديث الرصيدين في Supabase لحظياً عند كل عملية ربح
+    // تحديث الأرصدة سحابياً بعد كل مكافأة أو لعبة
     async function updateCloudBalances(newUsdt, newSyc) {
       if (!_supabase) return;
       try {
-        const deviceId = localStorage.getItem('sc_device_id');
-        if (deviceId) {
-          await _supabase.from('users').update({ 
-            balance: newUsdt,
-            syc_balance: newSyc 
-          }).eq('device_id', deviceId);
-        }
+        await _supabase.from('users').update({ 
+          balance: newUsdt,
+          syc_balance: newSyc 
+        }).eq('device_id', globalDeviceId);
       } catch (err) {
         console.error('Cloud update error:', err);
+      }
+    }
+
+    // إرسال طلب السحب الفعلي لجدول withdrawals في Supabase
+    async function requestWithdrawal() {
+      const method = document.getElementById('withdrawMethodSelect').value;
+      const target = document.getElementById('targetAccount')?.value.trim();
+      const extra = document.getElementById('targetExtra')?.value.trim() || '';
+      const amt = parseFloat(document.getElementById('withdrawAmount').value);
+      const submitBtn = document.getElementById('withdrawSubmitBtn');
+
+      if (!target || isNaN(amt) || amt < 10) {
+        return alert('يرجى ملء كافة البيانات بدقة، والحد الأدنى للسحب هو 10 USDT!');
+      }
+      if (amt > totalBal) {
+        return alert('الرصيد المالي الحالي غير كافٍ لإتمام هذا السحب!');
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'جاري إرسال طلب السحب...';
+
+      try {
+        // 1. تسجيل الطلب في جدول withdrawals في Supabase
+        const { error: insertErr } = await _supabase.from('withdrawals').insert([
+          {
+            device_id: globalDeviceId,
+            username: globalUsername,
+            method: method,
+            amount: amt,
+            account_info: target,
+            extra_info: extra,
+            status: 'قيد المراجعة ⏳'
+          }
+        ]);
+
+        if (insertErr) {
+          submitBtn.disabled = false;
+          submitBtn.innerText = 'تأكيد طلب السحب المالي 🚀';
+          return alert('تعذر تسجيل طلب السحب: ' + insertErr.message);
+        }
+
+        // 2. خصم المبلغ وتحديث الرصيد محلياً وسحابياً
+        totalBal -= amt;
+        document.getElementById('totalBal').innerText = totalBal.toFixed(4);
+        localStorage.setItem('sc_tot', totalBal);
+        await updateCloudBalances(totalBal, sycTotal);
+
+        document.getElementById('withdrawAmount').value = '';
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'تأكيد طلب السحب المالي 🚀';
+
+        alert(`✅ تم إرسال طلب سحب بمبلغ ${amt} USDT بنجاح!\nسيتم تدقيقه وتحويله فوراً إلى حسابك.`);
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'تأكيد طلب السحب المالي 🚀';
+        alert('حدث خطأ أثناء معالجة السحب: ' + err.message);
       }
     }
 
@@ -1348,9 +1452,6 @@
         tasks_header: "المهام الاجتماعية والرسمية",
         paid_ads_header: "إعلانات الفيديو المأجورة (25 إعلاناً)",
         ref_header: "برنامج دعوة الأصدقاء والوكالة",
-        ref_rule_1: "💰 <b>0.50 USDT كاش + 50 $SYC</b> هدية تسجيل فورية لكل شخص ينضم عبر رابطك!",
-        ref_rule_2: "⚡ عمولة تعدين <b>10% (مستوى 1)</b> مدى الحياة من أرباح أصدقائك دون خصم شيء منهم.",
-        ref_rule_3: "🌟 عمولة إضافية <b>5% (مستوى 2)</b> من أصدقاء أصدقائك.",
         copy_ref_btn: "نسخ رابط الإحالة الرسمي 📋",
         withdraw_header: "طلب سحب الأرباح المالي",
         withdraw_method_label: "طريقة استلام الأرباح:",
@@ -1406,9 +1507,6 @@
         tasks_header: "Sosyal ve Resmi Görevler",
         paid_ads_header: "Ücretli Video Reklamlar (25 Reklam)",
         ref_header: "Arkadaşını Davet Et & Ortaklık",
-        ref_rule_1: "💰 Bağlantınızla katılan her kişi için anında <b>0.50 USDT Nakit + 50 $SYC</b>!",
-        ref_rule_2: "⚡ Arkadaşlarınızın ömür boyu kazançlarından <b>%10 Komisyon (1. Seviye)</b>.",
-        ref_rule_3: "🌟 Arkadaşlarınızın arkadaşlarından <b>%5 Ek Komisyon (2. Seviye)</b>.",
         copy_ref_btn: "Resmi Davet Linkini Kopyala 📋",
         withdraw_header: "Para Çekme Talebi",
         withdraw_method_label: "Ödeme Yöntemi:",
@@ -1464,9 +1562,6 @@
         tasks_header: "Official & Social Tasks",
         paid_ads_header: "Paid Video Ads (25 Ads)",
         ref_header: "Referral & Affiliate Program",
-        ref_rule_1: "💰 Instant <b>0.50 USDT Cash + 50 $SYC</b> for every friend who joins!",
-        ref_rule_2: "⚡ <b>10% Lifetime Commission (Level 1)</b> from your friends' mining.",
-        ref_rule_3: "🌟 <b>5% Extra Commission (Level 2)</b> from sub-referrals.",
         copy_ref_btn: "Copy Official Invite Link 📋",
         withdraw_header: "Withdrawal Request Form",
         withdraw_method_label: "Payout Method:",
@@ -2066,27 +2161,11 @@
       }
     }
 
-    function requestWithdrawal() {
-      const method = document.getElementById('withdrawMethodSelect').value;
-      const target = document.getElementById('targetAccount')?.value.trim();
-      const amt = parseFloat(document.getElementById('withdrawAmount').value);
-
-      if (!target || isNaN(amt) || amt < 10) {
-        return alert('يرجى ملء كافة البيانات بدقة، والحد الأدنى للسحب هو 10 USDT!');
-      }
-      if (amt > totalBal) return alert('الرصيد الحالي غير كافٍ لإتمام هذا السحب!');
-
-      totalBal -= amt;
-      document.getElementById('totalBal').innerText = totalBal.toFixed(4);
-      localStorage.setItem('sc_tot', totalBal);
-      updateCloudBalances(totalBal, sycTotal);
-
-      alert(`✅ تم تأكيد طلب السحب بمبلغ ${amt} USDT وسيتم تنفيذه فوراً!\nالرسوم: 0% لمشتركي VIP.`);
-    }
-
     function copyLink() {
-      navigator.clipboard.writeText('https://wael99998.github.io/?ref=78214');
-      notify('تم نسخ رابط الإحالة الرسمي 📋');
+      const myRefCode = localStorage.getItem('sc_ref_code') || 'REF_DEFAULT';
+      const myAppUrl = window.location.origin + window.location.pathname + '?ref=' + myRefCode;
+      navigator.clipboard.writeText(myAppUrl);
+      notify('تم نسخ رابط الإحالة المحمي بنجاح 📋');
     }
 
     function navigate(id, el) {
@@ -2127,7 +2206,7 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      // إخفاء واجهة البداية بعد 3 ثوانٍ تماماً
+      // إخفاء شاشة البداية بعد 3 ثوانٍ تماماً
       setTimeout(() => {
         const splash = document.getElementById('appSplashScreen');
         if (splash) {
@@ -2141,7 +2220,7 @@
       initScratchCard();
       initAirdropCountdown();
 
-      // تشغيل المزامنة وحفظ الرصيدين في Supabase
+      // تشغيل المزامنة وحماية الحسابات
       syncUserWithCloud();
 
       const savedLang = localStorage.getItem('sc_lang') || 'ar';
