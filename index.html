@@ -10,7 +10,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-  <!-- مكتبة Supabase للاتصال السحابي (مضافة بأمان تام دون المساس بتصميمك) -->
+  <!-- مكتبة Supabase للاتصال السحابي -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
@@ -195,7 +195,6 @@
       margin: 0 auto;
     }
 
-    /* بنر الـ Airdrop */
     .airdrop-hero-banner {
       background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
       color: #ffffff;
@@ -265,7 +264,6 @@
       transition: width 0.3s;
     }
 
-    /* بنر تعدين الدولار (USDT) */
     .hero-banner {
       background: linear-gradient(135deg, #005a36 0%, #003822 100%);
       color: #ffffff;
@@ -457,7 +455,6 @@
     }
     .btn-official-green:active { transform: translateY(2px); }
 
-    /* كروت الألعاب والجوائز */
     .jackpot-card {
       background: linear-gradient(135deg, #451a03 0%, #1c0a00 100%);
       color: #ffffff;
@@ -522,61 +519,6 @@
     }
     .mystery-item:active { transform: scale(0.94); border-color: var(--accent-gold); }
 
-    /* باقات VIP */
-    .vip-tier-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 14px;
-      margin-bottom: 14px;
-      box-shadow: var(--shadow-sm);
-      position: relative;
-    }
-    .vip-badge-ribbon {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      font-size: 10px;
-      font-weight: 800;
-      padding: 2px 8px;
-      border-radius: 6px;
-    }
-    .vip-tier-title {
-      font-size: 14px;
-      font-weight: 800;
-      color: var(--text-dark);
-    }
-    .vip-tier-price {
-      font-size: 20px;
-      font-weight: 900;
-      color: var(--primary-green);
-      margin: 3px 0;
-    }
-    .vip-specs-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      background: #f8fafc;
-      padding: 8px;
-      border-radius: 8px;
-      font-size: 11px;
-      margin-bottom: 8px;
-    }
-    .vip-airdrop-perk {
-      background: #eef2ff;
-      border: 1px dashed #6366f1;
-      border-radius: 8px;
-      padding: 6px 10px;
-      font-size: 11px;
-      color: #3730a3;
-      font-weight: 700;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* شريط التنقل السفلي */
     .official-bottom-nav {
       position: fixed;
       bottom: 0;
@@ -625,7 +567,6 @@
     .tab-view { display: none; }
     .tab-view.active { display: block; }
 
-    /* النوافذ المنبثقة */
     .modal-backdrop-clean {
       position: fixed;
       inset: 0;
@@ -702,7 +643,6 @@
       line-height: 1.5;
     }
 
-    /* مشغل الإعلانات المؤكد المطور (Ad Verification Player) */
     .ad-player-box {
       background: #0f172a;
       border-radius: 14px;
@@ -744,7 +684,6 @@
   <div id="offline-banner">⚠️ انقطع الاتصال بالإنترنت.. جاري المحاولة تلقائياً</div>
   <div class="toast-clean" id="toastBox"></div>
 
-  <!-- الهيدر الرسمي -->
   <header class="top-header">
     <div class="header-icons">
       <button class="icon-btn-outline" onclick="openModal('supportModal')" title="الدعم الفني">
@@ -789,14 +728,12 @@
     </div>
   </header>
 
-  <!-- شريط السحوبات الحية -->
   <div class="ticker-bar">
     <div class="ticker-content" id="payoutTicker"></div>
   </div>
 
   <div class="container">
 
-    <!-- 1. التبويب الأول (الرئيسي): إنزال وتعدين عملة $SYC (Airdrop Hub) -->
     <main id="tab-airdrop" class="tab-view active">
       <div class="airdrop-hero-banner">
         <span class="airdrop-badge-top" data-i18n="air_season_badge">الموسم الأول (60 يوماً) 💎</span>
@@ -827,7 +764,7 @@
 
       <div class="mining-hub-card">
         <div style="font-size:12px; color:#4f46e5; font-weight:800;" data-i18n="syc_hub_title">محطة تعدين عملة الإنزال ($SYC Node 1) ⚡</div>
-        <div class="circle-mining-outer circle-syc-outer" onclick="clickSycStation()" title="اضغط لمضاعفة سرعة تعدين عملة المشروع">
+        <div class="circle-mining-outer circle-syc-outer" onclick="clickSycStation()">
           <div class="circle-mining-inner circle-syc-inner">
             <span style="font-size:24px;">💎</span>
             <span style="font-size:10px; font-weight:800; margin-top:2px;">تعدين $SYC</span>
@@ -837,7 +774,7 @@
         <div class="live-unclaimed-txt" style="color:#4f46e5;">
           $SYC +<span id="unclaimedSyc">0.45</span>
         </div>
-        <div style="font-size:11px; color:var(--text-muted); margin-top:3px;" data-i18n="syc_speed_lbl">سرعة التعدين: 15.0 $SYC / يوم (محدودة القيمة)</div>
+        <div style="font-size:11px; color:var(--text-muted); margin-top:3px;" data-i18n="syc_speed_lbl">سرعة التعدين: 15.0 $SYC / يوم</div>
 
         <button class="btn-official-green" style="background:linear-gradient(180deg,#4f46e5,#3730a3); margin-top:12px;" onclick="collectSycReward()">
           <span data-i18n="collect_syc_btn">جمع وتأكيد رصيد عملات ($SYC)</span>
@@ -849,7 +786,6 @@
       <div id="airdropTasksContainer" style="display:flex; flex-direction:column; gap:8px;"></div>
     </main>
 
-    <!-- 2. التبويب الثاني: تعدين الدولار الفوري (USDT Mining) -->
     <section id="tab-mining" class="tab-view">
       <div class="hero-banner">
         <div class="hero-title" data-i18n="hero_title">الرصيد الكلي القابل للسحب</div>
@@ -889,14 +825,14 @@
 
       <div class="mining-hub-card">
         <div style="font-size:12px; color:var(--text-muted); font-weight:700;" data-i18n="server_status">خادم تعدين الدولار (USDT Cloud 1) 🟢</div>
-        <div class="circle-mining-outer" onclick="clickMiningCircle()" title="اضغط لمشاهدة إعلان وزيادة الرصيد">
+        <div class="circle-mining-outer" onclick="clickMiningCircle()">
           <div class="circle-mining-inner">
             <span style="font-size:26px;">⚡</span>
             <span style="font-size:10px; font-weight:800; margin-top:2px;" data-i18n="active_mining">تعدين الدولار نشط</span>
           </div>
         </div>
         
-        <div onclick="clickCounterBox()" style="cursor:pointer;" title="اضغط لمكافأة إضافية">
+        <div onclick="clickCounterBox()" style="cursor:pointer;">
           <div class="live-unclaimed-txt">USDT +<span id="unclaimedBal">0.000600</span></div>
           <div style="font-size:12px; color:var(--text-muted); margin-top:3px;"><span data-i18n="cycle_timer">مؤقت الدورة</span>: <span id="liveSessionTimer">03:59:59</span> ⏱</div>
         </div>
@@ -908,11 +844,9 @@
       </div>
     </section>
 
-    <!-- 3. التبويب الثالث: الألعاب وتجديد المحاولات -->
     <section id="tab-games" class="tab-view">
       <div class="section-header" data-i18n="games_header">الألعاب وسحب الخزنة الكبرى الشهري</div>
       
-      <!-- السحب الشهري -->
       <div class="jackpot-card">
         <div style="font-size:11px; color:#fde68a; font-weight:bold;" data-i18n="vault_title">🔥 السحب الشهري على الخزنة الكبرى (Monthly Vault)</div>
         <div class="jackpot-val">$350.00 USDT</div>
@@ -922,7 +856,6 @@
         <button onclick="enterMonthlyVault()" class="btn-official-green" style="background:#fbbf24; color:#000;" data-i18n="vault_btn">مشاهدة إعلان للدخول بالسحب الشهري 🎟️</button>
       </div>
 
-      <!-- كرت امسح واربح -->
       <div class="mining-hub-card">
         <h3 style="color:var(--primary-green); font-size:15px;" data-i18n="scratch_title">🎟️ كرت (امسح واربح) 🪙</h3>
         <p style="color:var(--text-muted); font-size:11px; margin-top:2px;" data-i18n="scratch_desc">امسح بإصبعك على البطاقة واكشف هديتك فوراً!</p>
@@ -938,7 +871,6 @@
         <button onclick="newScratchCard()" class="btn-official-green" style="padding:10px; font-size:12px;" data-i18n="scratch_renew_btn">كرت جديد (مشاهدة إعلان مؤكد 🎬)</button>
       </div>
 
-      <!-- صناديق الحظ -->
       <div class="mining-hub-card">
         <h3 style="color:var(--accent-gold); font-size:15px;" data-i18n="boxes_title">🎁 صناديق الحظ الثلاثية</h3>
         <p style="color:var(--text-muted); font-size:11px; margin-top:2px;" data-i18n="boxes_desc">اختر أحد الصناديق لفتحه بالمفتاح الذهبي بعد مشاهدة إعلان!</p>
@@ -949,7 +881,6 @@
         </div>
       </div>
 
-      <!-- عجلة الحظ الكبرى مع زر تجديد اللفات -->
       <div class="mining-hub-card">
         <h3 style="color:var(--primary-green); font-size:15px;" data-i18n="wheel_title">🎡 عجلة الحظ الكبرى</h3>
         <div style="width:160px; height:160px; margin:12px auto; border-radius:50%; border:5px solid var(--primary-green); background:conic-gradient(#005a36 0deg 60deg, #3b82f6 60deg 120deg, #f59e0b 120deg 180deg, #ec4899 180deg 240deg, #10b981 240deg 360deg);" id="wheelSpinner"></div>
@@ -964,7 +895,6 @@
         </div>
       </div>
 
-      <!-- لعبة صائد العملات -->
       <div class="mining-hub-card">
         <h4 style="color:var(--primary-green);" data-i18n="tap_title">⛏️ لعبة صائد العملات (Tap Mining)</h4>
         <div onclick="tapMineGem()" style="width:70px; height:70px; margin:10px auto; border-radius:50%; background:#f0fdf4; border:2px solid var(--primary-green); display:flex; align-items:center; justify-content:center; font-size:30px; cursor:pointer;">💎</div>
@@ -975,7 +905,6 @@
       </div>
     </section>
 
-    <!-- 4. التبويب الرابع: المهام والإعلانات (ديناميكية بالكامل) -->
     <section id="tab-ads" class="tab-view">
       <div class="section-header" data-i18n="tasks_header">المهام الاجتماعية والرسمية</div>
       <div id="socialTasksContainer" style="display:flex; flex-direction:column; gap:8px; margin-bottom:14px;"></div>
@@ -984,7 +913,6 @@
       <div id="adsContainer25" style="display:flex; flex-direction:column; gap:8px;"></div>
     </section>
 
-    <!-- 5. التبويب الخامس: دعوة الأصدقاء -->
     <section id="tab-ref" class="tab-view">
       <div class="section-header" data-i18n="ref_header">برنامج دعوة الأصدقاء والوكالة</div>
       <div class="mining-hub-card" style="text-align:right;">
@@ -1001,7 +929,6 @@
       </div>
     </section>
 
-    <!-- 6. التبويب السادس: السحب المالي -->
     <section id="tab-withdraw" class="tab-view">
       <div class="section-header" data-i18n="withdraw_header">طلب سحب الأرباح المالي</div>
       <div class="mining-hub-card" style="text-align:right;">
@@ -1031,7 +958,6 @@
 
   </div>
 
-  <!-- نافذة مشغل الإعلانات المؤكد المطور (Ad Verification Player) -->
   <div class="modal-backdrop-clean" id="verifiedAdModal">
     <div class="modal-box-clean">
       <h3 style="color:var(--primary-green); font-size:16px; margin-bottom:4px;" id="adPlayerTitle">مشاهدة إعلان مدعوم</h3>
@@ -1048,14 +974,12 @@
         </div>
       </div>
 
-      <!-- الزر يظل معطلاً حتى ينتهي العد الصارم -->
       <button id="claimAdRewardBtn" class="btn-official-green" style="background:#64748b; cursor:not-allowed;" disabled>
         انتظر اكتمال الإعلان (8ث)...
       </button>
     </div>
   </div>
 
-  <!-- نافذة معلومات عنا الرسمية -->
   <div class="modal-backdrop-clean" id="aboutModal">
     <div class="modal-box-clean" style="text-align:right;">
       <div style="text-align:center;">
@@ -1083,7 +1007,6 @@
     </div>
   </div>
 
-  <!-- نافذة الدعم الفني -->
   <div class="modal-backdrop-clean" id="supportModal">
     <div class="modal-box-clean" style="text-align:right;">
       <h3 style="color:var(--primary-green); font-size:16px; margin-bottom:6px;">💬 الدعم الفني والإبلاغ عن مشكلة</h3>
@@ -1095,7 +1018,6 @@
     </div>
   </div>
 
-  <!-- شريط التنقل السفلي الفخم -->
   <nav class="official-bottom-nav">
     <div class="nav-link-btn active" onclick="navigate('tab-airdrop', this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -1140,11 +1062,10 @@
     </div>
   </nav>
 
-  <!-- المحرك البرمجي المتكامل ومحرك الترجمة اللحظية الصارم مع ربط Supabase السحابي -->
   <script>
-    // --- 0. إعدادات وقاعدة بيانات Supabase السحابية (مضافة بعناية ونظافة تامة) ---
+    // --- 0. إعدادات وقاعدة بيانات Supabase السحابية (محدثة بالمفتاح الحقيقي الصحيح) ---
     const SUPABASE_URL = 'https://tvypczferwkqnehhynwd.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publish_8M4imxTpGpHK9y4...'; // ضع المفتاح الكامل هنا
+    const SUPABASE_ANON_KEY = 'sb_publishable_8M4imxTpGpHK9y4sZjJhjQ_0ZEk3fZb';
     
     let _supabase = null;
     try {
@@ -1154,7 +1075,6 @@
       console.log('Supabase init error:', e);
     }
 
-    // دالة المزامنة السحابية لحفظ واسترجاع حسابات المستخدمين ومنع الاحتيال
     async function syncUserWithCloud() {
       if (!_supabase) return;
       try {
@@ -1192,7 +1112,6 @@
       }
     }
 
-    // --- 1. محرك الأصوات التفاعلي المدمج ---
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     function playSound(type) {
       try {
@@ -1234,7 +1153,6 @@
       } catch (e) {}
     }
 
-    // --- 2. قاموس اللغات الشامل الذي يترجم كل جزء بدقة ---
     const dict = {
       ar: {
         brand_sub: "المنظومة الرقمية للمعاملات والتعدين السحابي",
@@ -1435,7 +1353,6 @@
       localStorage.setItem('sc_lang', currentLang);
     }
 
-    // --- 3. نظام الإعلانات الصارم والمؤكد (Strict Ad Verification Player) ---
     let pendingRewardCallback = null;
     let adInterval = null;
 
@@ -1498,7 +1415,6 @@
       }
     };
 
-    // --- 4. إدارة الأرصدة والتعدين ---
     let totalBal = parseFloat(localStorage.getItem('sc_tot') || '0.2366');
     let sycTotal = parseFloat(localStorage.getItem('sc_syc_tot') || '240.50');
 
@@ -1536,7 +1452,6 @@
         `${h < 10 ? '0':''}${h}:${m < 10 ? '0':''}${m}:${s < 10 ? '0':''}${s}`;
     }, 1000);
 
-    // عداد الـ 60 يوماً التنازلي للإنزال الجوي
     function initAirdropCountdown() {
       let airdropEnd = localStorage.getItem('sc_airdrop_end');
       const totalDuration = 60 * 24 * 60 * 60 * 1000;
@@ -1578,7 +1493,6 @@
       setInterval(updateCountdown, 1000);
     }
 
-    // جمع أرباح الدولار
     function collectUsdtReward() {
       if (unclaimedBal <= 0.0001) return notify('رصيد الدولار المعدّن ضئيل حالياً!');
       playSound('win');
@@ -1591,7 +1505,6 @@
       localStorage.setItem('sc_uncl', unclaimedBal);
     }
 
-    // جمع أرباح $SYC
     function collectSycReward() {
       if (unclaimedSyc < 0.05) return notify('رصيد $SYC المعدّن ضئيل حالياً!');
       playSound('win');
@@ -1652,7 +1565,6 @@
       });
     }
 
-    // --- 5. الألعاب وتجديد المحاولات بالإعلانات المؤكدة ---
     let scratchCardAvailable = true;
     let currentScratchWon = { usdt: 0.025, syc: 5 };
 
@@ -1722,7 +1634,6 @@
       });
     }
 
-    // السحب الشهري
     let jackpotAdsWatched = parseInt(localStorage.getItem('sc_jackpot_ads') || '0');
     document.getElementById('jackpotAdsProgress').innerText = jackpotAdsWatched;
 
@@ -1754,7 +1665,6 @@
       });
     }
 
-    // إدارة عجلة الحظ وتجديد المحاولات
     let spinsLeft = parseInt(localStorage.getItem('sc_wheel_spins') || '3');
     document.getElementById('spinsLeft').innerText = spinsLeft;
 
@@ -1792,7 +1702,6 @@
       });
     }
 
-    // لعبة النقر وتجديد الطاقة
     let tapCount = 0;
     let tapEnergy = 50;
     function tapMineGem() {
@@ -1825,7 +1734,6 @@
       });
     }
 
-    // --- 6. توليد المهام الاجتماعية ومهام الإنزال والإعلانات حسب اللغة ---
     function renderSocialTasks(lang) {
       const c = document.getElementById('socialTasksContainer');
       const isAr = lang === 'ar';
@@ -1981,7 +1889,6 @@
       });
     }
 
-    // --- 7. طرق السحب المالي ---
     function updateWithdrawFields(method) {
       const c = document.getElementById('dynamicWithdrawFields');
       if (method === 'usdt') {
@@ -2014,7 +1921,6 @@
       alert(`✅ تم تأكيد طلب السحب بمبلغ ${amt} USDT وسيتم تنفيذه فوراً!\nالرسوم: 0% لمشتركي VIP.`);
     }
 
-    // --- 8. أدوات المودال والتنقل ---
     function copyLink() {
       navigator.clipboard.writeText('https://wael99998.github.io/?ref=78214');
       notify('تم نسخ رابط الإحالة الرسمي 📋');
