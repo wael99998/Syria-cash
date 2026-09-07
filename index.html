@@ -48,6 +48,110 @@
       min-height: 100vh;
     }
 
+    /* واجهة البداية بالعلم السوري لمدة 3 ثوانٍ */
+    #appSplashScreen {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, #00462a 0%, #001a10 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 999999;
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
+    }
+
+    .splash-container {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: splashPop 0.8s ease-out forwards;
+    }
+
+    .splash-flag-badge {
+      width: 95px;
+      height: 60px;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 245, 160, 0.2);
+      margin-bottom: 16px;
+      animation: floatFlag 2.4s ease-in-out infinite alternate;
+    }
+
+    .splash-flag-green { background: #007a3d; height: 33.3%; }
+    .splash-flag-white { 
+      background: #ffffff; 
+      height: 33.3%; 
+      display: flex; 
+      justify-content: space-evenly; 
+      align-items: center; 
+      padding: 0 8px;
+    }
+    .splash-flag-black { background: #000000; height: 33.4%; }
+
+    .splash-star {
+      color: #ce1126;
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .splash-app-title {
+      font-size: 26px;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: 1.5px;
+      margin-bottom: 4px;
+    }
+
+    .splash-app-title span {
+      color: var(--accent-gold);
+    }
+
+    .splash-sub-title {
+      font-size: 11px;
+      color: #a7f3d0;
+      font-weight: 600;
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+    }
+
+    .splash-loader-bar-bg {
+      width: 170px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .splash-loader-bar-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #38bdf8, var(--accent-gold), #00f5a0);
+      border-radius: 10px;
+      animation: splashFill 2.7s ease-in-out forwards;
+    }
+
+    @keyframes splashPop {
+      0% { opacity: 0; transform: scale(0.85); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes floatFlag {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-6px) scale(1.03); }
+    }
+
+    @keyframes splashFill {
+      0% { width: 0%; }
+      60% { width: 75%; }
+      100% { width: 100%; }
+    }
+
     #offline-banner {
       display: none;
       position: fixed;
@@ -195,7 +299,6 @@
       margin: 0 auto;
     }
 
-    /* بنر الـ Airdrop */
     .airdrop-hero-banner {
       background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
       color: #ffffff;
@@ -265,7 +368,6 @@
       transition: width 0.3s;
     }
 
-    /* بنر تعدين الدولار (USDT) */
     .hero-banner {
       background: linear-gradient(135deg, #005a36 0%, #003822 100%);
       color: #ffffff;
@@ -457,7 +559,6 @@
     }
     .btn-official-green:active { transform: translateY(2px); }
 
-    /* كروت الألعاب والجوائز */
     .jackpot-card {
       background: linear-gradient(135deg, #451a03 0%, #1c0a00 100%);
       color: #ffffff;
@@ -522,61 +623,6 @@
     }
     .mystery-item:active { transform: scale(0.94); border-color: var(--accent-gold); }
 
-    /* باقات VIP */
-    .vip-tier-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 14px;
-      margin-bottom: 14px;
-      box-shadow: var(--shadow-sm);
-      position: relative;
-    }
-    .vip-badge-ribbon {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      font-size: 10px;
-      font-weight: 800;
-      padding: 2px 8px;
-      border-radius: 6px;
-    }
-    .vip-tier-title {
-      font-size: 14px;
-      font-weight: 800;
-      color: var(--text-dark);
-    }
-    .vip-tier-price {
-      font-size: 20px;
-      font-weight: 900;
-      color: var(--primary-green);
-      margin: 3px 0;
-    }
-    .vip-specs-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      background: #f8fafc;
-      padding: 8px;
-      border-radius: 8px;
-      font-size: 11px;
-      margin-bottom: 8px;
-    }
-    .vip-airdrop-perk {
-      background: #eef2ff;
-      border: 1px dashed #6366f1;
-      border-radius: 8px;
-      padding: 6px 10px;
-      font-size: 11px;
-      color: #3730a3;
-      font-weight: 700;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* شريط التنقل السفلي */
     .official-bottom-nav {
       position: fixed;
       bottom: 0;
@@ -625,7 +671,6 @@
     .tab-view { display: none; }
     .tab-view.active { display: block; }
 
-    /* النوافذ المنبثقة */
     .modal-backdrop-clean {
       position: fixed;
       inset: 0;
@@ -740,10 +785,29 @@
 </head>
 <body>
 
+  <!-- شاشة البداية بالعلم السوري (3 ثوانٍ) -->
+  <div id="appSplashScreen">
+    <div class="splash-container">
+      <div class="splash-flag-badge">
+        <div class="splash-flag-green"></div>
+        <div class="splash-flag-white">
+          <span class="splash-star">★</span>
+          <span class="splash-star">★</span>
+          <span class="splash-star">★</span>
+        </div>
+        <div class="splash-flag-black"></div>
+      </div>
+      <h1 class="splash-app-title">SYRIA <span>CASH</span></h1>
+      <p class="splash-sub-title">المنظومة الرقمية للمعاملات والتعدين السحابي</p>
+      <div class="splash-loader-bar-bg">
+        <div class="splash-loader-bar-fill"></div>
+      </div>
+    </div>
+  </div>
+
   <div id="offline-banner">⚠️ انقطع الاتصال بالإنترنت.. جاري المحاولة تلقائياً</div>
   <div class="toast-clean" id="toastBox"></div>
 
-  <!-- الهيدر الرسمي -->
   <header class="top-header">
     <div class="header-icons">
       <button class="icon-btn-outline" onclick="openModal('supportModal')" title="الدعم الفني">
@@ -788,14 +852,12 @@
     </div>
   </header>
 
-  <!-- شريط السحوبات الحية -->
   <div class="ticker-bar">
     <div class="ticker-content" id="payoutTicker"></div>
   </div>
 
   <div class="container">
 
-    <!-- 1. التبويب الأول: إنزال وتعدين عملة $SYC -->
     <main id="tab-airdrop" class="tab-view active">
       <div class="airdrop-hero-banner">
         <span class="airdrop-badge-top" data-i18n="air_season_badge">الموسم الأول (60 يوماً) 💎</span>
@@ -836,7 +898,7 @@
         <div class="live-unclaimed-txt" style="color:#4f46e5;">
           $SYC +<span id="unclaimedSyc">0.45</span>
         </div>
-        <div style="font-size:11px; color:var(--text-muted); margin-top:3px;" data-i18n="syc_speed_lbl">سرعة التعدين: 15.0 $SYC / يوم (محدودة القيمة)</div>
+        <div style="font-size:11px; color:var(--text-muted); margin-top:3px;" data-i18n="syc_speed_lbl">سرعة التعدين: 15.0 $SYC / يوم</div>
 
         <button class="btn-official-green" style="background:linear-gradient(180deg,#4f46e5,#3730a3); margin-top:12px;" onclick="collectSycReward()">
           <span data-i18n="collect_syc_btn">جمع وتأكيد رصيد عملات ($SYC)</span>
@@ -848,7 +910,6 @@
       <div id="airdropTasksContainer" style="display:flex; flex-direction:column; gap:8px;"></div>
     </main>
 
-    <!-- 2. التبويب الثاني: تعدين الدولار الفوري -->
     <section id="tab-mining" class="tab-view">
       <div class="hero-banner">
         <div class="hero-title" data-i18n="hero_title">الرصيد الكلي القابل للسحب</div>
@@ -907,7 +968,6 @@
       </div>
     </section>
 
-    <!-- 3. التبويب الثالث: الألعاب -->
     <section id="tab-games" class="tab-view">
       <div class="section-header" data-i18n="games_header">الألعاب وسحب الخزنة الكبرى الشهري</div>
       
@@ -969,7 +1029,6 @@
       </div>
     </section>
 
-    <!-- 4. التبويب الرابع: المهام والإعلانات -->
     <section id="tab-ads" class="tab-view">
       <div class="section-header" data-i18n="tasks_header">المهام الاجتماعية والرسمية</div>
       <div id="socialTasksContainer" style="display:flex; flex-direction:column; gap:8px; margin-bottom:14px;"></div>
@@ -978,7 +1037,6 @@
       <div id="adsContainer25" style="display:flex; flex-direction:column; gap:8px;"></div>
     </section>
 
-    <!-- 5. التبويب الخامس: الإحالة -->
     <section id="tab-ref" class="tab-view">
       <div class="section-header" data-i18n="ref_header">برنامج دعوة الأصدقاء والوكالة</div>
       <div class="mining-hub-card" style="text-align:right;">
@@ -995,7 +1053,6 @@
       </div>
     </section>
 
-    <!-- 6. التبويب السادس: السحب -->
     <section id="tab-withdraw" class="tab-view">
       <div class="section-header" data-i18n="withdraw_header">طلب سحب الأرباح المالي</div>
       <div class="mining-hub-card" style="text-align:right;">
@@ -1119,7 +1176,7 @@
   </nav>
 
   <script>
-    // --- 0. إعدادات اتصال Supabase بالمفتاح الحقيقي الصحيح ---
+    // إعدادات اتصال Supabase السحابية
     const SUPABASE_URL = 'https://tvypczferwkqnehhynwd.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_8M4imxTpGpHK9y4sZjJhjQ_0ZEk3fZb';
     
@@ -1128,15 +1185,12 @@
       const { createClient } = supabase;
       _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     } catch(e) {
-      console.log('Supabase init error:', e);
+      console.error('Supabase init error:', e);
     }
 
-    // دالة المزامنة السحابية مزودة بتنبيه مرئي ومباشر على الشاشة لمعرفة النتيجة فوراً
+    // دالة المزامنة السحابية الذكية والشاملة لكافة الأرصدة واسم المستخدم
     async function syncUserWithCloud() {
-      if (!_supabase) {
-        alert("⚠️ لم يتم تفعيل مكتبة Supabase");
-        return;
-      }
+      if (!_supabase) return;
       try {
         let deviceId = localStorage.getItem('sc_device_id');
         if (!deviceId) {
@@ -1144,36 +1198,68 @@
           localStorage.setItem('sc_device_id', deviceId);
         }
 
-        const refCode = 'REF_' + Math.random().toString(36).substring(2, 8).toUpperCase();
+        const refCode = localStorage.getItem('sc_ref_code') || ('REF_' + Math.random().toString(36).substring(2, 8).toUpperCase());
+        localStorage.setItem('sc_ref_code', refCode);
 
-        // فحص هل المستخدم موجود بدون إيقاف الكود
-        let { data: existingUser, error: selectErr } = await _supabase
+        let { data: existingUser } = await _supabase
           .from('users')
           .select('*')
           .eq('device_id', deviceId)
           .maybeSingle();
 
         if (existingUser) {
-          alert("✅ تم التعرف على جهازك والاتصال بالسحابة بنجاح!");
+          // مقارنة الأرصدة واعتماد القيمة الأعلى دائماً لمنع أي فقدان للأرباح
+          const cloudUsdt = parseFloat(existingUser.balance || 0);
+          const cloudSyc = parseFloat(existingUser.syc_balance || 0);
+
+          totalBal = Math.max(totalBal, cloudUsdt);
+          sycTotal = Math.max(sycTotal, cloudSyc);
+
+          document.getElementById('totalBal').innerText = totalBal.toFixed(4);
+          document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
+
+          localStorage.setItem('sc_tot', totalBal);
+          localStorage.setItem('sc_syc_tot', sycTotal);
+
+          // تحديث السحابة بالرصيد الحقيقي واسم المستخدم المميز
+          const customName = 'مستخدم_' + (existingUser.referral_code || refCode).replace('REF_', '');
+          await _supabase.from('users').update({
+            username: customName,
+            balance: totalBal,
+            syc_balance: sycTotal
+          }).eq('device_id', deviceId);
+
         } else {
-          // تسجيل السجل الجديد مباشرة في جدول users
-          let { error: insertErr } = await _supabase.from('users').insert([
+          // إنشاء السجل الجديد لأول مرة
+          const customName = 'مستخدم_' + refCode.replace('REF_', '');
+          await _supabase.from('users').insert([
             {
-              username: 'مستخدم سوريا كاش',
+              username: customName,
               balance: totalBal,
+              syc_balance: sycTotal,
               device_id: deviceId,
               referral_code: refCode
             }
           ]);
-
-          if (insertErr) {
-            alert("❌ خطأ من قاعدة البيانات: " + insertErr.message);
-          } else {
-            alert("🎉 ألف مبروك! تم تسجيل جهازك وإرسال بياناتك لقاعدة البيانات بنجاح!");
-          }
         }
       } catch (err) {
-        alert("❌ استثناء غير متوقع: " + err.message);
+        console.error('Cloud sync error:', err);
+      }
+    }
+
+    // دالة تحديث الرصيدين في Supabase لحظياً عند كل عملية ربح
+    async function updateCloudBalances(newUsdt, newSyc) {
+      if (!_supabase) return;
+      try {
+        const deviceId = localStorage.getItem('sc_device_id');
+        if (deviceId) {
+          await _supabase.from('users').update({ 
+            balance: newUsdt,
+            syc_balance: newSyc 
+          }).eq('device_id', deviceId);
+        }
+      } catch (err) {
+        console.error('Cloud update error:', err);
       }
     }
 
@@ -1568,6 +1654,7 @@
       document.getElementById('unclaimedBal').innerText = unclaimedBal.toFixed(6);
       localStorage.setItem('sc_tot', totalBal);
       localStorage.setItem('sc_uncl', unclaimedBal);
+      updateCloudBalances(totalBal, sycTotal);
     }
 
     function collectSycReward() {
@@ -1580,6 +1667,7 @@
       document.getElementById('unclaimedSyc').innerText = unclaimedSyc.toFixed(2);
       localStorage.setItem('sc_syc_tot', sycTotal);
       localStorage.setItem('sc_uncl_syc', unclaimedSyc);
+      updateCloudBalances(totalBal, sycTotal);
     }
 
     function clickMiningCircle() {
@@ -1600,8 +1688,10 @@
 
     function clickSycStation() {
       playVerifiedAd('تسريع تعدين عملة $SYC', 'شاهد الإعلان كاملاً لتأكيد إضافة عملات المنصة النادرة...', 8, () => {
-        unclaimedSyc += 5;
-        document.getElementById('unclaimedSyc').innerText = unclaimedSyc.toFixed(2);
+        sycTotal += 5;
+        document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
+        localStorage.setItem('sc_syc_tot', sycTotal);
+        updateCloudBalances(totalBal, sycTotal);
         notify('🎉 تمت إضافة +5.00 $SYC بنجاح!');
       });
     }
@@ -1677,6 +1767,7 @@
           document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
           localStorage.setItem('sc_tot', totalBal);
           localStorage.setItem('sc_syc_tot', sycTotal);
+          updateCloudBalances(totalBal, sycTotal);
           notify(`🎉 كشفت الجائزة: +${currentScratchWon.usdt} USDT و +${currentScratchWon.syc} $SYC`);
         }
       }
@@ -1726,6 +1817,7 @@
         document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
         localStorage.setItem('sc_tot', totalBal);
         localStorage.setItem('sc_syc_tot', sycTotal);
+        updateCloudBalances(totalBal, sycTotal);
         notify(`🎉 ربحت من الصندوق ${num}: +0.025 USDT و +4 $SYC!`);
       });
     }
@@ -1753,6 +1845,7 @@
         document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
         localStorage.setItem('sc_tot', totalBal);
         localStorage.setItem('sc_syc_tot', sycTotal);
+        updateCloudBalances(totalBal, sycTotal);
         playSound('win');
         alert('🎉 مبروك! ربحت +0.025 USDT و +5 $SYC من عجلة الحظ!');
       }, 3100);
@@ -1787,6 +1880,7 @@
           document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
           localStorage.setItem('sc_tot', totalBal);
           localStorage.setItem('sc_syc_tot', sycTotal);
+          updateCloudBalances(totalBal, sycTotal);
           notify('💎 مبروك! كسبت +0.02 USDT و +6 $SYC!');
         });
       }
@@ -1922,6 +2016,7 @@
         totalBal += parseFloat(reward);
         document.getElementById('totalBal').innerText = totalBal.toFixed(4);
         localStorage.setItem('sc_tot', totalBal);
+        updateCloudBalances(totalBal, sycTotal);
         btn.disabled = true;
         btn.innerText = 'مكتملة ✓';
         btn.style.background = '#15803d';
@@ -1935,6 +2030,7 @@
         sycTotal += rewardSyc;
         document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
         localStorage.setItem('sc_syc_tot', sycTotal);
+        updateCloudBalances(totalBal, sycTotal);
         btn.disabled = true;
         btn.innerText = 'مكتملة ✓';
         btn.style.background = '#15803d';
@@ -1947,6 +2043,7 @@
         totalBal += parseFloat(reward);
         document.getElementById('totalBal').innerText = totalBal.toFixed(4);
         localStorage.setItem('sc_tot', totalBal);
+        updateCloudBalances(totalBal, sycTotal);
         btn.disabled = true;
         btn.innerText = 'مكتملة ✓';
         btn.style.background = '#15803d';
@@ -1982,6 +2079,7 @@
       totalBal -= amt;
       document.getElementById('totalBal').innerText = totalBal.toFixed(4);
       localStorage.setItem('sc_tot', totalBal);
+      updateCloudBalances(totalBal, sycTotal);
 
       alert(`✅ تم تأكيد طلب السحب بمبلغ ${amt} USDT وسيتم تنفيذه فوراً!\nالرسوم: 0% لمشتركي VIP.`);
     }
@@ -2028,14 +2126,22 @@
       setTimeout(() => { b.style.display = 'none'; }, 2400);
     }
 
-    // التشغيل التلقائي عند التحميل
     window.addEventListener('DOMContentLoaded', () => {
+      // إخفاء واجهة البداية بعد 3 ثوانٍ تماماً
+      setTimeout(() => {
+        const splash = document.getElementById('appSplashScreen');
+        if (splash) {
+          splash.style.opacity = '0';
+          setTimeout(() => splash.remove(), 600);
+        }
+      }, 3000);
+
       makeTicker();
       updateWithdrawFields('usdt');
       initScratchCard();
       initAirdropCountdown();
 
-      // تشغيل المزامنة السحابية مع Supabase
+      // تشغيل المزامنة وحفظ الرصيدين في Supabase
       syncUserWithCloud();
 
       const savedLang = localStorage.getItem('sc_lang') || 'ar';
