@@ -195,6 +195,7 @@
       margin: 0 auto;
     }
 
+    /* بنر الـ Airdrop */
     .airdrop-hero-banner {
       background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
       color: #ffffff;
@@ -264,6 +265,7 @@
       transition: width 0.3s;
     }
 
+    /* بنر تعدين الدولار (USDT) */
     .hero-banner {
       background: linear-gradient(135deg, #005a36 0%, #003822 100%);
       color: #ffffff;
@@ -455,6 +457,7 @@
     }
     .btn-official-green:active { transform: translateY(2px); }
 
+    /* كروت الألعاب والجوائز */
     .jackpot-card {
       background: linear-gradient(135deg, #451a03 0%, #1c0a00 100%);
       color: #ffffff;
@@ -519,6 +522,61 @@
     }
     .mystery-item:active { transform: scale(0.94); border-color: var(--accent-gold); }
 
+    /* باقات VIP */
+    .vip-tier-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+    .vip-badge-ribbon {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+    .vip-tier-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+    .vip-tier-price {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--primary-green);
+      margin: 3px 0;
+    }
+    .vip-specs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      background: #f8fafc;
+      padding: 8px;
+      border-radius: 8px;
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
+    .vip-airdrop-perk {
+      background: #eef2ff;
+      border: 1px dashed #6366f1;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 11px;
+      color: #3730a3;
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* شريط التنقل السفلي */
     .official-bottom-nav {
       position: fixed;
       bottom: 0;
@@ -567,6 +625,7 @@
     .tab-view { display: none; }
     .tab-view.active { display: block; }
 
+    /* النوافذ المنبثقة */
     .modal-backdrop-clean {
       position: fixed;
       inset: 0;
@@ -684,6 +743,7 @@
   <div id="offline-banner">⚠️ انقطع الاتصال بالإنترنت.. جاري المحاولة تلقائياً</div>
   <div class="toast-clean" id="toastBox"></div>
 
+  <!-- الهيدر الرسمي -->
   <header class="top-header">
     <div class="header-icons">
       <button class="icon-btn-outline" onclick="openModal('supportModal')" title="الدعم الفني">
@@ -728,12 +788,14 @@
     </div>
   </header>
 
+  <!-- شريط السحوبات الحية -->
   <div class="ticker-bar">
     <div class="ticker-content" id="payoutTicker"></div>
   </div>
 
   <div class="container">
 
+    <!-- 1. التبويب الأول: إنزال وتعدين عملة $SYC -->
     <main id="tab-airdrop" class="tab-view active">
       <div class="airdrop-hero-banner">
         <span class="airdrop-badge-top" data-i18n="air_season_badge">الموسم الأول (60 يوماً) 💎</span>
@@ -774,7 +836,7 @@
         <div class="live-unclaimed-txt" style="color:#4f46e5;">
           $SYC +<span id="unclaimedSyc">0.45</span>
         </div>
-        <div style="font-size:11px; color:var(--text-muted); margin-top:3px;" data-i18n="syc_speed_lbl">سرعة التعدين: 15.0 $SYC / يوم</div>
+        <div style="font-size:11px; color:var(--text-muted); margin-top:3px;" data-i18n="syc_speed_lbl">سرعة التعدين: 15.0 $SYC / يوم (محدودة القيمة)</div>
 
         <button class="btn-official-green" style="background:linear-gradient(180deg,#4f46e5,#3730a3); margin-top:12px;" onclick="collectSycReward()">
           <span data-i18n="collect_syc_btn">جمع وتأكيد رصيد عملات ($SYC)</span>
@@ -786,6 +848,7 @@
       <div id="airdropTasksContainer" style="display:flex; flex-direction:column; gap:8px;"></div>
     </main>
 
+    <!-- 2. التبويب الثاني: تعدين الدولار الفوري -->
     <section id="tab-mining" class="tab-view">
       <div class="hero-banner">
         <div class="hero-title" data-i18n="hero_title">الرصيد الكلي القابل للسحب</div>
@@ -844,6 +907,7 @@
       </div>
     </section>
 
+    <!-- 3. التبويب الثالث: الألعاب -->
     <section id="tab-games" class="tab-view">
       <div class="section-header" data-i18n="games_header">الألعاب وسحب الخزنة الكبرى الشهري</div>
       
@@ -905,6 +969,7 @@
       </div>
     </section>
 
+    <!-- 4. التبويب الرابع: المهام والإعلانات -->
     <section id="tab-ads" class="tab-view">
       <div class="section-header" data-i18n="tasks_header">المهام الاجتماعية والرسمية</div>
       <div id="socialTasksContainer" style="display:flex; flex-direction:column; gap:8px; margin-bottom:14px;"></div>
@@ -913,6 +978,7 @@
       <div id="adsContainer25" style="display:flex; flex-direction:column; gap:8px;"></div>
     </section>
 
+    <!-- 5. التبويب الخامس: الإحالة -->
     <section id="tab-ref" class="tab-view">
       <div class="section-header" data-i18n="ref_header">برنامج دعوة الأصدقاء والوكالة</div>
       <div class="mining-hub-card" style="text-align:right;">
@@ -929,6 +995,7 @@
       </div>
     </section>
 
+    <!-- 6. التبويب السادس: السحب -->
     <section id="tab-withdraw" class="tab-view">
       <div class="section-header" data-i18n="withdraw_header">طلب سحب الأرباح المالي</div>
       <div class="mining-hub-card" style="text-align:right;">
@@ -989,18 +1056,7 @@
       </div>
 
       <div style="font-size:12px; color:var(--text-dark); line-height:1.7; margin-bottom:14px;">
-        شركة <b>Syria Cash</b> هي منظومة تقنية متكاملة تهدف إلى تمكين المستخدمين في سوريا وحول العالم من تحقيق دخل رقمي حقيقي وموثوق بالدولار المشفر (USDT) والمشاركة في الفرص المبكرة لمشاريع البلوكشين.
-      </div>
-
-      <div style="font-size:12px; font-weight:800; color:var(--primary-green); margin-bottom:6px;">🚀 خارطة الطريق الرسمية (Roadmap):</div>
-      <div class="about-roadmap-step">
-        <b>المرحلة 1 (الحالية):</b> إطلاق خوادم التعدين السحابي، بدء الموسم الأول لإنزال عملة $SYC (60 يوماً)، وتفعيل السحب الفوري عبر شام كاش والبنوك التركية والمحافظ الرقمية.
-      </div>
-      <div class="about-roadmap-step">
-        <b>المرحلة 2 (القادمة):</b> إتمام توزيع الإنزال الجوي وتحويل $SYC إلى USDT مباشرة، وإطلاق منصة التداول الداخلي بين الأعضاء.
-      </div>
-      <div class="about-roadmap-step">
-        <b>المرحلة 3 (المستقبلية):</b> التوسع بإطلاق <b>عدة تطبيقات خدمية ومنصات تسوق إلكترونية تابعة</b> توفر مصادر دخل إضافية وفرص عمل رقمية كبرى لمجتمعنا العربي والعالمي!
+        شركة <b>Syria Cash</b> هي منظومة تقنية متكاملة تهدف إلى تمكين المستخدمين في سوريا وحول العالم من تحقيق دخل رقمي حقيقي وموثوق بالدولار المشفر (USDT).
       </div>
 
       <button class="btn-official-green" style="margin-top:14px; padding:10px;" onclick="closeModal('aboutModal')">إغلاق النافذة</button>
@@ -1063,7 +1119,7 @@
   </nav>
 
   <script>
-    // --- 0. إعدادات وقاعدة بيانات Supabase السحابية (محدثة بالمفتاح الحقيقي الصحيح) ---
+    // --- 0. إعدادات اتصال Supabase بالمفتاح الحقيقي الصحيح ---
     const SUPABASE_URL = 'https://tvypczferwkqnehhynwd.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_8M4imxTpGpHK9y4sZjJhjQ_0ZEk3fZb';
     
@@ -1075,30 +1131,33 @@
       console.log('Supabase init error:', e);
     }
 
+    // دالة المزامنة السحابية مزودة بتنبيه مرئي ومباشر على الشاشة لمعرفة النتيجة فوراً
     async function syncUserWithCloud() {
-      if (!_supabase) return;
+      if (!_supabase) {
+        alert("⚠️ لم يتم تفعيل مكتبة Supabase");
+        return;
+      }
       try {
         let deviceId = localStorage.getItem('sc_device_id');
         if (!deviceId) {
-          deviceId = 'dev_' + Math.random().toString(36).substring(2, 15);
+          deviceId = 'dev_' + Math.random().toString(36).substring(2, 12);
           localStorage.setItem('sc_device_id', deviceId);
         }
 
-        let { data: existingUser, error } = await _supabase
+        const refCode = 'REF_' + Math.random().toString(36).substring(2, 8).toUpperCase();
+
+        // فحص هل المستخدم موجود بدون إيقاف الكود
+        let { data: existingUser, error: selectErr } = await _supabase
           .from('users')
           .select('*')
           .eq('device_id', deviceId)
-          .single();
+          .maybeSingle();
 
         if (existingUser) {
-          if (existingUser.balance !== null && existingUser.balance !== undefined) {
-            totalBal = parseFloat(existingUser.balance);
-            document.getElementById('totalBal').innerText = totalBal.toFixed(4);
-            localStorage.setItem('sc_tot', totalBal);
-          }
+          alert("✅ تم التعرف على جهازك والاتصال بالسحابة بنجاح!");
         } else {
-          const refCode = 'REF_' + Math.random().toString(36).substring(2, 8).toUpperCase();
-          await _supabase.from('users').insert([
+          // تسجيل السجل الجديد مباشرة في جدول users
+          let { error: insertErr } = await _supabase.from('users').insert([
             {
               username: 'مستخدم سوريا كاش',
               balance: totalBal,
@@ -1106,9 +1165,15 @@
               referral_code: refCode
             }
           ]);
+
+          if (insertErr) {
+            alert("❌ خطأ من قاعدة البيانات: " + insertErr.message);
+          } else {
+            alert("🎉 ألف مبروك! تم تسجيل جهازك وإرسال بياناتك لقاعدة البيانات بنجاح!");
+          }
         }
       } catch (err) {
-        console.log('Cloud sync status:', err);
+        alert("❌ استثناء غير متوقع: " + err.message);
       }
     }
 
