@@ -60,7 +60,7 @@
       z-index: 10000;
     }
 
-    /* الهيدر الرسمي العصري */
+    /* الهيدر العصري الفخم */
     .top-header {
       background: #ffffff;
       border-bottom: 1px solid var(--border-color);
@@ -142,7 +142,7 @@
       margin-top: -2px;
     }
 
-    /* العلم السوري الأخضر الرسمي */
+    /* العلم السوري الأخضر ذو النجوم الثلاث فقط */
     .syria-flag-badge {
       width: 22px;
       height: 14px;
@@ -194,7 +194,78 @@
       margin: 0 auto;
     }
 
-    /* بنر الرصيد الأساسي (USDT) */
+    /* بنر الـ Airdrop الأول والمسيطر */
+    .airdrop-hero-banner {
+      background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+      color: #ffffff;
+      border: 2px solid #818cf8;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25);
+      position: relative;
+    }
+    .airdrop-badge-top {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: #6366f1;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 900;
+      padding: 3px 10px;
+      border-radius: 8px;
+    }
+    .airdrop-balance-big {
+      font-size: 34px;
+      font-weight: 900;
+      color: #38bdf8;
+      margin: 6px 0;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    /* مؤقت الـ 60 يوماً التنازلي الدقيق */
+    .airdrop-timer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      text-align: center;
+      margin: 12px 0 10px 0;
+    }
+    .time-slot {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 6px 2px;
+    }
+    .time-num {
+      font-size: 17px;
+      font-weight: 900;
+      color: #fde047;
+    }
+    .time-lbl {
+      font-size: 9px;
+      color: #cbd5e1;
+    }
+    .airdrop-progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .airdrop-progress-fill {
+      width: 4%;
+      height: 100%;
+      background: linear-gradient(90deg, #38bdf8, #00f5a0);
+      border-radius: 10px;
+      transition: width 0.3s;
+    }
+
+    /* بنر رصيد الدولار (USDT) */
     .hero-banner {
       background: linear-gradient(135deg, #005a36 0%, #003822 100%);
       color: #ffffff;
@@ -238,77 +309,6 @@
       margin-top: 6px;
       display: flex;
       justify-content: space-between;
-    }
-
-    /* بنر تبويب الـ Airdrop المستقل */
-    .airdrop-hero-banner {
-      background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
-      color: #ffffff;
-      border: 2px solid #818cf8;
-      border-radius: 18px;
-      padding: 18px;
-      margin-bottom: 16px;
-      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25);
-      position: relative;
-    }
-    .airdrop-badge-top {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      background: #6366f1;
-      color: #fff;
-      font-size: 10px;
-      font-weight: 900;
-      padding: 3px 8px;
-      border-radius: 6px;
-    }
-    .airdrop-balance-big {
-      font-size: 32px;
-      font-weight: 900;
-      color: #38bdf8;
-      margin: 6px 0;
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
-    }
-
-    /* مؤقت الـ 60 يوماً التنازلي المطور */
-    .airdrop-timer-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
-      text-align: center;
-      margin: 12px 0 10px 0;
-    }
-    .time-slot {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 8px;
-      padding: 6px 2px;
-    }
-    .time-num {
-      font-size: 16px;
-      font-weight: 900;
-      color: #fde047;
-    }
-    .time-lbl {
-      font-size: 9px;
-      color: #cbd5e1;
-    }
-    .airdrop-progress-bar-bg {
-      width: 100%;
-      height: 8px;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
-      overflow: hidden;
-      margin-top: 8px;
-    }
-    .airdrop-progress-fill {
-      width: 5%;
-      height: 100%;
-      background: linear-gradient(90deg, #38bdf8, #00f5a0);
-      border-radius: 10px;
-      transition: width 0.3s;
     }
 
     .section-header {
@@ -386,7 +386,7 @@
       border-radius: 10px;
     }
 
-    /* مركز التعدين الأبيض النظيف */
+    /* مراكز التعدين */
     .mining-hub-card {
       background: #ffffff;
       border: 1px solid #e2e8f0;
@@ -423,10 +423,7 @@
       animation: cancelSpin 12s linear infinite;
     }
 
-    /* دائرة تعدين عملة SYC الخاصة */
-    .circle-syc-outer {
-      border-color: #6366f1;
-    }
+    .circle-syc-outer { border-color: #6366f1; }
     .circle-syc-inner {
       background: linear-gradient(135deg, #4f46e5, #312e81);
       box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
@@ -459,11 +456,9 @@
       box-shadow: 0 4px 12px rgba(0, 90, 54, 0.2);
       transition: all 0.15s;
     }
-    .btn-official-green:active {
-      transform: translateY(2px);
-    }
+    .btn-official-green:active { transform: translateY(2px); }
 
-    /* كروت الألعاب (امسح واربح + الجاكبوت) */
+    /* كروت الألعاب */
     .jackpot-card {
       background: linear-gradient(135deg, #451a03 0%, #1c0a00 100%);
       color: #ffffff;
@@ -499,7 +494,7 @@
       justify-content: center;
       font-weight: 900;
       color: var(--primary-green);
-      font-size: 17px;
+      font-size: 16px;
     }
     #scratchCanvas {
       position: absolute;
@@ -526,13 +521,13 @@
     }
     .mystery-item:active { transform: scale(0.94); border-color: var(--accent-gold); }
 
-    /* باقات VIP */
+    /* باقات VIP مع مكافأة الـ SYC الحصرية الضخمة */
     .vip-tier-card {
       background: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 16px;
       padding: 14px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       box-shadow: var(--shadow-sm);
       position: relative;
     }
@@ -564,7 +559,20 @@
       padding: 8px;
       border-radius: 8px;
       font-size: 11px;
+      margin-bottom: 8px;
+    }
+    .vip-airdrop-perk {
+      background: #eef2ff;
+      border: 1px dashed #6366f1;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 11px;
+      color: #3730a3;
+      font-weight: 700;
       margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     /* شريط التنقل السفلي الفخم */
@@ -671,6 +679,28 @@
       z-index: 1000;
       box-shadow: 0 4px 14px rgba(0,0,0,0.15);
     }
+
+    /* ستايل نافذة معلومات عنا الاحترافية التفاعلية */
+    .about-card-badge {
+      display: inline-block;
+      background: #e6f4ea;
+      color: #0d652d;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .about-roadmap-step {
+      background: #f8fafc;
+      border-right: 3px solid var(--primary-green);
+      border-radius: 6px;
+      padding: 8px 10px;
+      margin-bottom: 6px;
+      text-align: right;
+      font-size: 11px;
+      line-height: 1.5;
+    }
   </style>
 </head>
 <body>
@@ -678,16 +708,16 @@
   <div id="offline-banner">⚠️ انقطع الاتصال بالإنترنت.. جاري المحاولة تلقائياً</div>
   <div class="toast-clean" id="toastBox"></div>
 
-  <!-- الهيدر الرسمي المودرن -->
+  <!-- الهيدر الرسمي -->
   <header class="top-header">
     <div class="header-icons">
-      <button class="icon-btn-outline" onclick="openModal('supportModal')" title="الدعم">
+      <button class="icon-btn-outline" onclick="openModal('supportModal')" title="الدعم الفني">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="18" height="18">
           <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
           <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
         </svg>
       </button>
-      <button class="icon-btn-outline" onclick="openModal('aboutModal')" title="معلومات عنا">
+      <button class="icon-btn-outline" onclick="openModal('aboutModal')" title="عن المنصة">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="18" height="18">
           <circle cx="12" cy="12" r="10"></circle>
           <line x1="12" y1="16" x2="12" y2="12"></line>
@@ -733,68 +763,8 @@
 
   <div class="container">
 
-    <!-- 1. التبويب الأول: تعدين الدولار الأساسي (USDT Mining) -->
-    <main id="tab-mining" class="tab-view active">
-      <div class="hero-banner">
-        <div class="hero-title" data-i18n="hero_title">الرصيد الكلي القابل للسحب</div>
-        <div class="hero-balance">
-          <span id="totalBal">0.2366</span>
-          <small>USDT</small>
-        </div>
-        <div class="hero-meta">
-          <span><span data-i18n="speed">السرعة</span>: <b id="speedDisplay" style="color:#a7f3d0;">1.0 MH/s</b></span>
-          <span><span data-i18n="prod">الإنتاج اليومي</span>: <b>0.48 $/يوم</b></span>
-        </div>
-      </div>
-
-      <div class="section-header" data-i18n="services_header">الخدمات السحابية الرقمية</div>
-      <div class="services-grid-2">
-        <div class="service-card" onclick="navigate('tab-withdraw', document.querySelectorAll('.nav-link-btn')[5])">
-          <div class="service-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
-              <line x1="1" y1="10" x2="23" y2="10"></line>
-            </svg>
-          </div>
-          <div class="service-title" data-i18n="withdraw_nav">سحب الأرباح</div>
-          <span class="service-badge">شام كاش / بنوك / TRC20</span>
-        </div>
-
-        <div class="service-card" onclick="triggerBoost()">
-          <div class="service-icon-wrap" style="background:#fef3c7; border-color:#fde68a; color:var(--accent-gold);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-            </svg>
-          </div>
-          <div class="service-title" data-i18n="boost_btn">مضاعفة السرعة 2X</div>
-          <span class="service-badge" id="boostBadge" style="background:#fef3c7; color:#b45309;" data-i18n="available">متاح الآن</span>
-        </div>
-      </div>
-
-      <!-- مركز تعدين USDT المستقل -->
-      <div class="mining-hub-card">
-        <div style="font-size:12px; color:var(--text-muted); font-weight:700;" data-i18n="server_status">خادم تعدين الدولار (USDT Cloud 1) 🟢</div>
-        <div class="circle-mining-outer" onclick="clickMiningCircle()" title="اضغط لمشاهدة إعلان وزيادة الرصيد">
-          <div class="circle-mining-inner">
-            <span style="font-size:26px;">⚡</span>
-            <span style="font-size:10px; font-weight:800; margin-top:2px;" data-i18n="active_mining">تعدين الدولار نشط</span>
-          </div>
-        </div>
-        
-        <div onclick="clickCounterBox()" style="cursor:pointer;" title="اضغط لمكافأة إضافية">
-          <div class="live-unclaimed-txt">USDT +<span id="unclaimedBal">0.000600</span></div>
-          <div style="font-size:12px; color:var(--text-muted); margin-top:3px;"><span data-i18n="cycle_timer">مؤقت الدورة</span>: <span id="liveSessionTimer">03:59:59</span> ⏱</div>
-        </div>
-
-        <button class="btn-official-green" style="margin-top:14px;" onclick="collectUsdtReward()">
-          <span data-i18n="collect_btn">جمع وتأكيد أرباح الدولار (USDT)</span>
-          <span>👛</span>
-        </button>
-      </div>
-    </main>
-
-    <!-- 2. التبويب الثاني المستقل بالكامل: إنزال وتعدين عملة $SYC (Airdrop Hub) -->
-    <section id="tab-airdrop" class="tab-view">
+    <!-- 1. التبويب الأول (الواجهة الرئيسية): إنزال وتعدين عملة $SYC (Airdrop Hub) -->
+    <main id="tab-airdrop" class="tab-view active">
       <div class="airdrop-hero-banner">
         <span class="airdrop-badge-top">الموسم الأول (60 يوماً) 💎</span>
         <div style="font-size:12px; color:#c7d2fe; font-weight:bold;">رصيدك الإجمالي من عملة المنصة:</div>
@@ -803,7 +773,7 @@
           <small style="font-size:16px; color:#fbbf24;">$SYC</small>
         </div>
         <div style="font-size:11px; color:#e0e7ff; margin-bottom:8px;">
-          يتم تحويل كامل رصيدك تلقائياً إلى USDT وتوزيعه فور انتهاء العداد:
+          يتم تحويل وتوزيع كامل رصيدك تلقائياً إلى USDT فور انتهاء العداد:
         </div>
 
         <!-- عداد الـ 60 يوماً التنازلي التفاعلي -->
@@ -844,7 +814,7 @@
         </button>
       </div>
 
-      <!-- المهام الخاصة بالإنزال الجوي فقط -->
+      <!-- المهام الحصرية الخاصة بالإنزال الجوي -->
       <div class="section-header">مهام الإنزال الجوي الحصرية (كسب آلاف القطع)</div>
       <div style="display:flex; flex-direction:column; gap:8px;">
         <div style="background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:12px; display:flex; justify-content:space-between; align-items:center;">
@@ -878,6 +848,66 @@
           </div>
           <button class="btn-official-green" style="width:auto; padding:6px 12px; font-size:11px; background:#4f46e5;" onclick="copyLink()">مشاركة</button>
         </div>
+      </div>
+    </main>
+
+    <!-- 2. التبويب الثاني: تعدين الدولار الفوري (USDT Mining) -->
+    <section id="tab-mining" class="tab-view">
+      <div class="hero-banner">
+        <div class="hero-title" data-i18n="hero_title">الرصيد الكلي القابل للسحب</div>
+        <div class="hero-balance">
+          <span id="totalBal">0.2366</span>
+          <small>USDT</small>
+        </div>
+        <div class="hero-meta">
+          <span><span data-i18n="speed">السرعة</span>: <b id="speedDisplay" style="color:#a7f3d0;">1.0 MH/s</b></span>
+          <span><span data-i18n="prod">الإنتاج اليومي</span>: <b>0.48 $/يوم</b></span>
+        </div>
+      </div>
+
+      <div class="section-header" data-i18n="services_header">الخدمات السحابية الرقمية</div>
+      <div class="services-grid-2">
+        <div class="service-card" onclick="navigate('tab-withdraw', document.querySelectorAll('.nav-link-btn')[5])">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+              <line x1="1" y1="10" x2="23" y2="10"></line>
+            </svg>
+          </div>
+          <div class="service-title" data-i18n="withdraw_nav">سحب الأرباح</div>
+          <span class="service-badge">شام كاش / بنوك / TRC20</span>
+        </div>
+
+        <div class="service-card" onclick="triggerBoost()">
+          <div class="service-icon-wrap" style="background:#fef3c7; border-color:#fde68a; color:var(--accent-gold);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
+          <div class="service-title" data-i18n="boost_btn">مضاعفة السرعة 2X</div>
+          <span class="service-badge" id="boostBadge" style="background:#fef3c7; color:#b45309;" data-i18n="available">متاح الآن</span>
+        </div>
+      </div>
+
+      <!-- مركز تعدين USDT -->
+      <div class="mining-hub-card">
+        <div style="font-size:12px; color:var(--text-muted); font-weight:700;" data-i18n="server_status">خادم تعدين الدولار (USDT Cloud 1) 🟢</div>
+        <div class="circle-mining-outer" onclick="clickMiningCircle()" title="اضغط لمشاهدة إعلان وزيادة الرصيد">
+          <div class="circle-mining-inner">
+            <span style="font-size:26px;">⚡</span>
+            <span style="font-size:10px; font-weight:800; margin-top:2px;" data-i18n="active_mining">تعدين الدولار نشط</span>
+          </div>
+        </div>
+        
+        <div onclick="clickCounterBox()" style="cursor:pointer;" title="اضغط لمكافأة إضافية">
+          <div class="live-unclaimed-txt">USDT +<span id="unclaimedBal">0.000600</span></div>
+          <div style="font-size:12px; color:var(--text-muted); margin-top:3px;"><span data-i18n="cycle_timer">مؤقت الدورة</span>: <span id="liveSessionTimer">03:59:59</span> ⏱</div>
+        </div>
+
+        <button class="btn-official-green" style="margin-top:14px;" onclick="collectUsdtReward()">
+          <span data-i18n="collect_btn">جمع وتأكيد أرباح الدولار (USDT)</span>
+          <span>👛</span>
+        </button>
       </div>
     </section>
 
@@ -974,13 +1004,14 @@
       <div id="adsContainer25" style="display:flex; flex-direction:column; gap:8px;"></div>
     </section>
 
-    <!-- 5. تبويب VIP (الباقات الخمسة كاملة) -->
+    <!-- 5. تبويب VIP (الباقات الخمسة مع مكافآت الـ $SYC الحصرية) -->
     <section id="tab-vip" class="tab-view">
       <div class="section-header" data-i18n="vip_header">باقات التعدين السحابي المعتمدة VIP</div>
       <p style="font-size:11px; color:var(--text-muted); margin-bottom:12px;">
-        استأجر خوادم سحابية مخصصة، ضاعف أرباحك، واحصل على <b>سحب فوري بدون أي رسوم إطلاقاً (0% Fee)</b>.
+        استأجر خوادم سحابية مخصصة، ضاعف أرباحك، واحصل على <b>سحب فوري بدون أي رسوم إطلاقاً (0% Fee)</b> مع بونص ضخم من عملة المنصة!
       </p>
 
+      <!-- باقة 10$ -->
       <div class="vip-tier-card">
         <span class="vip-badge-ribbon" style="background:#fef3c7; color:#b45309;">برونزية 🥉</span>
         <div class="vip-tier-title">باقة VIP 1 البرونزية</div>
@@ -991,9 +1022,13 @@
           <div>📅 الربح الشهري: <b>18.00 $</b></div>
           <div>⚡ السحب: <b style="color:var(--primary-green);">فوري 0% رسوم</b></div>
         </div>
+        <div class="vip-airdrop-perk">
+          🎁 بونص إضافي: <b>+1,500 $SYC</b> فوراً + سرعة إنزال 1.5x!
+        </div>
         <button class="btn-official-green" onclick="openDepositModal('VIP 1 البرونزية', 10)">ترقية الباقة الآن (10$)</button>
       </div>
 
+      <!-- باقة 25$ -->
       <div class="vip-tier-card">
         <span class="vip-badge-ribbon" style="background:#e2e8f0; color:#475569;">فضية 🥈</span>
         <div class="vip-tier-title">باقة VIP 2 الفضية</div>
@@ -1004,9 +1039,13 @@
           <div>📅 الربح الشهري: <b>48.00 $</b></div>
           <div>⚡ السحب: <b style="color:var(--primary-green);">فوري 0% رسوم</b></div>
         </div>
+        <div class="vip-airdrop-perk">
+          🎁 بونص إضافي: <b>+4,000 $SYC</b> فوراً + سرعة إنزال 2.0x!
+        </div>
         <button class="btn-official-green" onclick="openDepositModal('VIP 2 الفضية', 25)">ترقية الباقة الآن (25$)</button>
       </div>
 
+      <!-- باقة 50$ -->
       <div class="vip-tier-card" style="border: 2px solid var(--accent-gold);">
         <span class="vip-badge-ribbon" style="background:#fef3c7; color:#b45309;">الأكثر طلباً ⭐</span>
         <div class="vip-tier-title">باقة VIP 3 الذهبية 🥇</div>
@@ -1017,9 +1056,13 @@
           <div>📅 الربح الشهري: <b>105.00 $</b></div>
           <div>⚡ السحب: <b style="color:var(--primary-green);">فوري 0% رسوم</b></div>
         </div>
+        <div class="vip-airdrop-perk" style="background:#fffbeb; border-color:#f59e0b; color:#92400e;">
+          👑 بونص ملكي: <b>+10,000 $SYC</b> فوراً + سرعة إنزال 3.0x!
+        </div>
         <button class="btn-official-green" style="background:var(--accent-gold);" onclick="openDepositModal('VIP 3 الذهبية', 50)">ترقية الباقة الآن (50$)</button>
       </div>
 
+      <!-- باقة 100$ -->
       <div class="vip-tier-card">
         <span class="vip-badge-ribbon" style="background:#e0f2fe; color:#0369a1;">بلاتينية 💠</span>
         <div class="vip-tier-title">باقة VIP 4 البلاتينية</div>
@@ -1030,9 +1073,13 @@
           <div>📅 الربح الشهري: <b>225.00 $</b></div>
           <div>⚡ السحب: <b style="color:var(--primary-green);">فوري 0% رسوم</b></div>
         </div>
+        <div class="vip-airdrop-perk">
+          🎁 بونص ضخم: <b>+25,000 $SYC</b> فوراً + سرعة إنزال 5.0x!
+        </div>
         <button class="btn-official-green" onclick="openDepositModal('VIP 4 البلاتينية', 100)">ترقية الباقة الآن (100$)</button>
       </div>
 
+      <!-- باقة 200$ -->
       <div class="vip-tier-card" style="border: 2px solid var(--primary-green);">
         <span class="vip-badge-ribbon" style="background:#dcfce7; color:#166534;">الماسية القصوى 👑</span>
         <div class="vip-tier-title">باقة VIP 5 الماسية 💎</div>
@@ -1042,6 +1089,9 @@
           <div>💵 الربح اليومي: <b>16.00 $</b></div>
           <div>📅 الربح الشهري: <b>480.00 $</b></div>
           <div>⚡ السحب: <b style="color:var(--primary-green);">فوري 0% رسوم + أولوية</b></div>
+        </div>
+        <div class="vip-airdrop-perk" style="background:#f0fdf4; border-color:#22c55e; color:#15803d;">
+          💎 حوت المنصة: <b>+60,000 $SYC</b> فوراً + سرعة إنزال 10.0x قصوى!
         </div>
         <button class="btn-official-green" onclick="openDepositModal('VIP 5 الماسية', 200)">ترقية الباقة الآن (200$)</button>
       </div>
@@ -1103,21 +1153,30 @@
     </div>
   </div>
 
-  <!-- نافذة معلومات عنا الأصلية -->
+  <!-- نافذة معلومات عنا الاحترافية الفخمة المطورة -->
   <div class="modal-backdrop-clean" id="aboutModal">
     <div class="modal-box-clean" style="text-align:right;">
-      <h3 style="color:var(--primary-green); font-size:16px; margin-bottom:8px;">ℹ️ عن شركة Syria Cash</h3>
-      <div style="font-size:12px; color:var(--text-dark); line-height:1.7;">
-        <p style="margin-bottom:8px;">
-          شركة <b>Syria Cash</b> هي منصة رائدة متخصصة في توفير حلول الربح من الإنترنت والتعدين السحابي للعملات الرقمية المشفرة (USDT). تم تصميم المنصة لتمكين كافة المستخدمين من تحقيق دخل رقمي حقيقي بأبسط الخطوات وبأعلى مستويات الأمان والموثوقية.
-        </p>
-        <p style="margin-bottom:8px; color:var(--accent-gold); font-weight:bold;">
-          🚀 خطط التوسع القادمة:
-        </p>
-        <p>
-          يسر إدارة Syria Cash الإعلان عن العمل حالياً على إطلاق وتطوير <b>عدة تطبيقات ومنصات إلكترونية تابعة</b> في المستقبل القريب، والتي ستوفر مصادر ربح متعددة، أسواق رقمية، وخيارات سحب أوسع لتحقيق أقصى استفادة لمجتمعنا العربي والعالمي!
-        </p>
+      <div style="text-align:center;">
+        <span class="about-card-badge">منظومة موثوقة ومحمية 🛡️</span>
+        <h3 style="color:var(--primary-green); font-size:17px; margin-bottom:4px;">عن منصة Syria Cash</h3>
+        <p style="font-size:11px; color:var(--text-muted); margin-bottom:12px;">البوابة الرقمية الرائدة للربح والتعدين السحابي للعملات المشفرة</p>
       </div>
+
+      <div style="font-size:12px; color:var(--text-dark); line-height:1.7; margin-bottom:14px;">
+        شركة <b>Syria Cash</b> هي منظومة تقنية متكاملة تهدف إلى تمكين المستخدمين في سوريا وحول العالم من تحقيق دخل رقمي حقيقي وموثوق بالدولار المشفر (USDT) والمشاركة في الفرص المبكرة لمشاريع البلوكشين.
+      </div>
+
+      <div style="font-size:12px; font-weight:800; color:var(--primary-green); margin-bottom:6px;">🚀 خارطة الطريق الرسمية (Roadmap):</div>
+      <div class="about-roadmap-step">
+        <b>المرحلة 1 (الحالية):</b> إطلاق خوادم التعدين السحابي، بدء الموسم الأول لإنزال عملة $SYC (60 يوماً)، وتفعيل السحب الفوري عبر شام كاش والبنوك التركية والمحافظ الرقمية.
+      </div>
+      <div class="about-roadmap-step">
+        <b>المرحلة 2 (القادمة):</b> إتمام توزيع الإنزال الجوي وتحويل $SYC إلى USDT مباشرة، وإطلاق منصة التداول الداخلي بين الأعضاء.
+      </div>
+      <div class="about-roadmap-step">
+        <b>المرحلة 3 (المستقبلية):</b> التوسع بإطلاق <b>عدة تطبيقات خدمية ومنصات تسوق إلكترونية تابعة</b> توفر مصادر دخل إضافية وفرص عمل رقمية كبرى لمجتمعنا العربي والعالمي!
+      </div>
+
       <button class="btn-official-green" style="margin-top:14px; padding:10px;" onclick="closeModal('aboutModal')">إغلاق النافذة</button>
     </div>
   </div>
@@ -1144,19 +1203,19 @@
     </div>
   </div>
 
-  <!-- شريط التنقل السفلي الفخم (يشمل تبويب الإنزال الجوي المنفصل) -->
+  <!-- شريط التنقل السفلي الفخم (يبدأ بإنزال $SYC أولاً) -->
   <nav class="official-bottom-nav">
-    <div class="nav-link-btn active" onclick="navigate('tab-mining', this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-      </svg>
-      <span data-i18n="nav_main">تعدين USDT</span>
-    </div>
-    <div class="nav-link-btn" onclick="navigate('tab-airdrop', this)">
+    <div class="nav-link-btn active" onclick="navigate('tab-airdrop', this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
       </svg>
       <span data-i18n="nav_airdrop">إنزال $SYC</span>
+    </div>
+    <div class="nav-link-btn" onclick="navigate('tab-mining', this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+      </svg>
+      <span data-i18n="nav_main">تعدين USDT</span>
     </div>
     <div class="nav-link-btn" onclick="navigate('tab-games', this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -1188,7 +1247,7 @@
     </div>
   </nav>
 
-  <!-- المحرك البرمجي المتكامل ومحرك اللغات -->
+  <!-- المحرك البرمجي المتكامل -->
   <script>
     const translations = {
       ar: {
@@ -1211,8 +1270,8 @@
         withdraw_method_label: "طريقة استلام الأرباح:",
         amount_label: "المبلغ المطلوب سحبه:",
         submit_withdraw_btn: "تأكيد طلب السحب المالي 🚀",
-        nav_main: "تعدين USDT",
         nav_airdrop: "إنزال $SYC",
+        nav_main: "تعدين USDT",
         nav_games: "الألعاب",
         nav_ads: "الإعلانات",
         nav_vip: "VIP",
@@ -1238,8 +1297,8 @@
         withdraw_method_label: "Payout Method:",
         amount_label: "Amount to Withdraw:",
         submit_withdraw_btn: "Submit Withdrawal Request 🚀",
-        nav_main: "USDT Mining",
         nav_airdrop: "$SYC Airdrop",
+        nav_main: "USDT Mining",
         nav_games: "Games",
         nav_ads: "Tasks",
         nav_vip: "VIP",
@@ -1262,7 +1321,7 @@
       localStorage.setItem('sc_lang', lang);
     }
 
-    // --- محرك الأرصدة (فصل تام بين USDT و SYC) ---
+    // إدارة الأرصدة
     let totalBal = parseFloat(localStorage.getItem('sc_tot') || '0.2366');
     let sycTotal = parseFloat(localStorage.getItem('sc_syc_tot') || '1480.00');
 
@@ -1275,7 +1334,6 @@
     document.getElementById('unclaimedBal').innerText = unclaimedBal.toFixed(6);
     document.getElementById('unclaimedSyc').innerText = unclaimedSyc.toFixed(2);
 
-    // عداد التعدين الحي
     setInterval(() => {
       const stepUsdt = boosted ? 0.000010 : 0.000005;
       const stepSyc = boosted ? 0.08 : 0.04;
@@ -1301,7 +1359,7 @@
         `${h < 10 ? '0':''}${h}:${m < 10 ? '0':''}${m}:${s < 10 ? '0':''}${s}`;
     }, 1000);
 
-    // --- محرك عداد الـ 60 يوماً التنازلي للـ Airdrop ---
+    // عداد الـ 60 يوماً التنازلي للإنزال الجوي
     function initAirdropCountdown() {
       let airdropEnd = localStorage.getItem('sc_airdrop_end');
       const totalDuration = 60 * 24 * 60 * 60 * 1000;
@@ -1429,7 +1487,6 @@
       }, 1000);
     }
 
-    // تنفيذ مهام الإنزال الجوي الخاصة
     function executeAirdropTask(btn, rewardSyc, url = null) {
       if (url) window.open(url, '_blank');
       btn.disabled = true;
@@ -1527,7 +1584,6 @@
       }
     }
 
-    // توليد 25 إعلاناً مأجوراً
     function render25Ads() {
       const c = document.getElementById('adsContainer25');
       let html = '';
@@ -1560,7 +1616,6 @@
       }, 4000);
     }
 
-    // خيارات السحب المالي
     function updateWithdrawFields(method) {
       const c = document.getElementById('dynamicWithdrawFields');
       if (method === 'usdt') {
@@ -1593,7 +1648,7 @@
       alert(`✅ تم تأكيد طلب السحب بمبلغ ${amt} USDT وسيتم تنفيذه ومراجعته فوراً!\nالرسوم: 0% لمشتركي VIP.`);
     }
 
-    // إيداع وترقية VIP
+    // إيداع VIP وتوزيع بونص الـ $SYC الحقيقي
     let currentVipPlan = '';
     let currentVipCost = 0;
     function openDepositModal(name, cost) {
@@ -1612,7 +1667,14 @@
     function confirmVipDeposit() {
       const txid = document.getElementById('depositTxidInput').value.trim();
       if (!txid) return alert('يرجى إدخال رقم المعاملة TXID لتأكيد الإيداع!');
-      alert('تم إرسال إثبات الدفع وسنقوم بتفعيل باقتك فوراً!');
+      
+      // إضافة بونص الـ SYC المباشر للمستخدم
+      let bonusSyc = currentVipCost * 150;
+      sycTotal += bonusSyc;
+      document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
+      localStorage.setItem('sc_syc_tot', sycTotal);
+
+      alert(`تم إرسال إثبات الدفع بنجاح!\n🎉 تمت إضافة بونص VIP الفوري (+${bonusSyc} $SYC) لحسابك وسيتم تفعيل مضاعفة السرعة فوراً.`);
       closeModal('vipDepositModal');
     }
 
