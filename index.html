@@ -736,51 +736,6 @@
       font-weight: 800;
       margin-bottom: 8px;
     }
-    .about-roadmap-step {
-      background: #f8fafc;
-      border-right: 3px solid var(--primary-green);
-      border-radius: 6px;
-      padding: 8px 10px;
-      margin-bottom: 6px;
-      text-align: right;
-      font-size: 11px;
-      line-height: 1.5;
-    }
-
-    .ad-player-box {
-      background: #0f172a;
-      border-radius: 14px;
-      padding: 16px;
-      color: #fff;
-      margin-bottom: 14px;
-      position: relative;
-      overflow: hidden;
-    }
-    .ad-sim-video {
-      height: 100px;
-      background: #1e293b;
-      border-radius: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      border: 1px dashed #475569;
-      margin-bottom: 12px;
-    }
-    .ad-progress-bar-wrap {
-      width: 100%;
-      height: 6px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 10px;
-      overflow: hidden;
-      margin-top: 8px;
-    }
-    .ad-progress-bar-fill {
-      width: 0%;
-      height: 100%;
-      background: #00f5a0;
-      transition: width 0.2s linear;
-    }
   </style>
 </head>
 <body>
@@ -1289,7 +1244,6 @@
       }
     }
 
-    // دالة احتساب إنجاز المهمة والتحقق من استحقاق الداعي لمكافأة الإحالة الحقيقية
     async function recordTaskCompletion() {
       if (!_supabase) return;
       try {
@@ -1304,7 +1258,6 @@
         let newTasksCount = (currentUser.completed_tasks || 0) + 1;
         let updateData = { completed_tasks: newTasksCount };
 
-        // إذا أتم 5 مهام ولم تُصرف المكافأة للداعي بعد
         if (newTasksCount >= 5 && !currentUser.referral_rewarded && currentUser.referred_by) {
           let { data: referrerUser } = await _supabase
             .from('users')
@@ -1316,7 +1269,6 @@
             const refNewUsdt = parseFloat(referrerUser.balance || 0) + 0.50;
             const refNewSyc = parseFloat(referrerUser.syc_balance || 0) + 50.0;
 
-            // تحويل مكافأة الإحالة الحقيقية لحساب الداعي
             await _supabase.from('users').update({
               balance: refNewUsdt,
               syc_balance: refNewSyc
@@ -1492,7 +1444,7 @@
         boost_btn: "2X Hız Artırıcı",
         available: "Hazır",
         server_status: "USDT Bulut Sunucusu (Cloud 1) 🟢",
-        active_mining: "USDT Madenciliği Aktif",
+        active_mining: "USDT Madenciliği Aktف",
         cycle_timer: "Döngü Sayacı",
         collect_btn: "USDT Kazancını Topla ve Onayla",
         air_season_badge: "1. Sezon (60 Gün) 💎",
@@ -1667,7 +1619,6 @@
             onVerifiedReward();
             closeModal('verifiedAdModal');
             playSound('win');
-            // احتساب إنجاز المهمة للمستخدم سحابياً
             recordTaskCompletion();
           };
         }
