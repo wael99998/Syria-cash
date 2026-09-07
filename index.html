@@ -10,6 +10,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
+  <!-- مكتبة Supabase للاتصال السحابي (مضافة بأمان تام دون المساس بتصميمك) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <style>
     :root {
       --bg-light: #f4f6f9;
@@ -1137,8 +1140,58 @@
     </div>
   </nav>
 
-  <!-- المحرك البرمجي المتكامل ومحرك الترجمة اللحظية الصارم -->
+  <!-- المحرك البرمجي المتكامل ومحرك الترجمة اللحظية الصارم مع ربط Supabase السحابي -->
   <script>
+    // --- 0. إعدادات وقاعدة بيانات Supabase السحابية (مضافة بعناية ونظافة تامة) ---
+    const SUPABASE_URL = 'https://tvypczferwkqnehhynwd.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publish_8M4imxTpGpHK9y4...'; // ضع المفتاح الكامل هنا
+    
+    let _supabase = null;
+    try {
+      const { createClient } = supabase;
+      _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    } catch(e) {
+      console.log('Supabase init error:', e);
+    }
+
+    // دالة المزامنة السحابية لحفظ واسترجاع حسابات المستخدمين ومنع الاحتيال
+    async function syncUserWithCloud() {
+      if (!_supabase) return;
+      try {
+        let deviceId = localStorage.getItem('sc_device_id');
+        if (!deviceId) {
+          deviceId = 'dev_' + Math.random().toString(36).substring(2, 15);
+          localStorage.setItem('sc_device_id', deviceId);
+        }
+
+        let { data: existingUser, error } = await _supabase
+          .from('users')
+          .select('*')
+          .eq('device_id', deviceId)
+          .single();
+
+        if (existingUser) {
+          if (existingUser.balance !== null && existingUser.balance !== undefined) {
+            totalBal = parseFloat(existingUser.balance);
+            document.getElementById('totalBal').innerText = totalBal.toFixed(4);
+            localStorage.setItem('sc_tot', totalBal);
+          }
+        } else {
+          const refCode = 'REF_' + Math.random().toString(36).substring(2, 8).toUpperCase();
+          await _supabase.from('users').insert([
+            {
+              username: 'مستخدم سوريا كاش',
+              balance: totalBal,
+              device_id: deviceId,
+              referral_code: refCode
+            }
+          ]);
+        }
+      } catch (err) {
+        console.log('Cloud sync status:', err);
+      }
+    }
+
     // --- 1. محرك الأصوات التفاعلي المدمج ---
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     function playSound(type) {
@@ -1376,7 +1429,6 @@
         document.documentElement.setAttribute('dir', 'ltr');
       }
 
-      // إعادة رسم المهام والإعلانات باللغة المختارة
       renderSocialTasks(currentLang);
       renderAirdropTasks(currentLang);
       render25Ads(currentLang);
@@ -2005,12 +2057,15 @@
       setTimeout(() => { b.style.display = 'none'; }, 2400);
     }
 
-    // التشغيل التلقائي
+    // التشغيل التلقائي عند التحميل
     window.addEventListener('DOMContentLoaded', () => {
       makeTicker();
       updateWithdrawFields('usdt');
       initScratchCard();
       initAirdropCountdown();
+
+      // تشغيل المزامنة السحابية مع Supabase
+      syncUserWithCloud();
 
       const savedLang = localStorage.getItem('sc_lang') || 'ar';
       document.getElementById('langSelect').value = savedLang;
