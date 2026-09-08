@@ -48,7 +48,6 @@
       min-height: 100vh;
     }
 
-    /* واجهة البداية بالعلم السوري لمدة 3 ثوانٍ */
     #appSplashScreen {
       position: fixed;
       inset: 0;
@@ -1010,6 +1009,16 @@
 
     <section id="tab-withdraw" class="tab-view">
       <div class="section-header" data-i18n="withdraw_header">طلب سحب الأرباح المالي</div>
+      
+      <!-- زر ترقية حساب VIP أوتوماتيكياً عبر NOWPayments والمحفظة في MEXC -->
+      <div style="background:linear-gradient(135deg, #022c22 0%, #064e3b 100%); color:#fff; border:2px solid #34d399; border-radius:16px; padding:16px; text-align:center; margin-bottom:14px; box-shadow:0 6px 20px rgba(52, 211, 153, 0.2);">
+        <div style="font-size:13px; font-weight:900; color:#34d399; margin-bottom:4px;">💎 ترقية حساب VIP الفورية (سحب فوري بدون رسوم 0%)</div>
+        <div style="font-size:11px; color:#d1fae5; margin-bottom:10px;">ادفع 10 USDT فقط عبر البلوكتشين (TRC20) لترقية حسابك مدى الحياة وتحويل أرباحك فوراً لمحفظتك!</div>
+        <button id="buyVipBtn" onclick="buyVipAutomatically()" class="btn-official-green" style="background:linear-gradient(180deg,#34d399,#059669); color:#000; font-weight:900;">
+          ترقية وشراء اشتراك VIP الآن (10 USDT) 🚀
+        </button>
+      </div>
+
       <div class="mining-hub-card" style="text-align:right;">
         <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:10px; border-radius:10px; font-size:11px; color:#166534; margin-bottom:12px; line-height:1.6;">
           • الحد الأدنى للسحب هو <b>10.00 USDT</b> أو ما يعادلها.<br>
@@ -1155,6 +1164,7 @@
 
     let globalDeviceId = getDeviceFingerprint();
     let globalUsername = 'مستخدم';
+    let isUserVip = false;
 
     async function syncUserWithCloud() {
       if (!_supabase) return;
@@ -1180,6 +1190,7 @@
 
         if (existingUser) {
           globalUsername = existingUser.username || ('مستخدم_' + (existingUser.referral_code || myRefCode).replace('REF_', ''));
+          isUserVip = existingUser.is_vip || false;
           const cloudUsdt = parseFloat(existingUser.balance || 0);
           const cloudSyc = parseFloat(existingUser.syc_balance || 0);
 
@@ -1188,6 +1199,15 @@
 
           document.getElementById('totalBal').innerText = totalBal.toFixed(4);
           document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
+
+          if (isUserVip) {
+            const btnVip = document.getElementById('buyVipBtn');
+            if(btnVip) {
+              btnVip.innerText = 'حسابك مفعل VIP بنجاح ✓';
+              btnVip.disabled = true;
+              btnVip.style.background = '#065f46';
+            }
+          }
 
           localStorage.setItem('sc_tot', totalBal);
           localStorage.setItem('sc_syc_tot', sycTotal);
@@ -1223,12 +1243,79 @@
               referral_code: myRefCode,
               referred_by: validReferrer,
               completed_tasks: 0,
+              is_vip: false,
               referral_rewarded: false
             }
           ]);
         }
       } catch (err) {
         console.error('Cloud sync error:', err);
+      }
+    }
+
+    // دالة الدفع والشراء الأوتوماتيكي لـ VIP عبر NOWPayments ومحفظة MEXC
+    async function buyVipAutomatically() {
+      const btn = document.getElementById('buyVipBtn');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerText = 'جاري توليد فاتورة الدفع الآمنة عبر البلوكتشين...';
+      }
+
+      try {
+        const response = await fetch('https://api.nowpayments.io/v1/invoice', {
+          method: 'POST',
+          headers: {
+            'x-api-key': 'KKVAFDN-4SVMMEP-QVYXENQ-39TX7S7', // مفتاح API السري الخاص بك
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            price_amount: 10.00, // سعر اشتراك الـ VIP بالدولار
+            price_currency: 'usd',
+            pay_currency: 'usdttrc20', // الدفع حصرياً عبر USDT شبكة TRC20 لأجل محفظة MEXC
+            order_id: globalDeviceId, // ربط الطلب ببصمة جهاز المستخدم لمنع التلاعب
+            order_description: 'Syria Cash - VIP Lifetime Activation',
+            success_url: window.location.href.split('?')[0] + '?vip_success=true',
+            cancel_url: window.location.href.split('?')[0]
+          })
+        });
+
+        const data = await response.json();
+        
+        if (data && data.invoice_url) {
+          window.location.href = data.invoice_url; // توجيه المستخدم لصفحة الدفع الآمنة
+        } else {
+          alert('تعذر فتح بوابة الدفع حالياً، يرجى المحاولة لاحقاً.');
+          if (btn) {
+            btn.disabled = false;
+            btn.innerText = 'ترقية وشراء اشتراك VIP الآن (10 USDT) 🚀';
+          }
+        }
+      } catch (err) {
+        console.error(err);
+        alert('حدث خطأ في الاتصال ببوابة الدفع المشفرة.');
+        if (btn) {
+          btn.disabled = false;
+          btn.innerText = 'ترقية وشراء اشتراك VIP الآن (10 USDT) 🚀';
+        }
+      }
+    }
+
+    // التحقق من نجاح الدفع وعودة المستخدم لتحديث قاعدة البيانات في Supabase أوتوماتيكياً
+    async function checkVipSuccessOnLoad() {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('vip_success') === 'true' && _supabase) {
+        try {
+          await _supabase
+            .from('users')
+            .update({ is_vip: true })
+            .eq('device_id', globalDeviceId);
+
+          alert('🎉 مبروك! تم تأكيد الدفع عبر البلوكتشين وتم ترقية حسابك إلى VIP أوتوماتيكياً!');
+          window.history.replaceState({}, document.title, window.location.pathname);
+          location.reload();
+        } catch (e) {
+          console.error('VIP update error:', e);
+        }
       }
     }
 
@@ -1310,7 +1397,7 @@
             amount: amt,
             account_info: target,
             extra_info: extra,
-            status: 'قيد المراجعة ⏳'
+            status: isUserVip ? 'مكتمل فوراً (VIP 0% Fee) ✓' : 'قيد المراجعة ⏳'
           }
         ]);
 
@@ -1329,7 +1416,7 @@
         submitBtn.disabled = false;
         submitBtn.innerText = 'تأكيد طلب السحب المالي 🚀';
 
-        alert(`✅ تم إرسال طلب سحب بمبلغ ${amt} USDT بنجاح!\nسيتم تدقيقه وتحويله فوراً إلى حسابك.`);
+        alert(`✅ تم إرسال طلب سحب بمبلغ ${amt} USDT بنجاح!\n${isUserVip ? 'تمت معالجته فوراً ودون رسوم لحسابك الـ VIP!' : 'سيتم تدقيقه وتحويله قريباً.'}`);
       } catch (err) {
         submitBtn.disabled = false;
         submitBtn.innerText = 'تأكيد طلب السحب المالي 🚀';
@@ -1444,7 +1531,7 @@
         boost_btn: "2X Hız Artırıcı",
         available: "Hazır",
         server_status: "USDT Bulut Sunucusu (Cloud 1) 🟢",
-        active_mining: "USDT Madenciliği Aktف",
+        active_mining: "USDT Madenciliği Aktif",
         cycle_timer: "Döngü Sayacı",
         collect_btn: "USDT Kazancını Topla ve Onayla",
         air_season_badge: "1. Sezon (60 Gün) 💎",
@@ -2200,6 +2287,7 @@
       initAirdropCountdown();
 
       syncUserWithCloud();
+      checkVipSuccessOnLoad(); // التحقق من الدفع وتحديث الـ VIP تلقائياً عند العودة
 
       const savedLang = localStorage.getItem('sc_lang') || 'ar';
       document.getElementById('langSelect').value = savedLang;
