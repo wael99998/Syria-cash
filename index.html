@@ -739,7 +739,7 @@
 </head>
 <body>
 
-  <!-- نافذة تسجيل الدخول اليومي (Daily Check-in Modal) -->
+  <!-- نافذة تسجيل الدخول اليومي -->
   <div class="modal-backdrop-clean" id="dailyCheckinModal" style="display:flex;">
     <div class="modal-box-clean">
       <div style="font-size:36px; margin-bottom:6px;">🎁</div>
@@ -867,14 +867,18 @@
         </div>
         
         <div class="live-unclaimed-txt" style="color:#4f46e5;">
-          $SYC +<span id="unclaimedSyc">0.45</span>
+          $SYC +<span id="unclaimedSyc">0.00</span>
         </div>
-        <div style="font-size:11px; color:var(--text-muted); margin-top:3px;" data-i18n="syc_speed_lbl">سرعة التعدين: 15.0 $SYC / يوم</div>
+        <div style="font-size:11px; color:var(--text-muted); margin-top:3px;" id="sycMiningTimer">مؤقت دورة الـ 4 ساعات: 04:00:00 ⏱</div>
 
-        <button class="btn-official-green" style="background:linear-gradient(180deg,#4f46e5,#3730a3); margin-top:12px;" onclick="collectSycReward()">
-          <span data-i18n="collect_syc_btn">جمع وتأكيد رصيد عملات ($SYC)</span>
-          <span>💎</span>
-        </button>
+        <div style="display:flex; gap:8px; margin-top:12px;">
+          <button class="btn-official-green" style="background:linear-gradient(180deg,#4f46e5,#3730a3); flex:1;" onclick="collectSycReward()">
+            <span data-i18n="collect_syc_btn">جمع الأرباح</span>
+          </button>
+          <button class="btn-official-green" style="background:#0284c7; width:auto; padding:10px; font-size:11px;" onclick="triggerSycBoost()">
+            مضاعفة السرعة 2X (إعلان 🎬)
+          </button>
+        </div>
       </div>
 
       <div class="section-header" data-i18n="airdrop_tasks_header">مهام الإنزال الجوي الحصرية</div>
@@ -926,8 +930,8 @@
         </div>
         
         <div onclick="clickCounterBox()" style="cursor:pointer;">
-          <div class="live-unclaimed-txt">USDT +<span id="unclaimedBal">0.000600</span></div>
-          <div style="font-size:12px; color:var(--text-muted); margin-top:3px;"><span data-i18n="cycle_timer">مؤقت الدورة</span>: <span id="liveSessionTimer">03:59:59</span> ⏱</div>
+          <div class="live-unclaimed-txt">USDT +<span id="unclaimedBal">0.000000</span></div>
+          <div style="font-size:12px; color:var(--text-muted); margin-top:3px;"><span data-i18n="cycle_timer">مؤقت الدورة (4 ساعات)</span>: <span id="liveSessionTimer">04:00:00</span> ⏱</div>
         </div>
 
         <button class="btn-official-green" style="margin-top:14px;" onclick="collectUsdtReward()">
@@ -1159,7 +1163,7 @@
       </div>
     </section>
 
-    <!-- تبويب الإعلانات (يحتوي على المهام الاجتماعية الـ 4 وإعلانات الـ 25 فيديو) -->
+    <!-- تبويب الإعلانات والمهام -->
     <section id="tab-ads" class="tab-view">
       <div class="section-header" data-i18n="tasks_header">المهام الاجتماعية والرسمية</div>
       <div id="socialTasksContainer" style="display:flex; flex-direction:column; gap:8px; margin-bottom:14px;"></div>
@@ -1421,7 +1425,6 @@
       }
     }
 
-    // استلام مكافأة تسجيل الدخول اليومي
     function claimDailyReward() {
       totalBal += 0.050;
       sycTotal += 20;
@@ -1656,29 +1659,69 @@
     let totalBal = parseFloat(localStorage.getItem('sc_tot') || '0.2366');
     let sycTotal = parseFloat(localStorage.getItem('sc_syc_tot') || '240.50');
 
-    let unclaimedBal = parseFloat(localStorage.getItem('sc_uncl') || '0.000600');
-    let unclaimedSyc = parseFloat(localStorage.getItem('sc_uncl_syc') || '0.45');
+    let unclaimedBal = parseFloat(localStorage.getItem('sc_uncl') || '0.000000');
+    let unclaimedSyc = parseFloat(localStorage.getItem('sc_uncl_syc') || '0.00');
     let boosted = false;
+    let sycBoosted = false;
+
+    // نظام الـ 4 ساعات الدقيق لـ USDT
+    const DURATION_MS = 4 * 60 * 60 * 1000;
+    let usdtEndTime = parseInt(localStorage.getItem('sc_usdt_end') || '0');
+    if (!usdtEndTime || usdtEndTime <= Date.now()) {
+      usdtEndTime = Date.now() + DURATION_MS;
+      localStorage.setItem('sc_usdt_end', usdtEndTime);
+    }
+
+    // نظام الـ 4 ساعات الدقيق لـ $SYC Airdrop
+    let sycEndTime = parseInt(localStorage.getItem('sc_syc_end') || '0');
+    if (!sycEndTime || sycEndTime <= Date.now()) {
+      sycEndTime = Date.now() + DURATION_MS;
+      localStorage.setItem('sc_syc_end', sycEndTime);
+    }
 
     document.getElementById('totalBal').innerText = totalBal.toFixed(4);
     document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
-    document.getElementById('unclaimedBal').innerText = unclaimedBal.toFixed(6);
-    document.getElementById('unclaimedSyc').innerText = unclaimedSyc.toFixed(2);
 
-    // عداد تعدين الدولار (USDT) المستقل
+    // عداد تعدين USDT (يعمل في الخلفية ويحسب الأوقات حتى عند إغلاق التطبيق)
     setInterval(() => {
-      const stepUsdt = boosted ? 0.000010 : 0.000005;
-      unclaimedBal += stepUsdt;
-      document.getElementById('unclaimedBal').innerText = unclaimedBal.toFixed(6);
-      localStorage.setItem('sc_uncl', unclaimedBal);
+      const now = Date.now();
+      let remaining = usdtEndTime - now;
+
+      if (remaining <= 0) {
+        document.getElementById('liveSessionTimer').innerText = "00:00:00 (اكتملت الدورة ⏱)";
+      } else {
+        const h = Math.floor(remaining / (1000 * 60 * 60));
+        const m = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((remaining % (1000 * 60)) / 1000);
+        document.getElementById('liveSessionTimer').innerText = 
+          `${h < 10 ? '0':''}${h}:${m < 10 ? '0':''}${m}:${s < 10 ? '0':''}${s}`;
+
+        const rate = boosted ? 0.000020 : 0.000010;
+        unclaimedBal += rate;
+        document.getElementById('unclaimedBal').innerText = unclaimedBal.toFixed(6);
+        localStorage.setItem('sc_uncl', unclaimedBal);
+      }
     }, 1000);
 
-    // عداد تعدين عملة الإنزال ($SYC) المستقل
+    // عداد تعدين $SYC Airdrop (يعمل بشكل منفصل ومنطقي)
     setInterval(() => {
-      const stepSyc = boosted ? 0.05 : 0.02;
-      unclaimedSyc += stepSyc;
-      document.getElementById('unclaimedSyc').innerText = unclaimedSyc.toFixed(2);
-      localStorage.setItem('sc_uncl_syc', unclaimedSyc);
+      const now = Date.now();
+      let remaining = sycEndTime - now;
+
+      if (remaining <= 0) {
+        document.getElementById('sycMiningTimer').innerText = "00:00:00 (اكتملت الدورة ⏱)";
+      } else {
+        const h = Math.floor(remaining / (1000 * 60 * 60));
+        const m = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((remaining % (1000 * 60)) / 1000);
+        document.getElementById('sycMiningTimer').innerText = 
+          `مؤقت دورة الـ 4 ساعات: ${h < 10 ? '0':''}${h}:${m < 10 ? '0':''}${m}:${s < 10 ? '0':''}${s} ⏱`;
+
+        const rate = sycBoosted ? 0.05 : 0.02;
+        unclaimedSyc += rate;
+        document.getElementById('unclaimedSyc').innerText = unclaimedSyc.toFixed(2);
+        localStorage.setItem('sc_uncl_syc', unclaimedSyc);
+      }
     }, 1000);
 
     let sessionSeconds = 14274;
@@ -1688,8 +1731,6 @@
       const h = Math.floor(sessionSeconds / 3600);
       const m = Math.floor((sessionSeconds % 3600) / 60);
       const s = sessionSeconds % 60;
-      document.getElementById('liveSessionTimer').innerText = 
-        `${h < 10 ? '0':''}${h}:${m < 10 ? '0':''}${m}:${s < 10 ? '0':''}${s}`;
     }, 1000);
 
     function initAirdropCountdown() {
@@ -1733,30 +1774,40 @@
       setInterval(updateCountdown, 1000);
     }
 
+    // عند الضغط على جمع أرباح USDT يعود الوقت 4 ساعات من جديد
     function collectUsdtReward() {
-      if (unclaimedBal <= 0.0001) return notify('رصيد الدولار المعدّن ضئيل حالياً!');
+      if (unclaimedBal <= 0.00001) return notify('رصيد الدولار المعدّن ضئيل حالياً!');
       playSound('win');
       totalBal += unclaimedBal;
-      notify(`تم جمع أرباح الدولار (+${unclaimedBal.toFixed(4)} USDT) 👛`);
+      notify(`تم جمع أرباح الدولار (+${unclaimedBal.toFixed(4)} USDT) وإعادة تعيين العداد 👛`);
+      
       unclaimedBal = 0;
+      usdtEndTime = Date.now() + DURATION_MS; // إعادة العداد 4 ساعات
+      localStorage.setItem('sc_usdt_end', usdtEndTime);
+
       document.getElementById('totalBal').innerText = totalBal.toFixed(4);
-      document.getElementById('unclaimedBal').innerText = unclaimedBal.toFixed(6);
+      document.getElementById('unclaimedBal').innerText = '0.000000';
       localStorage.setItem('sc_tot', totalBal);
-      localStorage.setItem('sc_uncl', unclaimedBal);
+      localStorage.setItem('sc_uncl', 0);
       updateCloudBalances(totalBal, sycTotal);
       recordTaskCompletion();
     }
 
+    // عند الضغط على جمع أرباح $SYC يعود الوقت 4 ساعات من جديد
     function collectSycReward() {
-      if (unclaimedSyc < 0.05) return notify('رصيد $SYC المعدّن ضئيل حالياً!');
+      if (unclaimedSyc <= 0.01) return notify('رصيد $SYC المعدّن ضئيل حالياً!');
       playSound('win');
       sycTotal += unclaimedSyc;
-      notify(`تم استلام عملات الإنزال (+${unclaimedSyc.toFixed(2)} $SYC) 💎`);
+      notify(`تم استلام عملات الإنزال (+${unclaimedSyc.toFixed(2)} $SYC) وإعادة تعيين العداد 💎`);
+      
       unclaimedSyc = 0;
+      sycEndTime = Date.now() + DURATION_MS; // إعادة العداد 4 ساعات
+      localStorage.setItem('sc_syc_end', sycEndTime);
+
       document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
-      document.getElementById('unclaimedSyc').innerText = unclaimedSyc.toFixed(2);
+      document.getElementById('unclaimedSyc').innerText = '0.00';
       localStorage.setItem('sc_syc_tot', sycTotal);
-      localStorage.setItem('sc_uncl_syc', unclaimedSyc);
+      localStorage.setItem('sc_uncl_syc', 0);
       updateCloudBalances(totalBal, sycTotal);
       recordTaskCompletion();
     }
@@ -1787,13 +1838,14 @@
       });
     }
 
+    // مضاعفة سرعة USDT لمدة 10 دقائق مقابل إعلان
     function triggerBoost() {
       if (boosted) return notify('السرعة مضاعفة بالفعل!');
-      playVerifiedAd('مضاعفة سرعة التعدين 2X', 'شاهد الإعلان بالكامل لتفعيل مضاعفة السرعة لمدة 10 دقائق...', 8, () => {
+      playVerifiedAd('مضاعفة سرعة تعدين USDT 2X', 'شاهد الإعلان بالكامل لتفعيل مضاعفة السرعة لمدة 10 دقائق...', 8, () => {
         boosted = true;
         document.getElementById('speedDisplay').innerText = '2.0 MH/s';
         document.getElementById('boostBadge').innerText = '10:00';
-        notify('⚡ تم تفعيل مضاعفة السرعة 2X!');
+        notify('⚡ تم تفعيل مضاعفة سرعة USDT 2X!');
         
         let s = 600;
         const tm = setInterval(() => {
@@ -1808,6 +1860,16 @@
             document.getElementById('boostBadge').innerText = 'متاح الآن';
           }
         }, 1000);
+      });
+    }
+
+    // مضاعفة سرعة $SYC لمدة 10 دقائق مقابل إعلان
+    function triggerSycBoost() {
+      if (sycBoosted) return notify('سرعة الإنزال مضاعفة بالفعل!');
+      playVerifiedAd('مضاعفة سرعة تعدين $SYC 2X', 'شاهد الإعلان بالكامل لتفعيل مضاعفة سرعة الإنزال لمدة 10 دقائق...', 8, () => {
+        sycBoosted = true;
+        notify('⚡ تم تفعيل مضاعفة سرعة $SYC بنجاح!');
+        setTimeout(() => { sycBoosted = false; }, 600000);
       });
     }
 
@@ -1988,7 +2050,6 @@
       });
     }
 
-    // رندر المهام الاجتماعية الأربع بدقة
     function renderSocialTasks(lang) {
       const c = document.getElementById('socialTasksContainer');
       if (!c) return;
@@ -2083,7 +2144,6 @@
       `).join('');
     }
 
-    // رندر الـ 25 إعلاناً المأجورة بدقة في تبويب الإعلانات
     function render25Ads(lang) {
       const c = document.getElementById('adsContainer25');
       if (!c) return;
@@ -2230,7 +2290,6 @@
       syncUserWithCloud();
       checkVipSuccessOnLoad();
 
-      // استدعاء رندر المهام الاجتماعية والإعلانات الـ 25 فور التحميل لتظهر فوراً
       renderSocialTasks('ar');
       renderAirdropTasks('ar');
       render25Ads('ar');
