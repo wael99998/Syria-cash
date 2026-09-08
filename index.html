@@ -739,6 +739,23 @@
 </head>
 <body>
 
+  <!-- نافذة تسجيل الدخول اليومي (Daily Check-in Modal) -->
+  <div class="modal-backdrop-clean" id="dailyCheckinModal" style="display:flex;">
+    <div class="modal-box-clean">
+      <div style="font-size:36px; margin-bottom:6px;">🎁</div>
+      <h3 style="color:var(--primary-green); font-size:17px; margin-bottom:4px;">مكافأة تسجيل الدخول اليومي</h3>
+      <p style="color:var(--text-muted); font-size:11.5px; margin-bottom:14px; line-height:1.6;">
+        أهلاً بك مجدداً في Syria Cash! استلم مكافأتك المجانية اليومية لتسريع أرباحك:
+      </p>
+      <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:12px; padding:12px; margin-bottom:16px;">
+        <div style="font-size:16px; font-weight:900; color:var(--primary-green);">+0.050 USDT + 20 $SYC</div>
+        <div style="font-size:10px; color:#166534; margin-top:2px;">متاحة مرة كل 24 ساعة</div>
+      </div>
+      <button onclick="claimDailyReward()" class="btn-official-green" style="padding:11px; font-size:12px;">استلام المكافأة اليومية 🎯</button>
+      <button onclick="closeModal('dailyCheckinModal')" style="background:transparent; border:none; color:var(--text-muted); font-size:11px; margin-top:12px; cursor:pointer; width:100%;">لاحقاً</button>
+    </div>
+  </div>
+
   <div id="appSplashScreen">
     <div class="splash-container">
       <div class="splash-flag-badge">
@@ -811,7 +828,7 @@
 
   <div class="container">
 
-    <!-- تبويب إنزال SYC -->
+    <!-- تبويب إنزال SYC المنفصل -->
     <main id="tab-airdrop" class="tab-view active">
       <div class="airdrop-hero-banner">
         <span class="airdrop-badge-top" data-i18n="air_season_badge">الموسم الأول (60 يوماً) 💎</span>
@@ -864,7 +881,7 @@
       <div id="airdropTasksContainer" style="display:flex; flex-direction:column; gap:8px;"></div>
     </main>
 
-    <!-- تبويب تعدين USDT (مع دعم التعدين المستمر للعملتين 4 ساعات حتى عند إغلاق التطبيق) -->
+    <!-- تبويب تعدين USDT المستقل -->
     <section id="tab-mining" class="tab-view">
       <div class="hero-banner">
         <div class="hero-title" data-i18n="hero_title">الرصيد الكلي القابل للسحب</div>
@@ -900,21 +917,21 @@
       </div>
 
       <div class="mining-hub-card">
-        <div style="font-size:12px; color:var(--text-muted); font-weight:700;" data-i18n="server_status">خادم التعدين المزدوج (USDT & $SYC) 🟢</div>
+        <div style="font-size:12px; color:var(--text-muted); font-weight:700;" data-i18n="server_status">خادم تعدين الدولار (USDT Cloud 1) 🟢</div>
         <div class="circle-mining-outer" onclick="clickMiningCircle()">
           <div class="circle-mining-inner">
             <span style="font-size:26px;">⚡</span>
-            <span style="font-size:10px; font-weight:800; margin-top:2px;" data-i18n="active_mining">التعدين المزدوج نشط</span>
+            <span style="font-size:10px; font-weight:800; margin-top:2px;" data-i18n="active_mining">تعدين الدولار نشط</span>
           </div>
         </div>
         
         <div onclick="clickCounterBox()" style="cursor:pointer;">
-          <div class="live-unclaimed-txt">USDT +<span id="unclaimedBal">0.000600</span> | $SYC +<span id="unclaimedSycMining">0.00</span></div>
-          <div style="font-size:12px; color:var(--text-muted); margin-top:3px;"><span data-i18n="cycle_timer">مؤقت دورة الـ 4 ساعات</span>: <span id="liveSessionTimer">04:00:00</span> ⏱</div>
+          <div class="live-unclaimed-txt">USDT +<span id="unclaimedBal">0.000600</span></div>
+          <div style="font-size:12px; color:var(--text-muted); margin-top:3px;"><span data-i18n="cycle_timer">مؤقت الدورة</span>: <span id="liveSessionTimer">03:59:59</span> ⏱</div>
         </div>
 
         <button class="btn-official-green" style="margin-top:14px;" onclick="collectUsdtReward()">
-          <span data-i18n="collect_btn">جمع وتأكيد أرباح التعدين المزدوج</span>
+          <span data-i18n="collect_btn">جمع وتأكيد أرباح الدولار (USDT)</span>
           <span>👛</span>
         </button>
       </div>
@@ -992,7 +1009,7 @@
           </button>
         </div>
 
-        <!-- باقة 50$ (الأكثر شعبية) -->
+        <!-- باقة 50$ -->
         <div style="background: #ffffff; border: 2px solid var(--primary-green); border-radius: 16px; padding: 14px; box-shadow: var(--shadow-md); position: relative; overflow: hidden;">
           <div style="position: absolute; top: 0; left: 0; background: var(--primary-green); color: #ffffff; font-size: 9px; font-weight: 800; padding: 2px 8px; border-bottom-right-radius: 8px;">الأكثر طلباً ⭐</div>
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; margin-top: 4px;">
@@ -1142,7 +1159,7 @@
       </div>
     </section>
 
-    <!-- تبويب الإعلانات -->
+    <!-- تبويب الإعلانات (يحتوي على المهام الاجتماعية الـ 4 وإعلانات الـ 25 فيديو) -->
     <section id="tab-ads" class="tab-view">
       <div class="section-header" data-i18n="tasks_header">المهام الاجتماعية والرسمية</div>
       <div id="socialTasksContainer" style="display:flex; flex-direction:column; gap:8px; margin-bottom:14px;"></div>
@@ -1168,7 +1185,7 @@
       </div>
     </section>
 
-    <!-- تبويب سحب الأرباح المالي الأصلي (نظيف ومستقل لملء الشاشة بالكامل) -->
+    <!-- تبويب سحب الأرباح المالي المنفصل -->
     <section id="tab-withdraw" class="tab-view">
       <div class="section-header" data-i18n="withdraw_header">طلب سحب الأرباح المالي</div>
       
@@ -1404,6 +1421,20 @@
       }
     }
 
+    // استلام مكافأة تسجيل الدخول اليومي
+    function claimDailyReward() {
+      totalBal += 0.050;
+      sycTotal += 20;
+      document.getElementById('totalBal').innerText = totalBal.toFixed(4);
+      document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
+      localStorage.setItem('sc_tot', totalBal);
+      localStorage.setItem('sc_syc_tot', sycTotal);
+      updateCloudBalances(totalBal, sycTotal);
+      playSound('win');
+      notify('🎁 تم استلام مكافأة تسجيل الدخول اليومي (+0.050 USDT و +20 $SYC)!');
+      closeModal('dailyCheckinModal');
+    }
+
     async function buyVipPackage(amount, tierName, sycBonus) {
       notify(`جاري تجهيز عقد (${amount}$) مع بونص +${sycBonus} $SYC...`);
 
@@ -1622,323 +1653,43 @@
       } catch (e) {}
     }
 
-    const dict = {
-      ar: {
-        brand_sub: "المنظومة الرقمية للمعاملات والتعدين السحابي",
-        hero_title: "الرصيد الكلي القابل للسحب",
-        speed: "السرعة",
-        prod: "الإنتاج اليومي",
-        services_header: "الخدمات السحابية الرقمية",
-        withdraw_nav: "سحب الأرباح",
-        boost_btn: "مضاعفة السرعة 2X",
-        available: "متاح الآن",
-        server_status: "خادم التعدين المزدوج (USDT & $SYC) 🟢",
-        active_mining: "التعدين المزدوج نشط",
-        cycle_timer: "مؤقت دورة الـ 4 ساعات",
-        collect_btn: "جمع وتأكيد أرباح التعدين المزدوج",
-        air_season_badge: "الموسم الأول (60 يوماً) 💎",
-        air_balance_lbl: "رصيدك الإجمالي من عملة المنصة:",
-        air_distribute_lbl: "يتم تحويل وتوزيع كامل رصيدك تلقائياً إلى USDT فور انتهاء العداد:",
-        lbl_days: "يوم", lbl_hours: "ساعة", lbl_mins: "دقيقة", lbl_secs: "ثانية",
-        air_progress_lbl: "تقدم موسم الإنزال الجوي:",
-        syc_hub_title: "محطة تعدين عملة الإنزال ($SYC Node 1) ⚡",
-        syc_speed_lbl: "سرعة التعدين: 15.0 $SYC / يوم (محدودة القيمة)",
-        collect_syc_btn: "جمع وتأكيد رصيد عملات ($SYC)",
-        airdrop_tasks_header: "مهام الإنزال الجوي الحصرية",
-        games_header: "الألعاب وسحب الخزنة الكبرى الشهري",
-        vault_title: "🔥 السحب الشهري على الخزنة الكبرى (Monthly Vault)",
-        vault_progress_lbl: "إعلاناتك المشاهدة:",
-        vault_ticket_lbl: "إعلانات للحصول على التذكرة!",
-        vault_btn: "مشاهدة إعلان للدخول بالسحب الشهري 🎟️",
-        scratch_title: "🎟️ كرت (امسح واربح) 🪙",
-        scratch_desc: "امسح بإصبعك على البطاقة واكشف هديتك فوراً!",
-        scratch_renew_btn: "كرت جديد (مشاهدة إعلان مؤكد 🎬)",
-        boxes_title: "🎁 صناديق الحظ الثلاثية",
-        boxes_desc: "اختر أحد الصناديق لفتحه بالمفتاح الذهبي بعد مشاهدة إعلان!",
-        box_1: "صندوق 1", box_2: "صندوق 2", box_3: "صندوق 3",
-        wheel_title: "🎡 عجلة الحظ الكبرى",
-        spins_left_lbl: "اللفات المتبقية:",
-        spin_now_btn: "تدوير العجلة 🎯",
-        renew_spins_btn: "+3 لفات (إعلان 🎬)",
-        tap_title: "⛏️ لعبة صائد العملات (Tap Mining)",
-        tap_progress_lbl: "شظايا مجمعة:",
-        tap_recharge_btn: "شحن طاقة النقر (مشاهدة إعلان ⚡)",
-        tasks_header: "المهام الاجتماعية والرسمية",
-        paid_ads_header: "إعلانات الفيديو المأجورة (25 إعلاناً)",
-        ref_header: "برنامج دعوة الأصدقاء والوكالة",
-        copy_ref_btn: "نسخ رابط الإحالة الرسمي 📋",
-        withdraw_header: "طلب سحب الأرباح المالي",
-        withdraw_method_label: "طريقة استلام الأرباح:",
-        amount_label: "المبلغ المطلوب سحبه:",
-        submit_withdraw_btn: "تأكيد طلب السحب المالي 🚀",
-        nav_airdrop: "إنزال $SYC",
-        nav_main: "تعدين USDT",
-        nav_games: "الألعاب",
-        nav_ads: "الإعلانات",
-        nav_ref: "الإحالة",
-        nav_withdraw: "السحب"
-      },
-      tr: {
-        brand_sub: "Bulut Madenciliği ve Dijital İşlem Sistemi",
-        hero_title: "Çekilebilir Toplam Bakiye",
-        speed: "Hız",
-        prod: "Günlük Üretim",
-        services_header: "Dijital Bulut Hizmetleri",
-        withdraw_nav: "Para Çek",
-        boost_btn: "2X Hız Artırıcı",
-        available: "Hazır",
-        server_status: "Çift Madencilik Sunucusu (USDT & $SYC) 🟢",
-        active_mining: "Çift Madencilik Aktif",
-        cycle_timer: "4 Saatlik Döngü Sayacı",
-        collect_btn: "Madencilik Kazancını Topla ve Onayla",
-        air_season_badge: "1. Sezon (60 Gün) 💎",
-        air_balance_lbl: "Toplam $SYC Coin Bakiyeniz:",
-        air_distribute_lbl: "Sayaç bitiminde tüm bakiyeniz otomatik olarak USDT'ye çevrilir:",
-        lbl_days: "Gün", lbl_hours: "Saat", lbl_mins: "Dk", lbl_secs: "Sn",
-        air_progress_lbl: "Airdrop Sezon İlerlemesi:",
-        syc_hub_title: "$SYC Madencilik Düğümü (Node 1) ⚡",
-        syc_speed_lbl: "Madencilik Hızı: 15.0 $SYC / Gün",
-        collect_syc_btn: "$SYC Bakiyesini Topla ve Onayla",
-        airdrop_tasks_header: "Özel Airdrop Görevleri",
-        games_header: "Oyunlar ve Aylık Büyük Kasa",
-        vault_title: "🔥 Aylık Büyük Kasa Çekilişi (Monthly Vault)",
-        vault_progress_lbl: "İzlenen Reklamlar:",
-        vault_ticket_lbl: "bilet almak için gereken reklam!",
-        vault_btn: "Aylık Çekiliş İçin Reklam İzle 🎟️",
-        scratch_title: "🎟️ Kazı Kazan Kartı 🪙",
-        scratch_desc: "Parmağınızla kartı kazıyın ve anında ödül kazanın!",
-        scratch_renew_btn: "Yeni Kart (Reklam İzle 🎬)",
-        boxes_title: "🎁 Şanslı Üç Sandık",
-        boxes_desc: "Reklam izledikten sonra altın anahtarla bir sandık açın!",
-        box_1: "Sandık 1", box_2: "Sandık 2", box_3: "Sandık 3",
-        wheel_title: "🎡 Büyük Çarkıfelek",
-        spins_left_lbl: "Kalan Çevirme:",
-        spin_now_btn: "Çarkı Çevir 🎯",
-        renew_spins_btn: "+3 Çevirme (Reklam 🎬)",
-        tap_title: "⛏️ Tıklama Madenciliği (Tap Mining)",
-        tap_progress_lbl: "Toplanan Parçalar:",
-        tap_recharge_btn: "Enerjiyi Doldur (Reklam İzle ⚡)",
-        tasks_header: "Sosyal ve Resmi Görevler",
-        paid_ads_header: "Ücretli Video Reklamlar (25 Reklam)",
-        ref_header: "Arkadaşını Davet Et & Ortaklık",
-        copy_ref_btn: "Resmi Davet Linkini Kopyala 📋",
-        withdraw_header: "Para Çekme Talebi",
-        withdraw_method_label: "Ödeme Yöntemi:",
-        amount_label: "Çekilecek Tutar:",
-        submit_withdraw_btn: "Çekim Talebini Onayla 🚀",
-        nav_airdrop: "$SYC Airdrop",
-        nav_main: "USDT Madencilik",
-        nav_games: "Oyunlar",
-        nav_ads: "Görevler",
-        nav_ref: "Referans",
-        nav_withdraw: "Para Çek"
-      },
-      en: {
-        brand_sub: "Digital Ecosystem for Cloud Transactions & Mining",
-        hero_title: "Total Withdrawable Balance",
-        speed: "Speed",
-        prod: "Daily Output",
-        services_header: "Cloud Digital Services",
-        withdraw_nav: "Withdraw Funds",
-        boost_btn: "2X Speed Boost",
-        available: "Ready",
-        server_status: "Dual Mining Server (USDT & $SYC) 🟢",
-        active_mining: "Dual Mining Active",
-        cycle_timer: "4-Hour Cycle Timer",
-        collect_btn: "Collect & Confirm Dual Mining Profits",
-        air_season_badge: "Season 1 (60 Days) 💎",
-        air_balance_lbl: "Total $SYC Coin Balance:",
-        air_distribute_lbl: "All balance will convert automatically to USDT after timer:",
-        lbl_days: "Days", lbl_hours: "Hours", lbl_mins: "Mins", lbl_secs: "Secs",
-        air_progress_lbl: "Airdrop Season Progress:",
-        syc_hub_title: "$SYC Mining Node (Node 1) ⚡",
-        syc_speed_lbl: "Mining Speed: 15.0 $SYC / Day",
-        collect_syc_btn: "Collect & Confirm $SYC Balance",
-        airdrop_tasks_header: "Exclusive Airdrop Quests",
-        games_header: "Games & Monthly Mega Vault",
-        vault_title: "🔥 Monthly Mega Vault Draw",
-        vault_progress_lbl: "Ads Watched:",
-        vault_ticket_lbl: "ads to earn a ticket!",
-        vault_btn: "Watch Ad to Enter Vault Draw 🎟️",
-        scratch_title: "🎟️ Scratch & Win Card 🪙",
-        scratch_desc: "Scratch with your finger to reveal instant rewards!",
-        scratch_renew_btn: "New Card (Watch Ad 🎬)",
-        boxes_title: "Mystery Boxes",
-        boxes_desc: "Pick a box to open with the golden key after watching an ad!",
-        box_1: "Box 1", box_2: "Box 2", box_3: "Box 3",
-        wheel_title: "🎡 Lucky Fortune Wheel",
-        spins_left_lbl: "Spins Left:",
-        spin_now_btn: "Spin Wheel 🎯",
-        renew_spins_btn: "+3 Spins (Ad 🎬)",
-        tap_title: "⛏️ Tap Mining Quest",
-        tap_progress_lbl: "Collected Shards:",
-        tap_recharge_btn: "Recharge Energy (Watch Ad ⚡)",
-        tasks_header: "Official & Social Tasks",
-        paid_ads_header: "Paid Video Ads (25 Ads)",
-        ref_header: "Referral & Affiliate Program",
-        copy_ref_btn: "Copy Official Invite Link 📋",
-        withdraw_header: "Withdrawal Request Form",
-        withdraw_method_label: "Payout Method:",
-        amount_label: "Amount to Withdraw:",
-        submit_withdraw_btn: "Submit Withdrawal Request 🚀",
-        nav_airdrop: "$SYC Airdrop",
-        nav_main: "USDT Mining",
-        nav_games: "Games",
-        nav_ads: "Tasks",
-        nav_ref: "Referral",
-        nav_withdraw: "Withdraw"
-      }
-    };
-
-    let currentLang = 'ar';
-
-    function changeLanguage(lang) {
-      currentLang = dict[lang] ? lang : 'en';
-      const selected = dict[currentLang];
-
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (selected[key]) el.innerHTML = selected[key];
-      });
-
-      if (['ar', 'fa', 'ku'].includes(currentLang)) {
-        document.documentElement.setAttribute('dir', 'rtl');
-      } else {
-        document.documentElement.setAttribute('dir', 'ltr');
-      }
-
-      renderSocialTasks(currentLang);
-      renderAirdropTasks(currentLang);
-      render25Ads(currentLang);
-      localStorage.setItem('sc_lang', currentLang);
-    }
-
-    let pendingRewardCallback = null;
-    let adInterval = null;
-
-    function playVerifiedAd(title, desc, durationSeconds, onVerifiedReward) {
-      document.getElementById('adPlayerTitle').innerText = title;
-      document.getElementById('adPlayerDesc').innerText = desc;
-      
-      const claimBtn = document.getElementById('claimAdRewardBtn');
-      const progressBar = document.getElementById('adProgressBarFill');
-      const countdownTxt = document.getElementById('adCountdownVal');
-      const statusTxt = document.getElementById('adSimStatusText');
-
-      claimBtn.disabled = true;
-      claimBtn.style.background = '#64748b';
-      claimBtn.style.cursor = 'not-allowed';
-      claimBtn.innerText = `انتظر اكتمال الإعلان (${durationSeconds}ث)...`;
-      progressBar.style.width = '0%';
-      statusTxt.innerText = "جاري تشغيل الفيديو الإعلاني...";
-      
-      openModal('verifiedAdModal');
-      
-      let remaining = durationSeconds;
-      countdownTxt.innerText = `${remaining}s`;
-      
-      const stepPct = 100 / durationSeconds;
-      let currentPct = 0;
-
-      if (adInterval) clearInterval(adInterval);
-      
-      adInterval = setInterval(() => {
-        remaining--;
-        currentPct += stepPct;
-        progressBar.style.width = `${Math.min(100, currentPct)}%`;
-        countdownTxt.innerText = `${remaining}s`;
-
-        if (remaining <= 0) {
-          clearInterval(adInterval);
-          progressBar.style.width = '100%';
-          statusTxt.innerText = "✓ اكتمل الإعلان بنجاح! يمكنك استلام المكافأة:";
-          countdownTxt.innerText = "جاهز!";
-          
-          claimBtn.disabled = false;
-          claimBtn.style.background = '#005a36';
-          claimBtn.style.cursor = 'pointer';
-          claimBtn.innerText = "تأكيد المشاهدة واستلام المكافأة ✓";
-          
-          pendingRewardCallback = () => {
-            onVerifiedReward();
-            closeModal('verifiedAdModal');
-            playSound('win');
-            recordTaskCompletion();
-          };
-        }
-      }, 1000);
-    }
-
-    document.getElementById('claimAdRewardBtn').onclick = () => {
-      if (pendingRewardCallback) {
-        pendingRewardCallback();
-        pendingRewardCallback = null;
-      }
-    };
-
     let totalBal = parseFloat(localStorage.getItem('sc_tot') || '0.2366');
     let sycTotal = parseFloat(localStorage.getItem('sc_syc_tot') || '240.50');
 
-    // نظام التعدين المستمر 4 ساعات (حتى عند إغلاق التطبيق) لعملتي USDT و $SYC معاّ
-    const MINING_DURATION_MS = 4 * 60 * 60 * 1000; // 4 ساعات بالميلي ثانية
-    let miningEndTime = parseInt(localStorage.getItem('sc_mining_end_time') || '0');
-    let unclaimedBal = parseFloat(localStorage.getItem('sc_uncl') || '0.0');
-    let unclaimedSycMining = parseFloat(localStorage.getItem('sc_uncl_syc_mining') || '0.0');
-
-    if (!miningEndTime || miningEndTime <= Date.now()) {
-      miningEndTime = Date.now() + MINING_DURATION_MS;
-      localStorage.setItem('sc_mining_end_time', miningEndTime);
-    }
+    let unclaimedBal = parseFloat(localStorage.getItem('sc_uncl') || '0.000600');
+    let unclaimedSyc = parseFloat(localStorage.getItem('sc_uncl_syc') || '0.45');
+    let boosted = false;
 
     document.getElementById('totalBal').innerText = totalBal.toFixed(4);
     document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
+    document.getElementById('unclaimedBal').innerText = unclaimedBal.toFixed(6);
+    document.getElementById('unclaimedSyc').innerText = unclaimedSyc.toFixed(2);
 
-    // حساب الأرباح المتراكمة في الخلفية أثناء إغلاق التطبيق
-    function checkBackgroundMining() {
-      const now = Date.now();
-      const elapsedMs = MINING_DURATION_MS - (miningEndTime - now);
-      
-      if (elapsedMs > 0) {
-        // معدل الإنتاج لكل ثانية
-        const secondsElapsed = elapsedms_sec = elapsedMs / 1000;
-        const usdtPerSec = (boosted ? 0.000010 : 0.000005);
-        const sycPerSec = (boosted ? 0.015 : 0.008);
-
-        unclaimedBal = Math.min(0.48, secondsElapsed * usdtPerSec);
-        unclaimedSycMining = Math.min(15.0, secondsElapsed * sycPerSec);
-
-        document.getElementById('unclaimedBal').innerText = unclaimedBal.toFixed(6);
-        document.getElementById('unclaimedSycMining').innerText = unclaimedSycMining.toFixed(2);
-      }
-    }
-
-    // حلقة التعدين الحية والمستمرة
+    // عداد تعدين الدولار (USDT) المستقل
     setInterval(() => {
-      const now = Date.now();
-      let remainingMs = miningEndTime - now;
+      const stepUsdt = boosted ? 0.000010 : 0.000005;
+      unclaimedBal += stepUsdt;
+      document.getElementById('unclaimedBal').innerText = unclaimedBal.toFixed(6);
+      localStorage.setItem('sc_uncl', unclaimedBal);
+    }, 1000);
 
-      if (remainingMs <= 0) {
-        document.getElementById('liveSessionTimer').innerText = "00:00:00 (انتهت الدورة ⏱)";
-        // إشعار صوتي ومرئي بانقضاء الـ 4 ساعات
-      } else {
-        const h = Math.floor(remainingMs / (1000 * 60 * 60));
-        const m = Math.floor((remainingMs % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((remainingMs % (1000 * 60)) / 1000);
-        document.getElementById('liveSessionTimer').innerText = 
-          `${h < 10 ? '0':''}${h}:${m < 10 ? '0':''}${m}:${s < 10 ? '0':''}${s}`;
+    // عداد تعدين عملة الإنزال ($SYC) المستقل
+    setInterval(() => {
+      const stepSyc = boosted ? 0.05 : 0.02;
+      unclaimedSyc += stepSyc;
+      document.getElementById('unclaimedSyc').innerText = unclaimedSyc.toFixed(2);
+      localStorage.setItem('sc_uncl_syc', unclaimedSyc);
+    }, 1000);
 
-        const stepUsdt = boosted ? 0.000010 : 0.000005;
-        const stepSyc = boosted ? 0.015 : 0.008;
-
-        unclaimedBal += stepUsdt;
-        unclaimedSycMining += stepSyc;
-
-        document.getElementById('unclaimedBal').innerText = unclaimedBal.toFixed(6);
-        document.getElementById('unclaimedSycMining').innerText = unclaimedSycMining.toFixed(2);
-
-        localStorage.setItem('sc_uncl', unclaimedBal);
-        localStorage.setItem('sc_uncl_syc_mining', unclaimedSycMining);
-      }
+    let sessionSeconds = 14274;
+    setInterval(() => {
+      sessionSeconds--;
+      if (sessionSeconds <= 0) sessionSeconds = 14400;
+      const h = Math.floor(sessionSeconds / 3600);
+      const m = Math.floor((sessionSeconds % 3600) / 60);
+      const s = sessionSeconds % 60;
+      document.getElementById('liveSessionTimer').innerText = 
+        `${h < 10 ? '0':''}${h}:${m < 10 ? '0':''}${m}:${s < 10 ? '0':''}${s}`;
     }, 1000);
 
     function initAirdropCountdown() {
@@ -1983,54 +1734,43 @@
     }
 
     function collectUsdtReward() {
-      if (unclaimedBal <= 0.0001 && unclaimedSycMining <= 0.01) return notify('رصيد التعدين ضئيل حالياً!');
+      if (unclaimedBal <= 0.0001) return notify('رصيد الدولار المعدّن ضئيل حالياً!');
       playSound('win');
-      
       totalBal += unclaimedBal;
-      sycTotal += unclaimedSycMining;
-
-      notify(`تم جمع أرباح التعدين المزدوج بنجاح! 👛💎`);
-      
+      notify(`تم جمع أرباح الدولار (+${unclaimedBal.toFixed(4)} USDT) 👛`);
       unclaimedBal = 0;
-      unclaimedSycMining = 0;
-      miningEndTime = Date.now() + MINING_DURATION_MS; // إعادة تشغيل دورة الـ 4 ساعات جديدة
-      localStorage.setItem('sc_mining_end_time', miningEndTime);
-
       document.getElementById('totalBal').innerText = totalBal.toFixed(4);
-      document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
-      document.getElementById('unclaimedBal').innerText = '0.000000';
-      document.getElementById('unclaimedSycMining').innerText = '0.00';
-
+      document.getElementById('unclaimedBal').innerText = unclaimedBal.toFixed(6);
       localStorage.setItem('sc_tot', totalBal);
-      localStorage.setItem('sc_syc_tot', sycTotal);
-      localStorage.setItem('sc_uncl', 0);
-      localStorage.setItem('sc_uncl_syc_mining', 0);
-
+      localStorage.setItem('sc_uncl', unclaimedBal);
       updateCloudBalances(totalBal, sycTotal);
       recordTaskCompletion();
     }
 
     function collectSycReward() {
+      if (unclaimedSyc < 0.05) return notify('رصيد $SYC المعدّن ضئيل حالياً!');
       playSound('win');
-      sycTotal += 5;
+      sycTotal += unclaimedSyc;
+      notify(`تم استلام عملات الإنزال (+${unclaimedSyc.toFixed(2)} $SYC) 💎`);
+      unclaimedSyc = 0;
       document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
+      document.getElementById('unclaimedSyc').innerText = unclaimedSyc.toFixed(2);
       localStorage.setItem('sc_syc_tot', sycTotal);
+      localStorage.setItem('sc_uncl_syc', unclaimedSyc);
       updateCloudBalances(totalBal, sycTotal);
-      notify('🎉 تم استلام رصيد عملات الإنزال ($SYC)!');
+      recordTaskCompletion();
     }
 
     function clickMiningCircle() {
-      playVerifiedAd('تعدين العملات المشفرة', 'شاهد الإعلان بالكامل لتسريع دورة التعدين الحالية...', 8, () => {
+      playVerifiedAd('تعدين الدولار السحابي', 'شاهد الإعلان بالكامل لتأكيد إضافة بونص الدولار لحسابك...', 8, () => {
         unclaimedBal += 0.005;
-        unclaimedSycMining += 1.0;
         document.getElementById('unclaimedBal').innerText = unclaimedBal.toFixed(6);
-        document.getElementById('unclaimedSycMining').innerText = unclaimedSycMining.toFixed(2);
-        notify('🎉 تمت إضافة بونص التعدين المزدوج بنجاح!');
+        notify('🎉 تمت إضافة +0.005 USDT بنجاح!');
       });
     }
 
     function clickCounterBox() {
-      playVerifiedAd('مكافأة العداد المباشر', 'شاهد الإعلان لتأكيد إضافة بونص فوري...', 8, () => {
+      playVerifiedAd('مكافأة العداد المباشر', 'شاهد الإعلان لتأكيد إضافة بونص العداد الفوري...', 8, () => {
         unclaimedBal += 0.008;
         document.getElementById('unclaimedBal').innerText = unclaimedBal.toFixed(6);
         notify('🎉 تمت إضافة +0.008 USDT بنجاح!');
@@ -2248,8 +1988,10 @@
       });
     }
 
+    // رندر المهام الاجتماعية الأربع بدقة
     function renderSocialTasks(lang) {
       const c = document.getElementById('socialTasksContainer');
+      if (!c) return;
       const isAr = lang === 'ar';
       const isTr = lang === 'tr';
 
@@ -2297,6 +2039,7 @@
 
     function renderAirdropTasks(lang) {
       const c = document.getElementById('airdropTasksContainer');
+      if (!c) return;
       const isAr = lang === 'ar';
       const isTr = lang === 'tr';
 
@@ -2340,8 +2083,10 @@
       `).join('');
     }
 
+    // رندر الـ 25 إعلاناً المأجورة بدقة في تبويب الإعلانات
     function render25Ads(lang) {
       const c = document.getElementById('adsContainer25');
+      if (!c) return;
       const isAr = lang === 'ar';
       const isTr = lang === 'tr';
       let html = '';
@@ -2484,7 +2229,11 @@
 
       syncUserWithCloud();
       checkVipSuccessOnLoad();
-      checkBackgroundMining(); // فحص وتحديث التعدين المستمر في الخلفية فور الفتح
+
+      // استدعاء رندر المهام الاجتماعية والإعلانات الـ 25 فور التحميل لتظهر فوراً
+      renderSocialTasks('ar');
+      renderAirdropTasks('ar');
+      render25Ads('ar');
 
       const savedLang = localStorage.getItem('sc_lang') || 'ar';
       document.getElementById('langSelect').value = savedLang;
