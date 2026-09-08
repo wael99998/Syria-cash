@@ -224,14 +224,7 @@
       border: 1px solid #cbd5e1;
     }
     .flag-green { background: #007a3d; height: 33.3%; }
-    .flag-white { 
-      background: #ffffff; 
-      height: 33.3%; 
-      position: relative; 
-      display: flex; 
-      justify-content: space-around; 
-      align-items: center; 
-    }
+    .flag-white { background: #ffffff; height: 33.3%; position: relative; display: flex; justify-content: space-around; align-items: center; }
     .flag-black { background: #000000; height: 33.4%; }
     .star { width: 2.5px; height: 2.5px; background: #ce1126; border-radius: 50%; }
 
@@ -801,7 +794,7 @@
       </div>
     </section>
 
-    <!-- تبويب عقود VIP الاستثمارية (تم تعديل الباقة الأولى لـ 15$) -->
+    <!-- تبويب عقود VIP الاستثمارية -->
     <section id="tab-vip" class="tab-view">
       <div class="section-header" id="lbl_vip_header">خزن وعقود التعدين السحابي VIP 👑</div>
       
@@ -816,30 +809,30 @@
       </div>
 
       <div style="display: flex; flex-direction: column; gap: 14px;">
-        <!-- باقة 15$ -->
+        <!-- باقة 10$ -->
         <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 14px; box-shadow: var(--shadow-sm);">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
             <div>
               <div style="font-size: 14px; font-weight: 900; color: var(--text-dark);">عقد النحاس (VIP 1)</div>
               <div style="font-size: 10px; color: var(--text-muted);">عقد تعدين نشط لمدة شهر</div>
             </div>
-            <div style="font-size: 18px; font-weight: 900; color: var(--primary-green);">$15 <small style="font-size: 10px; color: var(--text-muted);">/ شهر</small></div>
+            <div style="font-size: 18px; font-weight: 900; color: var(--primary-green);">$10 <small style="font-size: 10px; color: var(--text-muted);">/ شهر</small></div>
           </div>
           <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: #f8fafc; border-radius: 10px; padding: 8px; text-align: center; margin-bottom: 10px;">
             <div>
               <div style="font-size: 9.5px; color: var(--text-muted);">الإنتاج اليومي</div>
-              <div style="font-size: 12px; font-weight: 800; color: var(--text-dark);">0.90 $</div>
+              <div style="font-size: 12px; font-weight: 800; color: var(--text-dark);">0.60 $</div>
             </div>
             <div>
               <div style="font-size: 9.5px; color: var(--text-muted);">العائد الشهري</div>
-              <div style="font-size: 12px; font-weight: 800; color: var(--primary-green);">27.00 $</div>
+              <div style="font-size: 12px; font-weight: 800; color: var(--primary-green);">18.00 $</div>
             </div>
             <div>
               <div style="font-size: 9.5px; color: var(--text-muted);">بونص الإيردروب</div>
-              <div style="font-size: 12px; font-weight: 800; color: #0284c7;">+150 SYC</div>
+              <div style="font-size: 12px; font-weight: 800; color: #0284c7;">+100 SYC</div>
             </div>
           </div>
-          <button onclick="buyVipPackage(15, 'VIP-1', 150)" class="btn-official-green" style="padding: 10px; font-size: 12px;">تفعيل العقد الآن (15 USDT) 🚀</button>
+          <button onclick="buyVipPackage(10, 'VIP-1', 100)" class="btn-official-green" style="padding: 10px; font-size: 12px;">تفعيل العقد الآن (10 USDT) 🚀</button>
         </div>
 
         <!-- باقة 25$ -->
@@ -1179,6 +1172,7 @@
   </nav>
 
   <script>
+    // سكريبت حماية شاشة البداية وضمان إزالتها كلياً لمنع تجمد اللمس
     window.addEventListener('load', () => {
       setTimeout(() => {
         const splash = document.getElementById('appSplashScreen');
@@ -1216,16 +1210,7 @@
     let globalUsername = 'مستخدم';
     let isUserVip = false;
 
-    // الحفاظ على الأرصدة وعدم تصفيرها أبداً عبر مقارنة الذاكرة المحلية
-    let totalBal = Math.max(parseFloat(localStorage.getItem('sc_tot') || '0.2366'), 0.2366);
-    let sycTotal = Math.max(parseFloat(localStorage.getItem('sc_syc_tot') || '240.50'), 240.50);
-
-    let unclaimedBal = parseFloat(localStorage.getItem('sc_uncl') || '0.000000');
-    let unclaimedSyc = parseFloat(localStorage.getItem('sc_uncl_syc') || '0.00');
-
-    document.getElementById('totalBal').innerText = totalBal.toFixed(4);
-    document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
-
+    // تهيئة مؤقتات الـ 4 ساعات
     const DURATION_MS = 4 * 60 * 60 * 1000;
     let usdtEndTime = parseInt(localStorage.getItem('sc_usdt_end') || '0');
     if (!usdtEndTime || usdtEndTime <= Date.now()) {
@@ -1238,9 +1223,6 @@
       sycEndTime = Date.now() + DURATION_MS;
       localStorage.setItem('sc_syc_end', sycEndTime);
     }
-
-    let boostEndTime = parseInt(localStorage.getItem('sc_boost_end') || '0');
-    let boosted = boostEndTime > Date.now();
 
     async function syncUserWithCloud() {
       if (!_supabase) return;
@@ -1370,451 +1352,850 @@
       }
     }
 
-    // قاموس اللغات الشامل
-    const dict = {
-      ar: {
-        brand_sub: "المنظومة الرقمية للمعاملات والتعدين السحابي",
-        hero_title: "الرصيد الكلي القابل للسحب",
-        speed: "السرعة",
-        prod: "الإنتاج اليومي",
-        withdraw_nav: "سحب الأرباح",
-        boost_btn: "مضاعفة السرعة 2X",
-        available: "متاح الآن",
-        server_status: "خادم تعدين الدولار (USDT Cloud 1) 🟢",
-        active_mining: "تعدين الدولار نشط",
-        cycle_timer: "مؤقت الدورة (4 ساعات)",
-        collect_btn: "جمع وتأكيد أرباح الدولار (USDT)",
-        air_season_badge: "الموسم الأول (60 يوماً) 💎",
-        air_balance_lbl: "رصيدك الإجمالي من عملة المنصة:",
-        air_distribute_lbl: "يتم تحويل وتوزيع كامل رصيدك تلقائياً إلى USDT فور انتهاء العداد:",
-        lbl_days: "يوم", lbl_hours: "ساعة", lbl_mins: "دقيقة", lbl_secs: "ثانية",
-        air_progress_lbl: "تقدم موسم الإنزال الجوي:",
-        syc_hub_title: "محطة تعدين عملة الإنزال ($SYC Node 1) ⚡",
-        syc_speed_lbl: "سرعة التعدين: 15.0 $SYC / يوم",
-        collect_syc_btn: "جمع الأرباح",
-        airdrop_tasks_header: "مهام الإنزال الجوي الحصرية",
-        games_header: "الألعاب وسحب الخزنة الكبرى الشهري",
-        vault_title: "🔥 السحب الشهري على الخزنة الكبرى (Monthly Vault)",
-        vault_progress_lbl: "إعلاناتك المشاهدة:",
-        vault_ticket_lbl: "إعلانات للحصول على التذكرة!",
-        vault_btn: "مشاهدة إعلان للدخول بالسحب الشهري 🎟️",
-        scratch_title: "🎟️ كرت (امسح واربح) 🪙",
-        scratch_desc: "امسح بإصبعك على البطاقة واكشف هديتك فوراً!",
-        scratch_renew_btn: "كرت جديد (مشاهدة إعلان مؤكد 🎬)",
-        boxes_title: "🎁 صناديق الحظ الثلاثية",
-        boxes_desc: "اختر أحد الصناديق لفتحه بالمفتاح الذهبي بعد مشاهدة إعلان!",
-        box_1: "صندوق 1", box_2: "صندوق 2", box_3: "صندوق 3",
-        wheel_title: "🎡 عجلة الحظ الكبرى",
-        spins_left_lbl: "اللفات المتبقية:",
-        spin_now_btn: "تدوير العجلة 🎯",
-        renew_spins_btn: "+3 لفات (إعلان 🎬)",
-        tap_title: "⛏️ لعبة صائد العملات (Tap Mining)",
-        tap_progress_lbl: "شظايا مجمعة:",
-        tap_recharge_btn: "شحن طاقة النقر (مشاهدة إعلان ⚡)",
-        tasks_header: "المهام الاجتماعية والرسمية",
-        paid_ads_header: "إعلانات الفيديو المأجورة (25 إعلاناً)",
-        ref_header: "برنامج دعوة الأصدقاء والوكالة",
-        copy_ref_btn: "نسخ رابط الإحالة الرسمي 📋",
-        withdraw_header: "طلب سحب الأرباح المالي",
-        withdraw_method_label: "طريقة استلام الأرباح:",
-        amount_label: "المبلغ المطلوب سحبه:",
-        submit_withdraw_btn: "تأكيد طلب السحب المالي 🚀",
-        nav_airdrop: "إنزال $SYC",
-        nav_main: "تعدين USDT",
-        nav_vip: "عقود VIP",
-        nav_games: "الألعاب",
-        nav_ads: "الإعلانات",
-        nav_ref: "الإحالة",
-        nav_withdraw: "السحب",
-        checkin_title: "مكافأة تسجيل الدخول اليومي",
-        checkin_desc: "استلم مكافأتك اليومية المتدرجة:",
-        checkin_btn: "استلام المكافأة اليومية 🎯",
-        close_btn: "إغلاق",
-        offline_msg: "⚠️ انقطع الاتصال بالإنترنت.. جاري المحاولة تلقائياً"
-      },
-      en: {
-        brand_sub: "Digital Ecosystem for Cloud Transactions & Mining",
-        hero_title: "Total Withdrawable Balance",
-        speed: "Speed",
-        prod: "Daily Output",
-        withdraw_nav: "Withdraw Funds",
-        boost_btn: "2X Speed Boost",
-        available: "Ready",
-        server_status: "USDT Cloud Server (Cloud 1) 🟢",
-        active_mining: "USDT Mining Active",
-        cycle_timer: "Cycle Timer (4 Hours)",
-        collect_btn: "Collect & Confirm USDT Profits",
-        air_season_badge: "Season 1 (60 Days) 💎",
-        air_balance_lbl: "Total $SYC Coin Balance:",
-        air_distribute_lbl: "All balance will convert automatically to USDT after timer:",
-        lbl_days: "Days", lbl_hours: "Hours", lbl_mins: "Mins", lbl_secs: "Secs",
-        air_progress_lbl: "Airdrop Season Progress:",
-        syc_hub_title: "$SYC Mining Node (Node 1) ⚡",
-        syc_speed_lbl: "Mining Speed: 15.0 $SYC / Day",
-        collect_syc_btn: "Collect Profits",
-        airdrop_tasks_header: "Exclusive Airdrop Quests",
-        games_header: "Games & Monthly Mega Vault",
-        vault_title: "🔥 Monthly Mega Vault Draw",
-        vault_progress_lbl: "Ads Watched:",
-        vault_ticket_lbl: "ads to earn a ticket!",
-        vault_btn: "Watch Ad to Enter Vault Draw 🎟️",
-        scratch_title: "🎟️ Scratch & Win Card 🪙",
-        scratch_desc: "Scratch with your finger to reveal instant rewards!",
-        scratch_renew_btn: "New Card (Watch Ad 🎬)",
-        boxes_title: "Mystery Boxes",
-        boxes_desc: "Pick a box to open with the golden key after watching an ad!",
-        box_1: "Box 1", box_2: "Box 2", box_3: "Box 3",
-        wheel_title: "🎡 Lucky Fortune Wheel",
-        spins_left_lbl: "Spins Left:",
-        spin_now_btn: "Spin Wheel 🎯",
-        renew_spins_btn: "+3 Spins (Ad 🎬)",
-        tap_title: "⛏️ Tap Mining Quest",
-        tap_progress_lbl: "Collected Shards:",
-        tap_recharge_btn: "Recharge Energy (Watch Ad ⚡)",
-        tasks_header: "Official & Social Tasks",
-        paid_ads_header: "Paid Video Ads (25 Ads)",
-        ref_header: "Referral & Affiliate Program",
-        copy_ref_btn: "Copy Official Invite Link 📋",
-        withdraw_header: "Withdrawal Request Form",
-        withdraw_method_label: "Payout Method:",
-        amount_label: "Amount to Withdraw:",
-        submit_withdraw_btn: "Submit Withdrawal Request 🚀",
-        nav_airdrop: "$SYC Airdrop",
-        nav_main: "USDT Mining",
-        nav_vip: "VIP Contracts",
-        nav_games: "Games",
-        nav_ads: "Tasks",
-        nav_ref: "Referral",
-        nav_withdraw: "Withdraw",
-        checkin_title: "Daily Check-in Reward",
-        checkin_desc: "Claim your tiered daily reward:",
-        checkin_btn: "Claim Daily Reward 🎯",
-        close_btn: "Close",
-        offline_msg: "⚠️ No internet connection.. Retrying automatically"
-      },
-      tr: {
-        brand_sub: "Bulut Madenciliği ve Dijital İşlem Sistemi",
-        hero_title: "Çekilebilir Toplam Bakiye",
-        speed: "Hız",
-        prod: "Günlük Üretim",
-        withdraw_nav: "Para Çek",
-        boost_btn: "2X Hız Artırıcı",
-        available: "Hazır",
-        server_status: "USDT Bulut Sunucusu (Cloud 1) 🟢",
-        active_mining: "USDT Madenciliği Aktif",
-        cycle_timer: "Döngü Sayacı (4 Saat)",
-        collect_btn: "USDT Kazancını Topla ve Onayla",
-        air_season_badge: "1. Sezon (60 Gün) 💎",
-        air_balance_lbl: "Toplam $SYC Coin Bakiyeniz:",
-        air_distribute_lbl: "Sayaç bitiminde tüm bakiyeniz otomatik olarak USDT'ye çevrilir:",
-        lbl_days: "Gün", lbl_hours: "Saat", lbl_mins: "Dk", lbl_secs: "Sn",
-        air_progress_lbl: "Airdrop Sezon İlerlemesi:",
-        syc_hub_title: "$SYC Madencilik Düğümü (Node 1) ⚡",
-        syc_speed_lbl: "Madencilik Hızı: 15.0 $SYC / Gün",
-        collect_syc_btn: "Kazançları Topla",
-        airdrop_tasks_header: "Özel Airdrop Görevleri",
-        games_header: "Oyunlar ve Aylık Büyük Kasa",
-        vault_title: "🔥 Aylık Büyük Kasa Çekilişi (Monthly Vault)",
-        vault_progress_lbl: "İzlenen Reklamlar:",
-        vault_ticket_lbl: "bilet almak için gereken reklam!",
-        vault_btn: "Aylık Çekiliş İçin Reklam İzle 🎟️",
-        scratch_title: "🎟️ Kazı Kazan Kartı 🪙",
-        scratch_desc: "Parmağınızla kartı kazıyın ve anında ödül kazanın!",
-        scratch_renew_btn: "Yeni Kart (Reklam İzle 🎬)",
-        boxes_title: "Şanslı Üç Sandık",
-        boxes_desc: "Reklam izledikten sonra altın anahtarla bir sandık açın!",
-        box_1: "Sandık 1", box_2: "Sandık 2", box_3: "Sandık 3",
-        wheel_title: "🎡 Büyük Çarkıfelek",
-        spins_left_lbl: "Kalan Çevirme:",
-        spin_now_btn: "Çarkı Çevir 🎯",
-        renew_spins_btn: "+3 Çevirme (Reklam 🎬)",
-        tap_title: "⛏️ Tıklama Madenciliği (Tap Mining)",
-        tap_progress_lbl: "Toplanan Parçalar:",
-        tap_recharge_btn: "Enerjiyi Doldur (Reklam İzle ⚡)",
-        tasks_header: "Sosyal ve Resmi Görevler",
-        paid_ads_header: "Ücretli Video Reklamlar (25 Reklam)",
-        ref_header: "Arkadaşını Davet Et & Ortaklık",
-        copy_ref_btn: "Resmi Davet Linkini Kopyala 📋",
-        withdraw_header: "Para Çekme Talebi",
-        withdraw_method_label: "Ödeme Yöntemi:",
-        amount_label: "Çekilecek Tutar:",
-        submit_withdraw_btn: "Çekim Talebini Onayla 🚀",
-        nav_airdrop: "$SYC Airdrop",
-        nav_main: "USDT Maden",
-        nav_vip: "VIP Sözleşme",
-        nav_games: "Oyunlar",
-        nav_ads: "Görevler",
-        nav_ref: "Referans",
-        nav_withdraw: "Para Çek",
-        checkin_title: "Günlük Giriş Ödülü",
-        checkin_desc: "Günlük ödülünüzü alın:",
-        checkin_btn: "Ödülü Al 🎯",
-        close_btn: "Kapat",
-        offline_msg: "⚠️ İnternet bağlantısı kesildi.. Yeniden deneniyor"
-      },
-      hi: {
-        brand_sub: "क्लाउड माइनिंग और डिजिटल सिस्टम",
-        hero_title: "कुल निकालने योग्य शेष",
-        speed: "गति",
-        prod: "दैनिक उत्पादन",
-        withdraw_nav: "धन निकालें",
-        boost_btn: "2X गति बूस्ट",
-        available: "उपलब्ध",
-        server_status: "USDT क्लाउड सर्वर 🟢",
-        active_mining: "USDT माइनिंग सक्रिय",
-        cycle_timer: "चक्र таймер (4 घंटे)",
-        collect_btn: "USDT लाभ एकत्र करें",
-        air_season_badge: "सीजन 1 (60 दिन) 💎",
-        air_balance_lbl: "कुल $SYC सिक्का शेष:",
-        air_distribute_lbl: "टाइमर समाप्त होने पर सभी शेष राशि USDT में परिवर्तित हो जाएगी:",
-        lbl_days: "दिन", lbl_hours: "घंटे", lbl_mins: "मिनट", lbl_secs: "सेकंड",
-        air_progress_lbl: "एयरड्रॉप प्रगति:",
-        syc_hub_title: "$SYC माइनिंग नोड ⚡",
-        syc_speed_lbl: "माइनिंग गति: 15.0 $SYC / दिन",
-        collect_syc_btn: "लाभ एकत्र करें",
-        airdrop_tasks_header: "विशेष एयरड्रॉप क्वेस्ट",
-        games_header: "गेम और मासिक वॉल्ट",
-        vault_title: "🔥 मासिक मेगा वॉल्ट ड्रा",
-        vault_progress_lbl: "देखे गए विज्ञापन:",
-        vault_ticket_lbl: "विज्ञापन टिकट के लिए!",
-        vault_btn: "वॉल्ट विज्ञापन देखें 🎟️",
-        scratch_title: "🎟️ स्क्रैच एंड विन 🪙",
-        scratch_desc: "तुरंत पुरस्कार पाने के लिए कार्ड स्क्रैच करें!",
-        scratch_renew_btn: "नया कार्ड (विज्ञापन देखें 🎬)",
-        boxes_title: "रहस्यमयी बक्से",
-        boxes_desc: "विज्ञापन देखने के बाद बक्सा खोलें!",
-        box_1: "बॉक्स 1", box_2: "बॉक्स 2", box_3: "बॉक्स 3",
-        wheel_title: "🎡 लकी व्हील",
-        spins_left_lbl: "शेष स्पिन:",
-        spin_now_btn: "स्पिन करें 🎯",
-        renew_spins_btn: "+3 स्पिन (विज्ञापन 🎬)",
-        tap_title: "⛏️ टैप माइनिंग",
-        tap_progress_lbl: "संग्रह:",
-        tap_recharge_btn: "ऊर्जा रीఛार्ज करें (विज्ञापन ⚡)",
-        tasks_header: "आधिकारिक कार्य",
-        paid_ads_header: "सशुल्क वीडियो विज्ञापन (25)",
-        ref_header: "रेफरल कार्यक्रम",
-        copy_ref_btn: "आमंत्रण लिंक कॉपी करें 📋",
-        withdraw_header: "निकासी अनुरोध",
-        withdraw_method_label: "भुगतान विधि:",
-        amount_label: "राशि:",
-        submit_withdraw_btn: "निकासी अनुरोध सबमिट करें 🚀",
-        nav_airdrop: "$SYC एयरड्रॉप",
-        nav_main: "USDT माइन",
-        nav_vip: "VIP अनुबंध",
-        nav_games: "गेम",
-        nav_ads: "कार्य",
-        nav_ref: "रेफरल",
-        nav_withdraw: "निकासी",
-        checkin_title: "दैनिक चेक-इन पुरस्कार",
-        checkin_desc: "अपना दैनिक पुरस्कार प्राप्त करें:",
-        checkin_btn: "पुरस्कार प्राप्त करें 🎯",
-        close_btn: "बंद करें",
-        offline_msg: "⚠️ इंटरनेट कनेक्शन नहीं है.."
-      },
-      zh: {
-        brand_sub: "云挖矿与数字交易系统",
-        hero_title: "总可提现余额",
-        speed: "速度",
-        prod: "每日产量",
-        withdraw_nav: "提现收益",
-        boost_btn: "2X 速度加速",
-        available: "可用",
-        server_status: "USDT 云服务器 (Cloud 1) 🟢",
-        active_mining: "USDT 挖矿进行中",
-        cycle_timer: "周期计时器 (4小时)",
-        collect_btn: "收集并确认 USDT 收益",
-        air_season_badge: "第一赛季 (60天) 💎",
-        air_balance_lbl: "您的总 $SYC 代币余额:",
-        air_distribute_lbl: "倒计时结束时，全部余额将自动转换为 USDT:",
-        lbl_days: "天", lbl_hours: "小时", lbl_mins: "分", lbl_secs: "秒",
-        air_progress_lbl: "空投赛季进度:",
-        syc_hub_title: "$SYC 挖矿节点 (Node 1) ⚡",
-        syc_speed_lbl: "挖矿速度: 15.0 $SYC / 天",
-        collect_syc_btn: "收集收益",
-        airdrop_tasks_header: "独家空投任务",
-        games_header: "游戏与每月超级金库",
-        vault_title: "🔥 每月超级金库抽奖",
-        vault_progress_lbl: "已观看广告:",
-        vault_ticket_lbl: "获得门票所需的广告数!",
-        vault_btn: "观看广告参与金库抽奖 🎟️",
-        scratch_title: "🎟️ 刮刮乐卡片 🪙",
-        scratch_desc: "用手指刮开卡片即刻揭晓奖励!",
-        scratch_renew_btn: "新卡片 (观看广告 🎬)",
-        boxes_title: "幸运三宝箱",
-        boxes_desc: "观看广告后使用金钥匙打开宝箱!",
-        box_1: "宝箱 1", box_2: "宝箱 2", box_3: "宝箱 3",
-        wheel_title: "🎡 幸运大转盘",
-        spins_left_lbl: "剩余抽奖次数:",
-        spin_now_btn: "转动转盘 🎯",
-        renew_spins_btn: "+3 次抽奖 (广告 🎬)",
-        tap_title: "⛏️ 点击挖矿",
-        tap_progress_lbl: "已收集碎片:",
-        tap_recharge_btn: "补充能量 (观看广告 ⚡)",
-        tasks_header: "官方与社交任务",
-        paid_ads_header: "付费视频广告 (25个)",
-        ref_header: "好友邀请与代理计划",
-        copy_ref_btn: "复制官方邀请链接 📋",
-        withdraw_header: "提现申请表",
-        withdraw_method_label: "提现方式:",
-        amount_label: "提现金额:",
-        submit_withdraw_btn: "确认提现申请 🚀",
-        nav_airdrop: "$SYC 空投",
-        nav_main: "USDT 挖矿",
-        nav_vip: "VIP 合约",
-        nav_games: "游戏",
-        nav_ads: "任务",
-        nav_ref: "邀请",
-        nav_withdraw: "提现",
-        checkin_title: "每日签到奖励",
-        checkin_desc: "领取您的每日签到奖励：",
-        checkin_btn: "领取今日奖励 🎯",
-        close_btn: "关闭",
-        offline_msg: "⚠️ 网络连接中断.."
-      },
-      ku: {
-        brand_sub: "Sîstema Cûdakirina Ewr û Têkiliyên Dîjîtal",
-        hero_title: "Bakiya Tê Vekêşan",
-        speed: "Lez",
-        prod: "Hilberîna Rojane",
-        withdraw_nav: "Drav Bikişîne",
-        boost_btn: "Lezê Zêde Bike 2X",
-        available: "Amade ye",
-        server_status: "Sêvêra Ewr a USDT 🟢",
-        active_mining: "Madenkirina USDT çalak e",
-        cycle_timer: "Dema Çevrimê (4 Demjimêr)",
-        collect_btn: "Qezencên USDT Kom Bike",
-        air_season_badge: "Wersiha 1 (60 Roj) 💎",
-        air_balance_lbl: "Bakiya Giştî ya Diravê $SYC:",
-        air_distribute_lbl: "Dema demjimêr xilas bibe, hemî bakiya te vedigere USDT:",
-        lbl_days: "Roj", lbl_hours: "Demjimêr", lbl_mins: "Deqe", lbl_secs: "Çirk",
-        air_progress_lbl: "Pêşveçûna Airdrop:",
-        syc_hub_title: "Stasyona Madenkirinê $SYC ⚡",
-        syc_speed_lbl: "Leza Madenê: 15.0 $SYC / Roj",
-        collect_syc_btn: "Qezencên Kom bike",
-        airdrop_tasks_header: "Erkên Airdrop yên Taybet",
-        games_header: "Lîstik û Qaseya Mezin",
-        vault_title: "🔥 Qaseya Mezin ya Mehane",
-        vault_progress_lbl: "Reklamên Temaşekirî:",
-        vault_ticket_lbl: "reklam ji bo bilêtê!",
-        vault_btn: "Ji bo Qaseyê Reklamê Temaşe Bike 🎟️",
-        scratch_title: "🎟️ Qerta Bixûre û Bibe Xwedî 🪙",
-        scratch_desc: "Bi tiliyê xwe qertê bixûre û xelata xwe bibîne!",
-        scratch_renew_btn: "Qerta Nû (Reklam Temaşe Bike 🎬)",
-        boxes_title: "Sindoqên Bextewariyê",
-        boxes_desc: "Piştî reklamê, bi mifteya zêrîn sindoqê veke!",
-        box_1: "Sindoq 1", box_2: "Sindoq 2", box_3: "Sindoq 3",
-        wheel_title: "🎡 Çerxa Bextê",
-        spins_left_lbl: "Çerxên Mane:",
-        spin_now_btn: "Çerxê Bide 🎯",
-        renew_spins_btn: "+3 Çerx (Reklam 🎬)",
-        tap_title: "⛏️ Lîstika Tap Mining",
-        tap_progress_lbl: "Perçeyên Komkirî:",
-        tap_recharge_btn: "Enerjiyê Tije Bike (Reklam ⚡)",
-        tasks_header: "Erkên Civakî û Fermî",
-        paid_ads_header: "Reklamên Vîdyoyî yên Dravî (25)",
-        ref_header: "Bernameya Hevalan",
-        copy_ref_btn: "Lînka Dawetê Kopya Bike 📋",
-        withdraw_header: "Daxwaza Vekêşana Drav",
-        withdraw_method_label: "Rêbaza Wergirtinê:",
-        amount_label: "Mîqdara Tê Xwestin:",
-        submit_withdraw_btn: "Daxwaza Vekêşanê Pejirîne 🚀",
-        nav_airdrop: "$SYC Airdrop",
-        nav_main: "Madenê USDT",
-        nav_vip: "Peymanên VIP",
-        nav_games: "Lîstik",
-        nav_ads: "Erk",
-        nav_ref: "Referans",
-        nav_withdraw: "Vekêşan",
-        checkin_title: "Xelata Têketina Rojane",
-        checkin_desc: "Xelata xwe bistîne:",
-        checkin_btn: "Xelatê Bistîne 🎯",
-        close_btn: "Girtin",
-        offline_msg: "⚠️ Têkiliya înternetê qut bû.."
-      },
-      fr: {
-        brand_sub: "Écosystème Numérique pour le Minage Cloud",
-        hero_title: "Solde Total Retirable",
-        speed: "Vitesse",
-        prod: "Production Quotidienne",
-        withdraw_nav: "Retirer",
-        boost_btn: "Boost de Vitesse 2X",
-        available: "Prêt",
-        server_status: "Serveur Cloud USDT (Cloud 1) 🟢",
-        active_mining: "Minage USDT Actif",
-        cycle_timer: "Minuteur de Cycle (4 Heures)",
-        collect_btn: "Collecter et Confirmer les Profits USDT",
-        air_season_badge: "Saison 1 (60 Jours) 💎",
-        air_balance_lbl: "Solde Total de Jeton $SYC:",
-        air_distribute_lbl: "Le solde sera automatiquement converti en USDT à la fin du minuteur :",
-        lbl_days: "Jours", lbl_hours: "Heures", lbl_mins: "Min", lbl_secs: "Sec",
-        air_progress_lbl: "Progression de la Saison Airdrop:",
-        syc_hub_title: "Nœud de Minage $SYC (Node 1) ⚡",
-        syc_speed_lbl: "Vitesse de Minage : 15.0 $SYC / Jour",
-        collect_syc_btn: "Collecter les Profits",
-        airdrop_tasks_header: "Quêtes Airdrop Exclusives",
-        games_header: "Jeux et Coffre Fort Mensuel",
-        vault_title: "🔥 Tirage du Grand Coffre Mensuel",
-        vault_progress_lbl: "Publicités vues :",
-        vault_ticket_lbl: "pubs pour gagner un ticket !",
-        vault_btn: "Voir une pub pour le coffre 🎟️",
-        scratch_title: "🎟️ Carte à Gratter 🪙",
-        scratch_desc: "Grattez avec votre doigt pour révéler des gains instantanés !",
-        scratch_renew_btn: "Nouvelle Carte (Voir une pub 🎬)",
-        boxes_title: "Boîtes Mystères",
-        boxes_desc: "Choisissez une boîte à ouvrir avec la clé dorée !",
-        box_1: "Boîte 1", box_2: "Boîte 2", box_3: "Boîte 3",
-        wheel_title: "🎡 Roue de la Fortune",
-        spins_left_lbl: "Spins restants :",
-        spin_now_btn: "Tourner la Roue 🎯",
-        renew_spins_btn: "+3 Spins (Pub 🎬)",
-        tap_title: "⛏️ Jeu de Minage Tap",
-        tap_progress_lbl: "Éclats collectés :",
-        tap_recharge_btn: "Recharger l'Énergie (Pub ⚡)",
-        tasks_header: "Tâches Officielles et Sociales",
-        paid_ads_header: "Publicités Vidéo Payantes (25 Pubs)",
-        ref_header: "Programme de Parrainage",
-        copy_ref_btn: "Copier le Lien de Parrainage 📋",
-        withdraw_header: "Formulaire de Retrait",
-        withdraw_method_label: "Méthode de Paiement :",
-        amount_label: "Montant à Retirer :",
-        submit_withdraw_btn: "Soumettre la Demande de Retrait 🚀",
-        nav_airdrop: "Airdrop $SYC",
-        nav_main: "Minage USDT",
-        nav_vip: "Contrats VIP",
-        nav_games: "Jeux",
-        nav_ads: "Tâches",
-        nav_ref: "Parrainage",
-        nav_withdraw: "Retrait",
-        checkin_title: "Récompense Quotidienne",
-        checkin_desc: "Récupérez votre récompense :",
-        checkin_btn: "Réclamer 🎯",
-        close_btn: "Fermer",
-        offline_msg: "⚠️ Connexion perdue.."
+    let pendingRewardCallback = null;
+    let adInterval = null;
+
+    function playVerifiedAd(title, desc, durationSeconds, onVerifiedReward) {
+      document.getElementById('adPlayerTitle').innerText = title;
+      document.getElementById('adPlayerDesc').innerText = desc;
+      
+      const claimBtn = document.getElementById('claimAdRewardBtn');
+      const progressBar = document.getElementById('adProgressBarFill');
+      const countdownTxt = document.getElementById('adCountdownVal');
+      const statusTxt = document.getElementById('adSimStatusText');
+
+      claimBtn.disabled = true;
+      claimBtn.style.background = '#64748b';
+      claimBtn.style.cursor = 'not-allowed';
+      claimBtn.innerText = `انتظر اكتمال الإعلان (${durationSeconds}ث)...`;
+      progressBar.style.width = '0%';
+      statusTxt.innerText = "جاري تشغيل الفيديو الإعلاني...";
+      
+      openModal('verifiedAdModal');
+      
+      let remaining = durationSeconds;
+      countdownTxt.innerText = `${remaining}s`;
+      
+      const stepPct = 100 / durationSeconds;
+      let currentPct = 0;
+
+      if (adInterval) clearInterval(adInterval);
+      
+      adInterval = setInterval(() => {
+        remaining--;
+        currentPct += stepPct;
+        progressBar.style.width = `${Math.min(100, currentPct)}%`;
+        countdownTxt.innerText = `${remaining}s`;
+
+        if (remaining <= 0) {
+          clearInterval(adInterval);
+          progressBar.style.width = '100%';
+          statusTxt.innerText = "✓ اكتمل الإعلان بنجاح! يمكنك استلام المكافأة:";
+          countdownTxt.innerText = "جاهز!";
+          
+          claimBtn.disabled = false;
+          claimBtn.style.background = '#005a36';
+          claimBtn.style.cursor = 'pointer';
+          claimBtn.innerText = "تأكيد المشاهدة واستلام المكافأة ✓";
+          
+          pendingRewardCallback = () => {
+            onVerifiedReward();
+            closeModal('verifiedAdModal');
+            playSound('win');
+            recordTaskCompletion();
+          };
+        }
+      }, 1000);
+    }
+
+    document.getElementById('claimAdRewardBtn').onclick = () => {
+      if (pendingRewardCallback) {
+        pendingRewardCallback();
+        pendingRewardCallback = null;
       }
     };
 
-    function changeLanguage(lang) {
+    let totalBal = parseFloat(localStorage.getItem('sc_tot') || '0.2366');
+    let sycTotal = parseFloat(localStorage.getItem('sc_syc_tot') || '240.50');
+
+    let unclaimedBal = parseFloat(localStorage.getItem('sc_uncl') || '0.000000');
+    let unclaimedSyc = parseFloat(localStorage.getItem('sc_uncl_syc') || '0.00');
+    let boosted = false;
+    let sycBoosted = false;
+
+    document.getElementById('totalBal').innerText = totalBal.toFixed(4);
+    document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
+
+    // عداد USDT
+    setInterval(() => {
+      const now = Date.now();
+      let remaining = usdtEndTime - now;
+
+      if (remaining <= 0) {
+        document.getElementById('liveSessionTimer').innerText = "00:00:00 (اكتملت الدورة ⏱)";
+      } else {
+        const h = Math.floor(remaining / (1000 * 60 * 60));
+        const m = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((remaining % (1000 * 60)) / 1000);
+        document.getElementById('liveSessionTimer').innerText = 
+          `${h < 10 ? '0':''}${h}:${m < 10 ? '0':''}${m}:${s < 10 ? '0':''}${s}`;
+
+        const rate = boosted ? 0.000020 : 0.000010;
+        unclaimedBal += rate;
+        document.getElementById('unclaimedBal').innerText = unclaimedBal.toFixed(6);
+        localStorage.setItem('sc_uncl', unclaimedBal);
+      }
+    }, 1000);
+
+    // عداد $SYC
+    setInterval(() => {
+      const now = Date.now();
+      let remaining = sycEndTime - now;
+
+      if (remaining <= 0) {
+        document.getElementById('sycMiningTimer').innerText = "00:00:00 (اكتملت الدورة ⏱)";
+      } else {
+        const h = Math.floor(remaining / (1000 * 60 * 60));
+        const m = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((remaining % (1000 * 60)) / 1000);
+        document.getElementById('sycMiningTimer').innerText = 
+          `مؤقت دورة الـ 4 ساعات: ${h < 10 ? '0':''}${h}:${m < 10 ? '0':''}${m}:${s < 10 ? '0':''}${s} ⏱`;
+
+        const rate = sycBoosted ? 0.05 : 0.02;
+        unclaimedSyc += rate;
+        document.getElementById('unclaimedSyc').innerText = unclaimedSyc.toFixed(2);
+        localStorage.setItem('sc_uncl_syc', unclaimedSyc);
+      }
+    }, 1000);
+
+    function initAirdropCountdown() {
+      let airdropEnd = localStorage.getItem('sc_airdrop_end');
+      const totalDuration = 60 * 24 * 60 * 60 * 1000;
+
+      if (!airdropEnd) {
+        airdropEnd = Date.now() + totalDuration;
+        localStorage.setItem('sc_airdrop_end', airdropEnd);
+      } else {
+        airdropEnd = parseInt(airdropEnd);
+      }
+
+      function updateCountdown() {
+        const now = Date.now();
+        let remaining = airdropEnd - now;
+
+        if (remaining <= 0) {
+          airdropEnd = Date.now() + totalDuration;
+          localStorage.setItem('sc_airdrop_end', airdropEnd);
+          remaining = totalDuration;
+        }
+
+        const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60));
+        const mins = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((remaining % (1000 * 60)) / 1000);
+
+        document.getElementById('airDays').innerText = days;
+        document.getElementById('airHours').innerText = hours < 10 ? '0' + hours : hours;
+        document.getElementById('airMins').innerText = mins < 10 ? '0' + mins : mins;
+        document.getElementById('airSecs').innerText = secs < 10 ? '0' + secs : secs;
+
+        const elapsed = totalDuration - remaining;
+        const progressPct = Math.min(100, Math.max(1, ((elapsed / totalDuration) * 100))).toFixed(1);
+        document.getElementById('airdropProgressBar').style.width = progressPct + '%';
+        document.getElementById('airdropProgressText').innerText = progressPct + '%';
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
+
+    function collectUsdtReward() {
+      if (unclaimedBal <= 0.00001) return notify('رصيد الدولار المعدّن ضئيل حالياً!');
+      playSound('win');
+      totalBal += unclaimedBal;
+      notify(`تم جمع أرباح الدولار وإعادة العداد 4 ساعات 👛`);
+      
+      unclaimedBal = 0;
+      usdtEndTime = Date.now() + DURATION_MS;
+      localStorage.setItem('sc_usdt_end', usdtEndTime);
+
+      document.getElementById('totalBal').innerText = totalBal.toFixed(4);
+      document.getElementById('unclaimedBal').innerText = '0.000000';
+      localStorage.setItem('sc_tot', totalBal);
+      localStorage.setItem('sc_uncl', 0);
+      updateCloudBalances(totalBal, sycTotal);
+      recordTaskCompletion();
+    }
+
+    function collectSycReward() {
+      if (unclaimedSyc <= 0.01) return notify('رصيد $SYC المعدّن ضئيل حالياً!');
+      playSound('win');
+      sycTotal += unclaimedSyc;
+      notify(`تم استلام عملات الإنزال وإعادة العداد 4 ساعات 💎`);
+      
+      unclaimedSyc = 0;
+      sycEndTime = Date.now() + DURATION_MS;
+      localStorage.setItem('sc_syc_end', sycEndTime);
+
+      document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
+      document.getElementById('unclaimedSyc').innerText = '0.00';
+      localStorage.setItem('sc_syc_tot', sycTotal);
+      localStorage.setItem('sc_uncl_syc', 0);
+      updateCloudBalances(totalBal, sycTotal);
+      recordTaskCompletion();
+    }
+
+    function clickMiningCircle() {
+      playVerifiedAd('تعدين الدولار السحابي', 'شاهد الإعلان بالكامل لتأكيد إضافة بونص الدولار لحسابك...', 8, () => {
+        unclaimedBal += 0.005;
+        document.getElementById('unclaimedBal').innerText = unclaimedBal.toFixed(6);
+        notify('🎉 تمت إضافة +0.005 USDT بنجاح!');
+      });
+    }
+
+    function clickCounterBox() {
+      playVerifiedAd('مكافأة العداد المباشر', 'شاهد الإعلان لتأكيد إضافة بونص العداد الفوري...', 8, () => {
+        unclaimedBal += 0.008;
+        document.getElementById('unclaimedBal').innerText = unclaimedBal.toFixed(6);
+        notify('🎉 تمت إضافة +0.008 USDT بنجاح!');
+      });
+    }
+
+    function clickSycStation() {
+      playVerifiedAd('تسريع تعدين عملة $SYC', 'شاهد الإعلان كاملاً لتأكيد إضافة عملات المنصة النادرة...', 8, () => {
+        sycTotal += 5;
+        document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
+        localStorage.setItem('sc_syc_tot', sycTotal);
+        updateCloudBalances(totalBal, sycTotal);
+        notify('🎉 تمت إضافة +5.00 $SYC بنجاح!');
+      });
+    }
+
+    function triggerBoost() {
+      if (boosted) return notify('السرعة مضاعفة بالفعل!');
+      playVerifiedAd('مضاعفة سرعة تعدين USDT 2X', 'شاهد الإعلان بالكامل لتفعيل مضاعفة السرعة لمدة 10 دقائق...', 8, () => {
+        boosted = true;
+        document.getElementById('speedDisplay').innerText = '2.0 MH/s';
+        document.getElementById('boostBadge').innerText = '10:00';
+        notify('⚡ تم تفعيل مضاعفة سرعة USDT 2X!');
+        
+        let s = 600;
+        const tm = setInterval(() => {
+          s--;
+          const m = Math.floor(s / 60);
+          const sec = s % 60;
+          document.getElementById('boostBadge').innerText = `${m}:${sec < 10 ? '0':''}${sec}`;
+          if (s <= 0) {
+            clearInterval(tm);
+            boosted = false;
+            document.getElementById('speedDisplay').innerText = '1.0 MH/s';
+            document.getElementById('boostBadge').innerText = 'متاح الآن';
+          }
+        }, 1000);
+      });
+    }
+
+    function triggerSycBoost() {
+      if (sycBoosted) return notify('سرعة الإنزال مضاعفة بالفعل!');
+      playVerifiedAd('مضاعفة سرعة تعدين $SYC 2X', 'شاهد الإعلان بالكامل لتفعيل مضاعفة سرعة الإنزال لمدة 10 دقائق...', 8, () => {
+        sycBoosted = true;
+        notify('⚡ تم تفعيل مضاعفة سرعة $SYC بنجاح!');
+        setTimeout(() => { sycBoosted = false; }, 600000);
+      });
+    }
+
+    let currentStreakDay = parseInt(localStorage.getItem('sc_streak_day') || '1');
+    let lastCheckinDate = localStorage.getItem('sc_last_checkin') || '';
+
+    function checkDailyCheckinStatus() {
+      const todayStr = new Date().toDateString();
+      if (lastCheckinDate !== todayStr) {
+        const modal = document.getElementById('dailyCheckinModal');
+        if (modal) modal.style.display = 'flex';
+        updateStreakUI();
+      }
+    }
+
+    function updateStreakUI() {
+      const rewards = [
+        { usdt: 0.050, syc: 20 },
+        { usdt: 0.080, syc: 35 },
+        { usdt: 0.120, syc: 50 },
+        { usdt: 0.180, syc: 80 },
+        { usdt: 0.250, syc: 120 },
+        { usdt: 0.350, syc: 200 },
+        { usdt: 0.500, syc: 350 }
+      ];
+      let dayIndex = (currentStreakDay - 1) % 7;
+      let cur = rewards[dayIndex];
+      const rewEl = document.getElementById('dailyRewardText');
+      const dayEl = document.getElementById('streakDayText');
+      if (rewEl) rewEl.innerText = `+${cur.usdt} USDT + ${cur.syc} $SYC`;
+      if (dayEl) dayEl.innerText = `اليوم الـ ${currentStreakDay} من السلسلة متدرجة العائد`;
+    }
+
+    function claimDailyReward() {
+      const rewards = [
+        { usdt: 0.050, syc: 20 },
+        { usdt: 0.080, syc: 35 },
+        { usdt: 0.120, syc: 50 },
+        { usdt: 0.180, syc: 80 },
+        { usdt: 0.250, syc: 120 },
+        { usdt: 0.350, syc: 200 },
+        { usdt: 0.500, syc: 350 }
+      ];
+      let dayIndex = (currentStreakDay - 1) % 7;
+      let cur = rewards[dayIndex];
+
+      totalBal += cur.usdt;
+      sycTotal += cur.syc;
+
+      document.getElementById('totalBal').innerText = totalBal.toFixed(4);
+      document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
+      
+      localStorage.setItem('sc_tot', totalBal);
+      localStorage.setItem('sc_syc_tot', sycTotal);
+      updateCloudBalances(totalBal, sycTotal);
+
+      localStorage.setItem('sc_last_checkin', new Date().toDateString());
+      currentStreakDay++;
+      localStorage.setItem('sc_streak_day', currentStreakDay);
+
+      playSound('win');
+      notify(`🎁 تم استلام مكافأة اليوم الـ ${currentStreakDay-1} بنجاح!`);
+      closeModal('dailyCheckinModal');
+    }
+
+    async function buyVipPackage(amount, tierName, sycBonus) {
+      notify(`جاري تجهيز عقد (${amount}$) مع بونص +${sycBonus} $SYC...`);
+
       try {
-        const selected = dict[lang] || dict['ar'];
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-          const key = el.getAttribute('data-i18n');
-          if (selected[key]) el.innerHTML = selected[key];
+        const response = await fetch('https://api.nowpayments.io/v1/invoice', {
+          method: 'POST',
+          headers: {
+            'x-api-key': 'KKVAFDN-4SVMMEP-QVYXENQ-39TX7S7',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            price_amount: parseFloat(amount),
+            price_currency: 'usd',
+            pay_currency: 'usdttrc20',
+            order_id: `${globalDeviceId}_${amount}`,
+            order_description: `Syria Cash - ${tierName} Monthly Contract`,
+            success_url: window.location.href.split('?')[0] + `?vip_success=true&tier=${amount}&syc=${sycBonus}`,
+            cancel_url: window.location.href.split('?')[0]
+          })
         });
 
+        const data = await response.json();
+        if (data && data.invoice_url) {
+          window.location.href = data.invoice_url;
+        } else {
+          alert('تعذر فتح بوابة الدفع حالياً، يرجى المحاولة لاحقاً.');
+        }
+      } catch (err) {
+        console.error('Invoice error:', err);
+        alert('حدث خطأ في الاتصال ببوابة الدفع المشفرة.');
+      }
+    }
+
+    async function checkVipSuccessOnLoad() {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('vip_success') === 'true' && _supabase) {
+        try {
+          const tier = urlParams.get('tier') || '10';
+          const bonusSyc = parseFloat(urlParams.get('syc') || '0');
+
+          const expiryDate = new Date();
+          expiryDate.setDate(expiryDate.getDate() + 30);
+
+          sycTotal += bonusSyc;
+          document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
+          localStorage.setItem('sc_syc_tot', sycTotal);
+
+          const { error } = await _supabase
+            .from('users')
+            .update({ 
+              is_vip: true,
+              vip_tier: `VIP-${tier} ($${tier})`,
+              vip_expiry: expiryDate.toISOString(),
+              syc_balance: sycTotal
+            })
+            .eq('device_id', globalDeviceId);
+
+          if (!error) {
+            alert(`🎉 ألف مبروك! تم توثيق عقد الباقة ($${tier}) بنجاح!\n• تفعيل السحب الفوري (0% Fee).\n• تمت إضافة +${bonusSyc} $SYC لمحفظة الإيردروب.`);
+          }
+
+          window.history.replaceState({}, document.title, window.location.pathname);
+          location.reload();
+        } catch (e) {
+          console.error('VIP success handling error:', e);
+        }
+      }
+    }
+
+    let scratchCardAvailable = localStorage.getItem('sc_scratch_used') !== 'true';
+    let currentScratchWon = { usdt: 0.025, syc: 5 };
+
+    function initScratchCard() {
+      const canvas = document.getElementById('scratchCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      canvas.style.opacity = '1';
+      
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = '#94a3b8';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 15px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('امسح هنا لكشف الجائزة 🪙', canvas.width / 2, canvas.height / 2 + 5);
+
+      let isDrawing = false;
+      let scratchedPixels = 0;
+
+      function scratch(e) {
+        if (!isDrawing || !scratchCardAvailable) return;
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
+
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(x, y, 18, 0, Math.PI * 2, false);
+        ctx.fill();
+
+        playSound('scratch');
+        scratchedPixels++;
+
+        if (scratchedPixels >= 26) {
+          scratchCardAvailable = false;
+          localStorage.setItem('sc_scratch_used', 'true');
+          canvas.style.opacity = '0';
+          playSound('win');
+          totalBal += currentScratchWon.usdt;
+          sycTotal += currentScratchWon.syc;
+          document.getElementById('totalBal').innerText = totalBal.toFixed(4);
+          document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
+          localStorage.setItem('sc_tot', totalBal);
+          localStorage.setItem('sc_syc_tot', sycTotal);
+          updateCloudBalances(totalBal, sycTotal);
+          recordTaskCompletion();
+          notify(`🎉 كشفت الجائزة: +${currentScratchWon.usdt} USDT و +${currentScratchWon.syc} $SYC`);
+        }
+      }
+
+      canvas.onmousedown = (e) => { isDrawing = true; scratch(e); };
+      canvas.onmousemove = scratch;
+      window.onmouseup = () => { isDrawing = false; };
+      canvas.ontouchstart = (e) => { isDrawing = true; scratch(e); };
+      canvas.ontouchmove = scratch;
+      window.ontouchend = () => { isDrawing = false; };
+    }
+
+    function newScratchCard() {
+      playVerifiedAd('تجهيز كرت امسح واربح جديد', 'شاهد الإعلان للنهاية لتجديد كرت كشط وجائزة نقدية جديدة...', 8, () => {
+        scratchCardAvailable = true;
+        localStorage.setItem('sc_scratch_used', 'false');
+        const prizes = [{ usdt: 0.015, syc: 3 }, { usdt: 0.025, syc: 5 }, { usdt: 0.040, syc: 8 }];
+        currentScratchWon = prizes[Math.floor(Math.random() * prizes.length)];
+        document.getElementById('scratchWonVal').innerText = `+${currentScratchWon.usdt} USDT و +${currentScratchWon.syc} $SYC`;
+        initScratchCard();
+        notify('🎟️ تم تجديد كرت امسح واربح بنجاح!');
+      });
+    }
+
+    let jackpotAdsWatched = parseInt(localStorage.getItem('sc_jackpot_ads') || '0');
+    document.getElementById('jackpotAdsProgress').innerText = jackpotAdsWatched;
+
+    function enterMonthlyVault() {
+      playVerifiedAd('تأكيد الدخول للسحب الشهري', 'شاهد الإعلان بالكامل لاحتساب تذكرة السحب الشهري...', 8, () => {
+        jackpotAdsWatched++;
+        if (jackpotAdsWatched >= 10) {
+          jackpotAdsWatched = 0;
+          localStorage.setItem('sc_jackpot_ads', '0');
+          document.getElementById('jackpotAdsProgress').innerText = '0';
+          alert('🎟️ ألف مبروك! أتممت 10 إعلانات وحصلت على تذكرة السحب الشهري على الخزنة الكبرى (350$)!');
+        } else {
+          localStorage.setItem('sc_jackpot_ads', jackpotAdsWatched);
+          document.getElementById('jackpotAdsProgress').innerText = jackpotAdsWatched;
+          notify(`شاهدت ${jackpotAdsWatched}/10 إعلانات للتذكرة الشهرية!`);
+        }
+      });
+    }
+
+    function openMysteryBox(num) {
+      playVerifiedAd(`فتح صندوق الحظ ${num}`, 'شاهد الإعلان كاملاً لفتح الصندوق بالمفتاح الذهبي...', 8, () => {
+        totalBal += 0.025;
+        sycTotal += 4;
+        document.getElementById('totalBal').innerText = totalBal.toFixed(4);
+        document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
+        localStorage.setItem('sc_tot', totalBal);
+        localStorage.setItem('sc_syc_tot', sycTotal);
+        updateCloudBalances(totalBal, sycTotal);
+        recordTaskCompletion();
+        notify(`🎉 ربحت من الصندوق ${num}: +0.025 USDT و +4 $SYC!`);
+      });
+    }
+
+    let spinsLeft = parseInt(localStorage.getItem('sc_wheel_spins') || '3');
+    document.getElementById('spinsLeft').innerText = spinsLeft;
+
+    function spinLuckyWheel() {
+      if (spinsLeft <= 0) {
+        return alert('نفدت لفاتك! اضغط على زر "+3 لفات (إعلان)" لتجديد اللفات فوراً.');
+      }
+      spinsLeft--;
+      localStorage.setItem('sc_wheel_spins', spinsLeft);
+      document.getElementById('spinsLeft').innerText = spinsLeft;
+
+      playSound('spin');
+      const spinner = document.getElementById('wheelSpinner');
+      spinner.style.transition = 'transform 3s cubic-bezier(0.1, 0.9, 0.2, 1)';
+      spinner.style.transform = `rotate(${Math.floor(Math.random() * 1440 + 720)}deg)`;
+      
+      setTimeout(() => {
+        totalBal += 0.025;
+        sycTotal += 5;
+        document.getElementById('totalBal').innerText = totalBal.toFixed(4);
+        document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
+        localStorage.setItem('sc_tot', totalBal);
+        localStorage.setItem('sc_syc_tot', sycTotal);
+        updateCloudBalances(totalBal, sycTotal);
+        recordTaskCompletion();
+        playSound('win');
+        alert('🎉 مبروك! ربحت +0.025 USDT و +5 $SYC من عجلة الحظ!');
+      }, 3100);
+    }
+
+    function renewSpinsWithAd() {
+      playVerifiedAd('تجديد لفات عجلة الحظ', 'شاهد الإعلان كاملاً لإضافة 3 لفات جديدة في العجلة...', 8, () => {
+        spinsLeft += 3;
+        localStorage.setItem('sc_wheel_spins', spinsLeft);
+        document.getElementById('spinsLeft').innerText = spinsLeft;
+        notify('🎯 تم تجديد 3 لفات في عجلة الحظ بنجاح!');
+      });
+    }
+
+    let tapCount = 0;
+    let tapEnergy = 50;
+    function tapMineGem() {
+      if (tapEnergy <= 0) {
+        return alert('نفدت طاقة النقر! اضغط على زر "شحن طاقة النقر" لمتابعة اللعب.');
+      }
+      tapCount++;
+      tapEnergy--;
+      playSound('scratch');
+      document.getElementById('tapScore').innerText = tapCount;
+      if (tapCount >= 50) {
+        tapCount = 0;
+        document.getElementById('tapScore').innerText = '0';
+        playVerifiedAd('مكافأة إكمال 50 نقرة', 'شاهد الإعلان لتأكيد استلام جائزة شظايا التعدين...', 8, () => {
+          totalBal += 0.02;
+          sycTotal += 6;
+          document.getElementById('totalBal').innerText = totalBal.toFixed(4);
+          document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
+          localStorage.setItem('sc_tot', totalBal);
+          localStorage.setItem('sc_syc_tot', sycTotal);
+          updateCloudBalances(totalBal, sycTotal);
+          recordTaskCompletion();
+          notify('💎 مبروك! كسبت +0.02 USDT و +6 $SYC!');
+        });
+      }
+    }
+
+    function rechargeTapEnergy() {
+      playVerifiedAd('شحن طاقة النقر', 'شاهد الإعلان لإعادة شحن طاقة النقر لـ 50 ضربة...', 8, () => {
+        tapEnergy = 50;
+        notify('⚡ تم شحن طاقة النقر بنجاح!');
+      });
+    }
+
+    function renderSocialTasks(lang) {
+      const c = document.getElementById('socialTasksContainer');
+      if (!c) return;
+
+      const tasks = [
+        { title: "▶️ مشاهدة فيديو رسمي (يوتيوب)", sub: "شاهد لمدة 30 ثانية | +0.030 USDT", btn: "مشاهدة", reward: 0.030, url: "https://youtube.com" },
+        { title: "🔔 اشتراك بقناة يوتيوب الرسمية", sub: "اشترك وفعل الجرس | +0.050 USDT", btn: "اشتراك", reward: 0.050, url: "https://youtube.com" },
+        { title: "✈️ انضمام لقناة أخبار تيليجرام", sub: "انضم للقناة الرسمية | +0.025 USDT", btn: "انضمام", reward: 0.025, url: "https://t.me" },
+        { title: "📸 متابعة حساب انستغرام الرسمي", sub: "تابع الحساب للتحديثات | +0.025 USDT", btn: "متابعة", reward: 0.025, url: "https://instagram.com" }
+      ];
+
+      c.innerHTML = tasks.map(t => `
+        <div style="background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:12px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="font-weight:800; font-size:12px;">${t.title}</div>
+            <div style="font-size:10px; color:var(--text-muted);">${t.sub}</div>
+          </div>
+          <button class="btn-official-green" style="width:auto; padding:6px 14px; font-size:11px;" onclick="executeTaskWithVerify(this, '${t.title}', ${t.reward}, '${t.url}')">${t.btn}</button>
+        </div>
+      `).join('');
+    }
+
+    function renderAirdropTasks(lang) {
+      const c = document.getElementById('airdropTasksContainer');
+      if (!c) return;
+
+      const airdropTasks = [
+        { title: "🔗 تأكيد محفظة استلام الإنزال (TON / TRC20)", sub: "سجل محفظتك للموسم | +25 $SYC", btn: "تأكيد", reward: 25 },
+        { title: "🐦 متابعة حساب المشروع على تويتر (X)", sub: "تابع الحساب الرسمي | +20 $SYC", btn: "متابعة", reward: 20, url: "https://x.com" },
+        { title: "📜 قراءة خطة إدراج العملة (Whitepaper)", sub: "اطلع على ورقة المشروع | +15 $SYC", btn: "قراءة", reward: 15 },
+        { title: "👥 دعوة منقب جديد للإنزال الجوي", sub: "شارك رابطك لتسريع التعدين | +50 $SYC", btn: "مشاركة", reward: 50, action: "copy" }
+      ];
+
+      c.innerHTML = airdropTasks.map(t => `
+        <div style="background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:12px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="font-weight:800; font-size:12px;">${t.title}</div>
+            <div style="font-size:10px; color:var(--text-muted);">${t.sub}</div>
+          </div>
+          <button class="btn-official-green" style="width:auto; padding:6px 14px; font-size:11px; background:#4f46e5;" onclick="${t.action === 'copy' ? 'copyLink()' : `executeAirdropTaskWithVerify(this, '${t.title}', ${t.reward}, '${t.url || ''}')`}">${t.btn}</button>
+        </div>
+      `).join('');
+    }
+
+    function render25Ads(lang) {
+      const c = document.getElementById('adsContainer25');
+      if (!c) return;
+      let html = '';
+
+      for (let i = 1; i <= 25; i++) {
+        const r = (0.010 + i * 0.001).toFixed(3);
+        html += `
+          <div style="background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:10px 12px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <div style="font-weight:800; font-size:12px; color:#0f172a;">مهمة إعلانية #${i}</div>
+              <div style="font-size:10px; color:#64748b;">مكافأة: +${r} USDT</div>
+            </div>
+            <button class="btn-official-green" style="width:auto; padding:6px 14px; font-size:11px;" onclick="executeAdTaskWithVerify(this, ${i}, ${r})">مشاهدة</button>
+          </div>
+        `;
+      }
+      c.innerHTML = html;
+    }
+
+    function executeTaskWithVerify(btn, title, reward, url = null) {
+      if (url) window.open(url, '_blank');
+      playVerifiedAd(title, 'شاهد الفيديو كاملاً لتأكيد التحقق من المهمة واستلام الدولار...', 8, () => {
+        totalBal += parseFloat(reward);
+        document.getElementById('totalBal').innerText = totalBal.toFixed(4);
+        localStorage.setItem('sc_tot', totalBal);
+        updateCloudBalances(totalBal, sycTotal);
+        recordTaskCompletion();
+        btn.disabled = true;
+        btn.innerText = 'مكتملة ✓';
+        btn.style.background = '#15803d';
+        notify(`🎉 كسبت +${reward} USDT بنجاح!`);
+      });
+    }
+
+    function executeAirdropTaskWithVerify(btn, title, rewardSyc, url = null) {
+      if (url) window.open(url, '_blank');
+      playVerifiedAd(title, 'شاهد الإعلان كاملاً لتأكيد المهمة وإضافة عملات $SYC...', 8, () => {
+        sycTotal += rewardSyc;
+        document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
+        localStorage.setItem('sc_syc_tot', sycTotal);
+        updateCloudBalances(totalBal, sycTotal);
+        recordTaskCompletion();
+        btn.disabled = true;
+        btn.innerText = 'مكتملة ✓';
+        btn.style.background = '#15803d';
+        notify(`🎉 كسبت +${rewardSyc} $SYC نادرة لحسابك!`);
+      });
+    }
+
+    function executeAdTaskWithVerify(btn, id, reward) {
+      playVerifiedAd(`إعلان مدفوع #${id}`, 'شاهد الإعلان كاملاً لتأكيد استحقاق مكافأة المشاهدة...', 8, () => {
+        totalBal += parseFloat(reward);
+        document.getElementById('totalBal').innerText = totalBal.toFixed(4);
+        localStorage.setItem('sc_tot', totalBal);
+        updateCloudBalances(totalBal, sycTotal);
+        recordTaskCompletion();
+        btn.disabled = true;
+        btn.innerText = 'مكتملة ✓';
+        btn.style.background = '#15803d';
+        notify(`🎉 كسبت +${reward} USDT`);
+      });
+    }
+
+    function updateWithdrawFields(method) {
+      const c = document.getElementById('dynamicWithdrawFields');
+      if (method === 'usdt') {
+        c.innerHTML = '<input type="text" id="targetAccount" placeholder="عنوان محفظة USDT (TRC20)" class="input-clean">';
+      } else if (method === 'google_play') {
+        c.innerHTML = '<input type="email" id="targetAccount" placeholder="بريدك الإلكتروني لاستلام الكود" class="input-clean">';
+      } else if (method === 'turkish_cash') {
+        c.innerHTML = '<input type="text" id="targetAccount" placeholder="رقم الآيبان (IBAN يبدأ بـ TR)" class="input-clean"><input type="text" id="targetExtra" placeholder="اسم صاحب الحساب بالتركي كما في البنك" class="input-clean" style="margin-top:6px;">';
+      } else if (method === 'telegram_stars') {
+        c.innerHTML = '<input type="text" id="targetAccount" placeholder="معرف تيليجرام (@username)" class="input-clean">';
+      } else if (method === 'sham_cash') {
+        c.innerHTML = '<input type="text" id="targetAccount" placeholder="عنوان الاستلام / المدينة ومكتب شام كاش" class="input-clean"><input type="text" id="targetExtra" placeholder="الاسم الثلاثي ورقم الهاتف للتسليم" class="input-clean" style="margin-top:6px;">';
+      }
+    }
+
+    async function requestWithdrawal() {
+      const method = document.getElementById('withdrawMethodSelect').value;
+      const target = document.getElementById('targetAccount')?.value.trim();
+      const extra = document.getElementById('targetExtra')?.value.trim() || '';
+      const amt = parseFloat(document.getElementById('withdrawAmount').value);
+      const submitBtn = document.getElementById('withdrawSubmitBtn');
+
+      if (!target || isNaN(amt) || amt < 10) {
+        return alert('يرجى ملء كافة البيانات بدقة، والحد الأدنى للسحب هو 10 USDT!');
+      }
+      if (amt > totalBal) {
+        return alert('الرصيد المالي الحالي غير كافٍ لإتمام هذا السحب!');
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'جاري إرسال طلب السحب...';
+
+      try {
+        const { error: insertErr } = await _supabase.from('withdrawals').insert([
+          {
+            device_id: globalDeviceId,
+            username: globalUsername,
+            method: method,
+            amount: amt,
+            account_info: target,
+            extra_info: extra,
+            status: isUserVip ? 'مكتمل فوراً (VIP 0% Fee) ✓' : 'قيد المراجعة ⏳'
+          }
+        ]);
+
+        if (insertErr) {
+          submitBtn.disabled = false;
+          submitBtn.innerText = 'تأكيد طلب السحب المالي 🚀';
+          return alert('تعذر تسجيل طلب السحب: ' + insertErr.message);
+        }
+
+        totalBal -= amt;
+        document.getElementById('totalBal').innerText = totalBal.toFixed(4);
+        localStorage.setItem('sc_tot', totalBal);
+        await updateCloudBalances(totalBal, sycTotal);
+
+        document.getElementById('withdrawAmount').value = '';
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'تأكيد طلب السحب المالي 🚀';
+
+        alert(`✅ تم إرسال طلب سحب بمبلغ ${amt} USDT بنجاح!\n${isUserVip ? 'تمت معالجته فوراً ودون رسوم لحسابك الـ VIP!' : 'سيتم تدقيقه وتحويله قريباً.'}`);
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'تأكيد طلب السحب المالي 🚀';
+        alert('حدث خطأ أثناء معالجة السحب: ' + err.message);
+      }
+    }
+
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playSound(type) {
+      try {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        const now = audioCtx.currentTime;
+
+        if (type === 'scratch') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.exponentialRampToValueAtTime(110, now + 0.05);
+          gain.gain.setValueAtTime(0.04, now);
+          gain.gain.linearRampToValueAtTime(0.001, now + 0.05);
+          osc.start(now);
+          osc.stop(now + 0.05);
+        } else if (type === 'win') {
+          [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+            const o = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            o.connect(g); g.connect(audioCtx.destination);
+            o.type = 'triangle';
+            o.frequency.value = freq;
+            g.gain.setValueAtTime(0.06, now + (i * 0.08));
+            g.gain.exponentialRampToValueAtTime(0.001, now + (i * 0.08) + 0.25);
+            o.start(now + (i * 0.08));
+            o.stop(now + (i * 0.08) + 0.25);
+          });
+        } else if (type === 'spin') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(600, now);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+          osc.start(now);
+          osc.stop(now + 0.06);
+        }
+      } catch (e) {}
+    }
+
+    function copyLink() {
+      const myRefCode = localStorage.getItem('sc_ref_code') || 'REF_DEFAULT';
+      const myAppUrl = window.location.origin + window.location.pathname + '?ref=' + myRefCode;
+      navigator.clipboard.writeText(myAppUrl);
+      notify('تم نسخ رابط الإحالة المحمي بنجاح 📋');
+    }
+
+    // دالة التنقل المستقلة 100% لضمان عمل الضغط فوراً
+    function navigate(id, el) {
+      playSound('spin');
+      document.querySelectorAll('.tab-view').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-link-btn').forEach(b => b.classList.remove('active'));
+      const target = document.getElementById(id);
+      if (target) target.classList.add('active');
+      if (el) el.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openModal(id) { 
+      const m = document.getElementById(id);
+      if (m) m.style.display = 'flex'; 
+    }
+    
+    function closeModal(id) { 
+      const m = document.getElementById(id);
+      if (m) m.style.display = 'none'; 
+    }
+
+    function sendSupport() {
+      const u = document.getElementById('supUser').value.trim();
+      const m = document.getElementById('supMsg').value.trim();
+      if (!u || !m) return alert('يرجى كتابة اسمك وتفاصيل المشكلة!');
+      alert('تم إرسال تذكرتك بنجاح! سيقوم فريق دعم Syria Cash بمراجعتها والتواصل معك.');
+      closeModal('supportModal');
+    }
+
+    function makeTicker() {
+      const box = document.getElementById('payoutTicker');
+      if (!box) return;
+      const wallets = ['0x8d...3e1', 'TR76...901', 'TQ2...9k5', 'شام كاش: حلب', 'TR04...412', 'شام كاش: دمشق'];
+      let str = '';
+      for (let i = 0; i < 12; i++) {
+        str += `<div class="ticker-item"><span>سحب ناجح: ${wallets[i%6]}</span><span class="ticker-badge">+25.00 USDT</span></div>`;
+      }
+      box.innerHTML = str + str;
+    }
+
+    function notify(msg) {
+      const b = document.getElementById('toastBox');
+      if (!b) return;
+      b.innerText = msg;
+      b.style.display = 'block';
+      setTimeout(() => { b.style.display = 'none'; }, 2400);
+    }
+
+    // دالة اللغات المحمية
+    function changeLanguage(lang) {
+      try {
         if (['ar', 'ku'].includes(lang)) {
           document.documentElement.setAttribute('dir', 'rtl');
         } else {
           document.documentElement.setAttribute('dir', 'ltr');
         }
-
-        renderSocialTasks(lang);
-        renderAirdropTasks(lang);
-        render25Ads(lang);
         localStorage.setItem('sc_lang', lang);
-      } catch(e) {
-        console.error('Lang switch error:', e);
-      }
+      } catch(e) {}
     }
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -1839,3 +2220,4 @@
   </script>
 </body>
 </html>
+د
