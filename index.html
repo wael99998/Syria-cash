@@ -892,9 +892,7 @@
 
         <div class="service-card" onclick="triggerBoost()">
           <div class="service-icon-wrap" style="background:#fef3c7; border-color:#fde68a; color:var(--accent-gold);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-            </svg>
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
           </div>
           <div class="service-title" data-i18n="boost_btn">مضاعفة السرعة 2X</div>
           <span class="service-badge" id="boostBadge" style="background:#fef3c7; color:#b45309;" data-i18n="available">متاح الآن</span>
@@ -922,22 +920,20 @@
       </div>
     </section>
 
-    <!-- تبويب عقود VIP الاستثمارية بتصميم فخم ومرتب -->
+    <!-- تبويب عقود VIP الاستثمارية بتصميم احترافي -->
     <section id="tab-vip" class="tab-view">
       <div class="section-header">خزن وعقود التعدين السحابي VIP 👑</div>
       
-      <!-- بنر الترويسة التوضيحي -->
       <div style="background: linear-gradient(145deg, #064e3b 0%, #022c22 100%); border-radius: 18px; padding: 16px; margin-bottom: 16px; border: 1px solid rgba(52, 211, 153, 0.3); box-shadow: var(--shadow-md); color: #fff;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <h3 style="color: #ffffff; font-size: 15px; font-weight: 900; margin: 0;">عقود شهرية بعوائد مضمونة</h3>
           <span style="background: rgba(52, 211, 153, 0.15); border: 1px solid #34d399; color: #34d399; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 6px;">صلاحية 30 يوماً</span>
         </div>
         <p style="font-size: 11px; color: #a7f3d0; line-height: 1.6; margin: 0;">
-          تمنحك جميع الباقات سحباً فورياً معفياً من الرسوم بنسبة <b>(0% Fee)</b> مع مكافأة رصيد <b>$SYC</b> ضخمة تُضاف لمحفظة الإيردروب فورياً.
+          تمنحك جميع الباقات سحباً فورياً معفياً من الرسوم بنسبة <b>(0% Fee)</b> مع مكافأة رصيد <b>$SYC</b> ضخمة تُضاف لمحفظة الإيردروب فورياً ودون أي أخطاء.
         </p>
       </div>
 
-      <!-- قائمة البطاقات الاحترافية -->
       <div style="display: flex; flex-direction: column; gap: 14px;">
         
         <!-- باقة 10$ -->
@@ -1283,7 +1279,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
         <circle cx="12" cy="12" r="10"></circle>
         <circle cx="12" cy="12" r="6"></circle>
-        <circle cx="12" cy="2"></circle>
+        <circle cx="12" cy="12" r="2"></circle>
       </svg>
       <span data-i18n="nav_ads">الإعلانات</span>
     </div>
@@ -1408,7 +1404,7 @@
       }
     }
 
-    // شراء باقة VIP الشهرية وتمرير بونص الإيردروب ($SYC)
+    // شراء عقد VIP الشهري مع بونص الإيردروب وتوجيه المستخدم لفاتورة الدفع
     async function buyVipPackage(amount, tierName, sycBonus) {
       notify(`جاري تجهيز عقد (${amount}$) مع بونص +${sycBonus} $SYC...`);
 
@@ -1439,11 +1435,11 @@
         }
       } catch (err) {
         console.error('Invoice error:', err);
-        alert('حدث خطأ أثناء الاتصال ببوابة الدفع المشفرة.');
+        alert('حدث خطأ في الاتصال ببوابة الدفع المشفرة.');
       }
     }
 
-    // فحص عودة المستخدم وإضافة بونص SYC وتفعيل اشتراك الـ VIP الشهري
+    // فحص عودة المستخدم وتحديث جدول الـ VIP في Supabase مع تحديد تاريخ الانتهاء (30 يوماً)
     async function checkVipSuccessOnLoad() {
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.get('vip_success') === 'true' && _supabase) {
@@ -1451,23 +1447,35 @@
           const tier = urlParams.get('tier') || '10';
           const bonusSyc = parseFloat(urlParams.get('syc') || '0');
 
+          // حساب تاريخ انتهاء العقد بعد 30 يوماً
+          const expiryDate = new Date();
+          expiryDate.setDate(expiryDate.getDate() + 30);
+
           sycTotal += bonusSyc;
           document.getElementById('sycTotalBal').innerText = sycTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
           localStorage.setItem('sc_syc_tot', sycTotal);
 
-          await _supabase
+          // إرسال البيانات المحدثة لقاعدة البيانات في Supabase
+          const { error } = await _supabase
             .from('users')
             .update({ 
               is_vip: true,
+              vip_tier: `VIP-${tier} ($${tier})`,
+              vip_expiry: expiryDate.toISOString(),
               syc_balance: sycTotal
             })
             .eq('device_id', globalDeviceId);
 
-          alert(`🎉 ألف مبروك! تم تفعيل عقد VIP (${tier}$) الشهري بنجاح!\nتمت إضافة +${bonusSyc} $SYC كاش فوراً إلى محفظة الإيردروب لديك!`);
+          if (error) {
+            console.error('Database update error:', error);
+          } else {
+            alert(`🎉 ألف مبروك! تم توثيق عقد الباقة ($${tier}) في قاعدة البيانات بنجاح!\n• تم تفعيل سحب الأرباح الفوري (0% Fee).\n• تمت إضافة +${bonusSyc} $SYC لمحفظة الإيردروب.\n• العقد ساري لمدة 30 يوماً.`);
+          }
+
           window.history.replaceState({}, document.title, window.location.pathname);
           location.reload();
         } catch (e) {
-          console.error('VIP update error:', e);
+          console.error('VIP success handling error:', e);
         }
       }
     }
