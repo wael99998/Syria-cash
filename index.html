@@ -10,6 +10,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
+  <!-- مكتبة Supabase للاتصال السحابي -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
@@ -921,6 +922,168 @@
       </div>
     </section>
 
+    <!-- تبويب عقود VIP الاستثمارية بتصميم فخم ومرتب -->
+    <section id="tab-vip" class="tab-view">
+      <div class="section-header">خزن وعقود التعدين السحابي VIP 👑</div>
+      
+      <!-- بنر الترويسة التوضيحي -->
+      <div style="background: linear-gradient(145deg, #064e3b 0%, #022c22 100%); border-radius: 18px; padding: 16px; margin-bottom: 16px; border: 1px solid rgba(52, 211, 153, 0.3); box-shadow: var(--shadow-md); color: #fff;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <h3 style="color: #ffffff; font-size: 15px; font-weight: 900; margin: 0;">عقود شهرية بعوائد مضمونة</h3>
+          <span style="background: rgba(52, 211, 153, 0.15); border: 1px solid #34d399; color: #34d399; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 6px;">صلاحية 30 يوماً</span>
+        </div>
+        <p style="font-size: 11px; color: #a7f3d0; line-height: 1.6; margin: 0;">
+          تمنحك جميع الباقات سحباً فورياً معفياً من الرسوم بنسبة <b>(0% Fee)</b> مع مكافأة رصيد <b>$SYC</b> ضخمة تُضاف لمحفظة الإيردروب فورياً.
+        </p>
+      </div>
+
+      <!-- قائمة البطاقات الاحترافية -->
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        
+        <!-- باقة 10$ -->
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 14px; box-shadow: var(--shadow-sm); position: relative; overflow: hidden;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <div>
+              <div style="font-size: 14px; font-weight: 900; color: var(--text-dark);">عقد النحاس (VIP 1)</div>
+              <div style="font-size: 10px; color: var(--text-muted);">عقد تعدين نشط لمدة شهر</div>
+            </div>
+            <div style="font-size: 18px; font-weight: 900; color: var(--primary-green);">$10 <small style="font-size: 10px; color: var(--text-muted);">/ شهر</small></div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: #f8fafc; border-radius: 10px; padding: 8px; text-align: center; margin-bottom: 10px;">
+            <div>
+              <div style="font-size: 9.5px; color: var(--text-muted);">الإنتاج اليومي</div>
+              <div style="font-size: 12px; font-weight: 800; color: var(--text-dark);">0.60 $</div>
+            </div>
+            <div>
+              <div style="font-size: 9.5px; color: var(--text-muted);">العائد الشهري</div>
+              <div style="font-size: 12px; font-weight: 800; color: var(--primary-green);">18.00 $</div>
+            </div>
+            <div>
+              <div style="font-size: 9.5px; color: var(--text-muted);">بونص الإيردروب</div>
+              <div style="font-size: 12px; font-weight: 800; color: #0284c7;">+100 SYC</div>
+            </div>
+          </div>
+          <button onclick="buyVipPackage(10, 'VIP-1', 100)" class="btn-official-green" style="padding: 10px; font-size: 12px;">
+            تفعيل العقد الآن (10 USDT) 🚀
+          </button>
+        </div>
+
+        <!-- باقة 25$ -->
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 14px; box-shadow: var(--shadow-sm); position: relative; overflow: hidden;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <div>
+              <div style="font-size: 14px; font-weight: 900; color: var(--text-dark);">عقد الفضة (VIP 2)</div>
+              <div style="font-size: 10px; color: var(--text-muted);">عقد تعدين نشط لمدة شهر</div>
+            </div>
+            <div style="font-size: 18px; font-weight: 900; color: var(--primary-green);">$25 <small style="font-size: 10px; color: var(--text-muted);">/ شهر</small></div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: #f8fafc; border-radius: 10px; padding: 8px; text-align: center; margin-bottom: 10px;">
+            <div>
+              <div style="font-size: 9.5px; color: var(--text-muted);">الإنتاج اليومي</div>
+              <div style="font-size: 12px; font-weight: 800; color: var(--text-dark);">1.60 $</div>
+            </div>
+            <div>
+              <div style="font-size: 9.5px; color: var(--text-muted);">العائد الشهري</div>
+              <div style="font-size: 12px; font-weight: 800; color: var(--primary-green);">48.00 $</div>
+            </div>
+            <div>
+              <div style="font-size: 9.5px; color: var(--text-muted);">بونص الإيردروب</div>
+              <div style="font-size: 12px; font-weight: 800; color: #0284c7;">+300 SYC</div>
+            </div>
+          </div>
+          <button onclick="buyVipPackage(25, 'VIP-2', 300)" class="btn-official-green" style="padding: 10px; font-size: 12px;">
+            تفعيل العقد الآن (25 USDT) 🚀
+          </button>
+        </div>
+
+        <!-- باقة 50$ (الأكثر شعبية) -->
+        <div style="background: #ffffff; border: 2px solid var(--primary-green); border-radius: 16px; padding: 14px; box-shadow: var(--shadow-md); position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; left: 0; background: var(--primary-green); color: #ffffff; font-size: 9px; font-weight: 800; padding: 2px 8px; border-bottom-right-radius: 8px;">الأكثر طلباً ⭐</div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; margin-top: 4px;">
+            <div>
+              <div style="font-size: 14px; font-weight: 900; color: var(--text-dark);">عقد الذهب (VIP 3)</div>
+              <div style="font-size: 10px; color: var(--text-muted);">معدل تعدين ومردود متقدم</div>
+            </div>
+            <div style="font-size: 18px; font-weight: 900; color: var(--primary-green);">$50 <small style="font-size: 10px; color: var(--text-muted);">/ شهر</small></div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: #f0fdf4; border-radius: 10px; padding: 8px; text-align: center; margin-bottom: 10px;">
+            <div>
+              <div style="font-size: 9.5px; color: var(--text-muted);">الإنتاج اليومي</div>
+              <div style="font-size: 12px; font-weight: 800; color: var(--text-dark);">3.50 $</div>
+            </div>
+            <div>
+              <div style="font-size: 9.5px; color: var(--text-muted);">العائد الشهري</div>
+              <div style="font-size: 12px; font-weight: 800; color: var(--primary-green);">105.00 $</div>
+            </div>
+            <div>
+              <div style="font-size: 9.5px; color: var(--text-muted);">بونص الإيردروب</div>
+              <div style="font-size: 12px; font-weight: 800; color: #0284c7;">+750 SYC</div>
+            </div>
+          </div>
+          <button onclick="buyVipPackage(50, 'VIP-3', 750)" class="btn-official-green" style="padding: 10px; font-size: 12px;">
+            تفعيل العقد الآن (50 USDT) 🚀
+          </button>
+        </div>
+
+        <!-- باقة 100$ -->
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 14px; box-shadow: var(--shadow-sm); position: relative; overflow: hidden;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <div>
+              <div style="font-size: 14px; font-weight: 900; color: var(--text-dark);">عقد البلاتين (VIP 4)</div>
+              <div style="font-size: 10px; color: var(--text-muted);">تعدين سحابي عالي الكفاءة</div>
+            </div>
+            <div style="font-size: 18px; font-weight: 900; color: var(--primary-green);">$100 <small style="font-size: 10px; color: var(--text-muted);">/ شهر</small></div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: #f8fafc; border-radius: 10px; padding: 8px; text-align: center; margin-bottom: 10px;">
+            <div>
+              <div style="font-size: 9.5px; color: var(--text-muted);">الإنتاج اليومي</div>
+              <div style="font-size: 12px; font-weight: 800; color: var(--text-dark);">7.50 $</div>
+            </div>
+            <div>
+              <div style="font-size: 9.5px; color: var(--text-muted);">العائد الشهري</div>
+              <div style="font-size: 12px; font-weight: 800; color: var(--primary-green);">225.00 $</div>
+            </div>
+            <div>
+              <div style="font-size: 9.5px; color: var(--text-muted);">بونص الإيردروب</div>
+              <div style="font-size: 12px; font-weight: 800; color: #0284c7;">+1800 SYC</div>
+            </div>
+          </div>
+          <button onclick="buyVipPackage(100, 'VIP-4', 1800)" class="btn-official-green" style="padding: 10px; font-size: 12px;">
+            تفعيل العقد الآن (100 USDT) 🚀
+          </button>
+        </div>
+
+        <!-- باقة 200$ (التاج الملكي) -->
+        <div style="background: linear-gradient(145deg, #1c1917 0%, #0c0a09 100%); border: 2px solid var(--accent-gold); border-radius: 16px; padding: 14px; box-shadow: 0 8px 20px rgba(197, 155, 39, 0.2); position: relative; overflow: hidden; color: #ffffff;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <div>
+              <div style="font-size: 14px; font-weight: 900; color: var(--accent-gold);">عقد التاج الملكي (VIP 5) 👑</div>
+              <div style="font-size: 10px; color: #a8a29e;">أعلى قدرة تعدين سحابية متوفرة</div>
+            </div>
+            <div style="font-size: 18px; font-weight: 900; color: #fbbf24;">$200 <small style="font-size: 10px; color: #d6d3d1;">/ شهر</small></div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: rgba(255, 255, 255, 0.07); border-radius: 10px; padding: 8px; text-align: center; margin-bottom: 10px;">
+            <div>
+              <div style="font-size: 9.5px; color: #a8a29e;">الإنتاج اليومي</div>
+              <div style="font-size: 12px; font-weight: 800; color: #ffffff;">16.00 $</div>
+            </div>
+            <div>
+              <div style="font-size: 9.5px; color: #a8a29e;">العائد الشهري</div>
+              <div style="font-size: 12px; font-weight: 800; color: #34d399;">480.00 $</div>
+            </div>
+            <div>
+              <div style="font-size: 9.5px; color: #a8a29e;">بونص الإيردروب</div>
+              <div style="font-size: 12px; font-weight: 800; color: #38bdf8;">+4000 SYC</div>
+            </div>
+          </div>
+          <button onclick="buyVipPackage(200, 'VIP-5', 4000)" class="btn-official-green" style="background: linear-gradient(180deg, #fbbf24 0%, #d97706 100%); color: #000000; font-weight: 900; padding: 10px; font-size: 12px;">
+            تفعيل العقد الملكي (200 USDT) 👑
+          </button>
+        </div>
+
+      </div>
+    </section>
+
     <!-- تبويب الألعاب -->
     <section id="tab-games" class="tab-view">
       <div class="section-header" data-i18n="games_header">الألعاب وسحب الخزنة الكبرى الشهري</div>
@@ -1006,100 +1169,6 @@
           جاري تجهيز الرابط...
         </div>
         <button onclick="copyLink()" class="btn-official-green" data-i18n="copy_ref_btn">نسخ رابط الإحالة الرسمي 📋</button>
-      </div>
-    </section>
-
-    <!-- تبويب عقود VIP الاستثمارية المستقل (مفصول تماماً) -->
-    <section id="tab-vip" class="tab-view">
-      <div class="section-header">خزن وعقود التعدين الاستثمارية VIP 👑</div>
-      
-      <div style="background: linear-gradient(135deg, #022c22 0%, #064e3b 100%); border: 2px solid #34d399; border-radius: 18px; padding: 16px; margin-bottom: 16px; box-shadow: 0 8px 24px rgba(0, 90, 54, 0.25); text-align: right; color: #fff;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span style="background: #34d399; color: #022c22; font-size: 10px; font-weight: 900; padding: 3px 8px; border-radius: 6px;">عقود استثمارية شهرية (30 يوماً) ⏳</span>
-          <h3 style="color: #34d399; font-size: 15px; margin: 0;">امتيازات العضوية الملكية</h3>
-        </div>
-        <p style="font-size: 11px; color: #d1fae5; line-height: 1.6; margin-bottom: 14px;">
-          جميع الباقات تمنحك <b>سحباً فورياً تلقائياً بدون رسوم (0% Fee)</b> مع <b>بونص إيردروب فوري ($SYC)</b> يُضاف فور تفعيل العقد:
-        </p>
-
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-          
-          <!-- 10$ -->
-          <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(52, 211, 153, 0.3); border-radius: 12px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
-            <div>
-              <div style="font-weight: 900; font-size: 13px; color: #fde047;">باقة النحاس VIP-1 ($10 شهرياً)</div>
-              <div style="font-size: 10.5px; color: #cbd5e1; margin-top: 3px; line-height: 1.5;">
-                • الإنتاج اليومي: <b>0.60 USDT</b><br>
-                • العائد الشهري: <b style="color:#34d399;">18.00 USDT</b><br>
-                • هدية الإيردروب: <b style="color:#38bdf8;">+100 $SYC كاش 💎</b>
-              </div>
-            </div>
-            <button onclick="buyVipPackage(10, 'VIP-1', 100)" class="btn-official-green" style="width: auto; padding: 8px 14px; font-size: 11px; background: #34d399; color: #022c22; font-weight: 900;">
-              تفعيل (10$) 🚀
-            </button>
-          </div>
-
-          <!-- 25$ -->
-          <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(52, 211, 153, 0.3); border-radius: 12px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
-            <div>
-              <div style="font-weight: 900; font-size: 13px; color: #fde047;">باقة الفضة VIP-2 ($25 شهرياً)</div>
-              <div style="font-size: 10.5px; color: #cbd5e1; margin-top: 3px; line-height: 1.5;">
-                • الإنتاج اليومي: <b>1.60 USDT</b><br>
-                • العائد الشهري: <b style="color:#34d399;">48.00 USDT</b><br>
-                • هدية الإيردروب: <b style="color:#38bdf8;">+300 $SYC كاش 💎</b>
-              </div>
-            </div>
-            <button onclick="buyVipPackage(25, 'VIP-2', 300)" class="btn-official-green" style="width: auto; padding: 8px 14px; font-size: 11px; background: #34d399; color: #022c22; font-weight: 900;">
-              تفعيل (25$) 🚀
-            </button>
-          </div>
-
-          <!-- 50$ -->
-          <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(52, 211, 153, 0.3); border-radius: 12px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
-            <div>
-              <div style="font-weight: 900; font-size: 13px; color: #fde047;">باقة الذهب VIP-3 ($50 شهرياً)</div>
-              <div style="font-size: 10.5px; color: #cbd5e1; margin-top: 3px; line-height: 1.5;">
-                • الإنتاج اليومي: <b>3.50 USDT</b><br>
-                • العائد الشهري: <b style="color:#34d399;">105.00 USDT</b><br>
-                • هدية الإيردروب: <b style="color:#38bdf8;">+750 $SYC كاش 💎</b>
-              </div>
-            </div>
-            <button onclick="buyVipPackage(50, 'VIP-3', 750)" class="btn-official-green" style="width: auto; padding: 8px 14px; font-size: 11px; background: #34d399; color: #022c22; font-weight: 900;">
-              تفعيل (50$) 🚀
-            </button>
-          </div>
-
-          <!-- 100$ -->
-          <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(52, 211, 153, 0.3); border-radius: 12px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
-            <div>
-              <div style="font-weight: 900; font-size: 13px; color: #fde047;">باقة البلاتين VIP-4 ($100 شهرياً)</div>
-              <div style="font-size: 10.5px; color: #cbd5e1; margin-top: 3px; line-height: 1.5;">
-                • الإنتاج اليومي: <b>7.50 USDT</b><br>
-                • العائد الشهري: <b style="color:#34d399;">225.00 USDT</b><br>
-                • هدية الإيردروب: <b style="color:#38bdf8;">+1800 $SYC كاش 💎</b>
-              </div>
-            </div>
-            <button onclick="buyVipPackage(100, 'VIP-4', 1800)" class="btn-official-green" style="width: auto; padding: 8px 14px; font-size: 11px; background: #34d399; color: #022c22; font-weight: 900;">
-              تفعيل (100$) 🚀
-            </button>
-          </div>
-
-          <!-- 200$ -->
-          <div style="background: rgba(255,255,255,0.08); border: 1.5px solid #fbbf24; border-radius: 12px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
-            <div>
-              <div style="font-weight: 900; font-size: 13px; color: #fbbf24;">باقة التاج VIP-5 ($200 شهرياً) 👑</div>
-              <div style="font-size: 10.5px; color: #cbd5e1; margin-top: 3px; line-height: 1.5;">
-                • الإنتاج اليومي: <b>16.00 USDT</b><br>
-                • العائد الشهري: <b style="color:#34d399;">480.00 USDT</b><br>
-                • هدية الإيردروب: <b style="color:#38bdf8;">+4000 $SYC كاش 💎</b>
-              </div>
-            </div>
-            <button onclick="buyVipPackage(200, 'VIP-5', 4000)" class="btn-official-green" style="width: auto; padding: 8px 14px; font-size: 11px; background: #fbbf24; color: #000; font-weight: 900;">
-              تفعيل (200$) 👑
-            </button>
-          </div>
-
-        </div>
       </div>
     </section>
 
@@ -1214,7 +1283,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
         <circle cx="12" cy="12" r="10"></circle>
         <circle cx="12" cy="12" r="6"></circle>
-        <circle cx="12" cy="12" r="2"></circle>
+        <circle cx="12" cy="2"></circle>
       </svg>
       <span data-i18n="nav_ads">الإعلانات</span>
     </div>
